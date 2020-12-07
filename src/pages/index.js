@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
 
 const filterMovies = (movieData, filter) => {
   if (filter.director) {
-    return movieData;
+    return movieData.filter((movie) => movie.director === filter.director);
   } else if (filter.actor) {
     return movieData.filter(
       (movie) => movie.cast && movie.cast.includes(filter.actor),
