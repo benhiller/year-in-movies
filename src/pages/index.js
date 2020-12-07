@@ -89,7 +89,7 @@ const Home = ({ movieData }) => {
           Top Directors:
           <ol>
             {topDirectors.slice(0, 5).map((director, idx) => (
-              <li key={idx}>
+              <li key={director[0]}>
                 <a onClick={() => setSelectedFilter({ director: director[0] })}>
                   {director[0]}
                 </a>
@@ -101,7 +101,7 @@ const Home = ({ movieData }) => {
           Top Actors:
           <ol>
             {topActors.slice(0, 5).map((actor, idx) => (
-              <li key={idx}>
+              <li key={actor[0]}>
                 <a onClick={() => setSelectedFilter({ actor: actor[0] })}>
                   {actor[0]}
                 </a>
@@ -111,8 +111,13 @@ const Home = ({ movieData }) => {
         </div>
       </div>
       <div className={styles.posters}>
+        {selectedFilter && (
+          <a className={styles.clear} onClick={() => setSelectedFilter(null)}>
+            Clear
+          </a>
+        )}
         {filteredMovies.map((movie, idx) => (
-          <img src={movie.poster} key={idx} />
+          <img src={movie.poster} key={movie.title} />
         ))}
       </div>
     </div>

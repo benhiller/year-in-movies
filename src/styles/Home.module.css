@@ -6,6 +6,11 @@
 
 .content, .posters {
   width: 100%;
+  padding: 10px;
+}
+
+.content div {
+  padding-bottom: 10px;
 }
 
 .posters {
@@ -17,4 +22,9 @@
   height: 150px;
   margin: 5px;
   object-fit: cover;
+}
+
+.clear {
+  color: white;
+  float: right;
 }
