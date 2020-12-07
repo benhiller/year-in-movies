@@ -45,6 +45,7 @@ const processData = (data) => {
       releaseDate: movie.details.release_date,
       director: findDirector(movie),
       cast: listCastMembers(movie),
+      runtime: movie.details.runtime,
       watchDate: movie.record.fields.Date,
       source: movie.record.fields.Source,
       notes: movie.record.fields.Notes,
