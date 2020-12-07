@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const readGeneratedData = async () => {
-  const data = await fs.promises.readFile('data/movies.json');
+  const data = await fs.promises.readFile('src/data/movies.json');
 
   return JSON.parse(data);
 };
