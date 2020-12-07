@@ -58,7 +58,7 @@ const processData = (data) => {
 readGeneratedData()
   .then((data) => {
     return fs.promises.writeFile(
-      'data/processed-movies.json',
+      'src/data/processed-movies.json',
       JSON.stringify(processData(data)),
     );
   })

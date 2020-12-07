@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 // import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import movieData from './processed-movies.json';
+import movieData from './data/processed-movies.json';
 
 ReactDOM.render(
   <React.StrictMode>
