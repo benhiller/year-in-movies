@@ -18,6 +18,10 @@ const filterMovies = (movieData, filter) => {
     return movieData.filter(
       (movie) => movie.cast && movie.cast.includes(filter.actor),
     );
+  } else if (filter.decade) {
+    return movieData.filter((movie) =>
+      movie.releaseDate.startsWith(filter.decade.slice(0, 3)),
+    );
   }
 };
 
@@ -26,6 +30,8 @@ const titleForFilter = (filter) => {
     return `Director: ${filter.director}`;
   } else if (filter.actor) {
     return `Cast Member: ${filter.actor}`;
+  } else if (filter.decade) {
+    return `Release Year: ${filter.decade}`;
   }
 };
 
@@ -74,6 +80,23 @@ const Home = ({ movieData }) => {
     [movieData],
   );
 
+  const topDecades = useMemo(
+    () =>
+      Object.entries(
+        movieData.reduce((acc, movie) => {
+          const decade = parseInt(movie.releaseDate.slice(0, 3)) * 10;
+          const decadeLabel = `${decade}'s`;
+          if (acc[decadeLabel]) {
+            acc[decadeLabel] = acc[decadeLabel] + 1;
+          } else {
+            acc[decadeLabel] = 1;
+          }
+          return acc;
+        }, {}),
+      ).sort((a, b) => b[1] - a[1]),
+    [movieData],
+  );
+
   const firstTitle = movieData[0].title;
   const lastTitle = movieData[movieData.length - 1].title;
 
@@ -116,6 +139,18 @@ const Home = ({ movieData }) => {
               <li key={actor[0]}>
                 <a onClick={() => setSelectedFilter({ actor: actor[0] })}>
                   {actor[0]}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div>
+          Top Decades:
+          <ol>
+            {topDecades.slice(0, 5).map((decade) => (
+              <li key={decade[0]}>
+                <a onClick={() => setSelectedFilter({ decade: decade[0] })}>
+                  {decade[0]}
                 </a>
               </li>
             ))}
