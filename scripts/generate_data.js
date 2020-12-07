@@ -5,7 +5,8 @@ const fetch = require('node-fetch');
 
 const fetchAirtablePage = async (offset) => {
   const filter = encodeURIComponent("IS_AFTER({Date}, '2019-12-31')");
-  let url = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Movies?maxRecords=200&filterByFormula=${filter}&sort[0][field]=Date&sort[0][direction]=asc`;
+  // TODO - remove pageSize to fetch more movies at once
+  let url = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Movies?maxRecords=200&filterByFormula=${filter}&sort[0][field]=Date&sort[0][direction]=asc&pageSize=15`;
   if (offset) {
     url = url + `&offset=${offset}`;
   }
@@ -24,6 +25,8 @@ const fetchAllAirtableRecords = async () => {
   while (json.offset) {
     json = await fetchAirtablePage(json.offset);
     records = [...records, ...json.records];
+    // TODO - delete to fetch all movies
+    break;
   }
   return records;
 };
