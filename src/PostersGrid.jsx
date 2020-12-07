@@ -21,18 +21,20 @@ const PostersGrid = ({ movies }) => {
   }
   columns--;
 
+  const actualSpacing = (width - POSTER_WIDTH * columns) / (columns - 1);
+
   // TODO - poster spacing should be evenly distributed based on width
   const gridItems = useMemo(() => {
     return movies.map((child, i) => {
       const column = i % columns;
       const xy = [
-        POSTER_WIDTH * column + Math.max(0, POSTER_SPACING * column),
+        POSTER_WIDTH * column + Math.max(0, actualSpacing * column),
         POSTER_HEIGHT * Math.floor(i / columns) +
           Math.max(0, POSTER_SPACING * Math.floor(i / columns)),
       ];
       return { ...child, xy, width: POSTER_WIDTH, height: POSTER_HEIGHT };
     });
-  }, [columns, movies]);
+  }, [columns, movies, actualSpacing]);
 
   const transitions = useTransition(gridItems, (item) => item.title, {
     from: ({ xy, width, height }) => ({ xy, width, height, opacity: 0 }),

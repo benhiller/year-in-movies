@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import styles from './styles/Home.module.css';
+import styles from './styles/App.module.css';
 import PostersGrid from './PostersGrid.jsx';
 
 const filterMovies = (movieData, filter) => {
