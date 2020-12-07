@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import movieData from '../../data/processed-movies.json';
@@ -11,7 +11,19 @@ export const getStaticProps = async () => {
   };
 };
 
+const filterMovies = (movieData, filter) => {
+  if (filter.director) {
+    return movieData.filter((movie) => movie.director === filter.director);
+  } else if (filter.actor) {
+    return movieData.filter(
+      (movie) => movie.cast && movie.cast.includes(filter.actor),
+    );
+  }
+};
+
 const Home = ({ movieData }) => {
+  const [selectedFilter, setSelectedFilter] = useState(null);
+
   const topDirectors = useMemo(
     () =>
       Object.entries(
@@ -57,6 +69,12 @@ const Home = ({ movieData }) => {
   const firstTitle = movieData[0].title;
   const lastTitle = movieData[movieData.length - 1].title;
 
+  const filteredMovies = useMemo(
+    () =>
+      selectedFilter ? filterMovies(movieData, selectedFilter) : movieData,
+    [movieData, selectedFilter],
+  );
+
   return (
     <div className={styles.container}>
       <Head>
@@ -71,7 +89,11 @@ const Home = ({ movieData }) => {
           Top Directors:
           <ol>
             {topDirectors.slice(0, 5).map((director, idx) => (
-              <li key={idx}>{director[0]}</li>
+              <li key={idx}>
+                <a onClick={() => setSelectedFilter({ director: director[0] })}>
+                  {director[0]}
+                </a>
+              </li>
             ))}
           </ol>
         </div>
@@ -79,13 +101,17 @@ const Home = ({ movieData }) => {
           Top Actors:
           <ol>
             {topActors.slice(0, 5).map((actor, idx) => (
-              <li key={idx}>{actor[0]}</li>
+              <li key={idx}>
+                <a onClick={() => setSelectedFilter({ actor: actor[0] })}>
+                  {actor[0]}
+                </a>
+              </li>
             ))}
           </ol>
         </div>
       </div>
       <div className={styles.posters}>
-        {movieData.map((movie, idx) => (
+        {filteredMovies.map((movie, idx) => (
           <img src={movie.poster} key={idx} />
         ))}
       </div>
