@@ -59,7 +59,8 @@ readGeneratedData()
   .then((data) => {
     return fs.promises.writeFile(
       'src/data/processed-movies.json',
-      JSON.stringify(processData(data)),
+      // TODO - remove slice when I want to run this for all movies
+      JSON.stringify(processData(data.slice(0, 20))),
     );
   })
   .catch((err) => {
