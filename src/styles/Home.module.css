@@ -9,6 +9,16 @@
   padding: 10px;
 }
 
+.summary {
+  display: flex;
+  flex-direction: row;
+}
+
+.summary div {
+  width: 100%;
+  text-align: center;
+}
+
 .content div {
   padding-bottom: 10px;
 }

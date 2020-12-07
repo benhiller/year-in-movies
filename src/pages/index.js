@@ -97,6 +97,12 @@ const Home = ({ movieData }) => {
     [movieData],
   );
 
+  const movieCount = movieData.length;
+  const timeSpent = useMemo(
+    () => movieData.reduce((acc, movie) => acc + movie.runtime, 0),
+    [movieData],
+  );
+
   const firstTitle = movieData[0].title;
   const lastTitle = movieData[movieData.length - 1].title;
 
@@ -118,6 +124,18 @@ const Home = ({ movieData }) => {
       </Head>
 
       <div className={styles.content}>
+        <div className={styles.summary}>
+          <div className={styles.summaryStat}>
+            <div>Movies Watched</div>
+            <div>{movieCount}</div>
+          </div>
+          <div className={styles.summaryStat}>
+            <div>Time Spent</div>
+            <div>
+              {Math.floor(timeSpent / 60)}h {timeSpent % 60}m
+            </div>
+          </div>
+        </div>
         <div>First movie watched: {firstTitle}</div>
         <div>Last movie watched: {lastTitle}</div>
         <div>
