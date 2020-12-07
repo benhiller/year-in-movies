@@ -23,7 +23,6 @@ const PostersGrid = ({ movies }) => {
 
   const actualSpacing = (width - POSTER_WIDTH * columns) / (columns - 1);
 
-  // TODO - poster spacing should be evenly distributed based on width
   const gridItems = useMemo(() => {
     return movies.map((child, i) => {
       const column = i % columns;
