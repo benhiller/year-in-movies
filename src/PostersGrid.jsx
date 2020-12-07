@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import useMeasure from 'react-use-measure';
 import { useTransition, a } from 'react-spring';
 
-import styles from '../styles/PostersGrid.module.css';
+import styles from './styles/PostersGrid.module.css';
 
 const POSTER_WIDTH = 100;
 const POSTER_HEIGHT = 150;

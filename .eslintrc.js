@@ -2,6 +2,8 @@ module.exports = {
   extends: [
     'standard',
     'prettier',
+    'react-app',
+    'react-app/jest',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
   ],

@@ -1,17 +1,7 @@
 import { useMemo, useState } from 'react';
-import Head from 'next/head';
 
-import styles from '../styles/Home.module.css';
-import PostersGrid from '../components/PostersGrid.jsx';
-import movieData from '../../data/processed-movies.json';
-
-export const getStaticProps = async () => {
-  return {
-    props: {
-      movieData,
-    },
-  };
-};
+import styles from './styles/Home.module.css';
+import PostersGrid from './PostersGrid.jsx';
 
 const filterMovies = (movieData, filter) => {
   if (filter.director) {
@@ -120,11 +110,6 @@ const Home = ({ movieData }) => {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Ben&apos;s Year in Movies - 2020</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <div className={styles.content}>
         <div className={styles.summary}>
           <div className={styles.summaryStat}>
