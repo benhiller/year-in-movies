@@ -13,11 +13,19 @@ export const getStaticProps = async () => {
 
 const filterMovies = (movieData, filter) => {
   if (filter.director) {
-    return movieData.filter((movie) => movie.director === filter.director);
+    return movieData;
   } else if (filter.actor) {
     return movieData.filter(
       (movie) => movie.cast && movie.cast.includes(filter.actor),
     );
+  }
+};
+
+const titleForFilter = (filter) => {
+  if (filter.director) {
+    return `Director: ${filter.director}`;
+  } else if (filter.actor) {
+    return `Cast Member: ${filter.actor}`;
   }
 };
 
@@ -75,6 +83,10 @@ const Home = ({ movieData }) => {
     [movieData, selectedFilter],
   );
 
+  const currentTitle = selectedFilter
+    ? titleForFilter(selectedFilter)
+    : 'All Movies';
+
   return (
     <div className={styles.container}>
       <Head>
@@ -88,7 +100,7 @@ const Home = ({ movieData }) => {
         <div>
           Top Directors:
           <ol>
-            {topDirectors.slice(0, 5).map((director, idx) => (
+            {topDirectors.slice(0, 5).map((director) => (
               <li key={director[0]}>
                 <a onClick={() => setSelectedFilter({ director: director[0] })}>
                   {director[0]}
@@ -100,7 +112,7 @@ const Home = ({ movieData }) => {
         <div>
           Top Actors:
           <ol>
-            {topActors.slice(0, 5).map((actor, idx) => (
+            {topActors.slice(0, 5).map((actor) => (
               <li key={actor[0]}>
                 <a onClick={() => setSelectedFilter({ actor: actor[0] })}>
                   {actor[0]}
@@ -110,15 +122,20 @@ const Home = ({ movieData }) => {
           </ol>
         </div>
       </div>
-      <div className={styles.posters}>
-        {selectedFilter && (
-          <a className={styles.clear} onClick={() => setSelectedFilter(null)}>
-            Clear
-          </a>
-        )}
-        {filteredMovies.map((movie, idx) => (
-          <img src={movie.poster} key={movie.title} />
-        ))}
+      <div className={styles.postersContainer}>
+        <div className={styles.controls}>
+          <span>{currentTitle}</span>
+          {selectedFilter && (
+            <a className={styles.clear} onClick={() => setSelectedFilter(null)}>
+              Clear
+            </a>
+          )}
+        </div>
+        <div className={styles.posters}>
+          {filteredMovies.map((movie) => (
+            <img src={movie.poster} key={movie.title} />
+          ))}
+        </div>
       </div>
     </div>
   );
