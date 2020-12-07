@@ -34,7 +34,6 @@ const PostersGrid = ({ movies }) => {
     });
   }, [columns, movies]);
 
-  // Hook6: Turn the static grid values into animated transitions, any addition, removal or change will be animated
   const transitions = useTransition(gridItems, (item) => item.title, {
     from: ({ xy, width, height }) => ({ xy, width, height, opacity: 0 }),
     enter: ({ xy, width, height }) => ({ xy, width, height, opacity: 1 }),
@@ -44,8 +43,12 @@ const PostersGrid = ({ movies }) => {
     trail: 25,
   });
 
+  const height =
+    Math.ceil(movies.length / columns) * POSTER_HEIGHT +
+    (Math.ceil(movies.length / columns) - 1) * POSTER_SPACING;
+
   return (
-    <div className={styles.posters} ref={ref}>
+    <div className={styles.posters} ref={ref} style={{ height: `${height}px` }}>
       {transitions.map(({ item, props: { xy, ...rest }, key }) => {
         return (
           <a.div
@@ -57,7 +60,7 @@ const PostersGrid = ({ movies }) => {
               ...rest,
             }}
           >
-            <img src={item.poster} />
+            <img src={item.poster} alt={item.title} />
           </a.div>
         );
       })}
