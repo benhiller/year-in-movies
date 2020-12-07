@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
 import Head from 'next/head';
+
 import styles from '../styles/Home.module.css';
+import PostersGrid from '../components/PostersGrid.jsx';
 import movieData from '../../data/processed-movies.json';
 
 export const getStaticProps = async () => {
@@ -184,11 +186,9 @@ const Home = ({ movieData }) => {
             </a>
           )}
         </div>
-        <div className={styles.posters}>
-          {filteredMovies.map((movie) => (
-            <img src={movie.poster} key={movie.title} />
-          ))}
-        </div>
+        {typeof window !== 'undefined' && (
+          <PostersGrid movies={filteredMovies} />
+        )}
       </div>
     </div>
   );

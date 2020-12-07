@@ -1,0 +1,14 @@
+.posters {
+  position: relative;
+}
+
+.posters div {
+  position: absolute;
+  will-change: transform, width, height, opacity;
+}
+
+.posters img {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+}
