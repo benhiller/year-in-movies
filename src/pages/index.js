@@ -64,7 +64,7 @@ const Home = ({ movieData }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <div className={styles.content}>
         <div>First movie watched: {firstTitle}</div>
         <div>Last movie watched: {lastTitle}</div>
         <div>
@@ -83,18 +83,12 @@ const Home = ({ movieData }) => {
             ))}
           </ol>
         </div>
-        <div>
-          Posters
-          <br />
-          {movieData.map((movie, idx) => (
-            <img
-              src={movie.poster}
-              key={idx}
-              style={{ width: '50px', height: '75px' }}
-            />
-          ))}
-        </div>
-      </main>
+      </div>
+      <div className={styles.posters}>
+        {movieData.map((movie, idx) => (
+          <img src={movie.poster} key={idx} />
+        ))}
+      </div>
     </div>
   );
 };
