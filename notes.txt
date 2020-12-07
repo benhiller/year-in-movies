@@ -1,0 +1,14 @@
+ideas for units:
+- top directors
+- top actors
+- top genres
+- top decades
+- longest/shortest movie
+- watches by month
+- most obscure movie
+- highest rated/lowest rated
+- minutes spent watching movies
+- where i watched the movie
+
+layout:
+- split page in half, with covers of movies i watched on right. click on item to filter to just those movies?

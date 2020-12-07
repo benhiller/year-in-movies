@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "generate-data": "node scripts/generate_data.js"
+    "generate-data": "node scripts/generate_data.js",
+    "process-data": "node scripts/process_data.js"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
