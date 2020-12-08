@@ -11,9 +11,11 @@ const findDirector = (movie) => {
     return null;
   }
 
-  return movie.details.credits.crew.find(
+  const director = movie.details.credits.crew.find(
     (crewMember) => crewMember.job === 'Director',
-  ).name;
+  );
+
+  return { name: director.name, imageSrc: director.profile_path };
 };
 
 const listCastMembers = (movie) => {
@@ -32,16 +34,16 @@ const listCastMembers = (movie) => {
         return null;
       }
 
-      return castMember.name;
+      return { name: castMember.name, imageSrc: castMember.profile_path };
     })
     .filter((castMember) => !!castMember);
 };
 
 const processData = (data) => {
   return data.map((movie) => {
-    const processedMovie = {
+    return {
       title: movie.details.title,
-      poster: movie.record.fields.Poster[0].url,
+      posterSrc: movie.details.poster_path,
       releaseDate: movie.details.release_date,
       director: findDirector(movie),
       cast: listCastMembers(movie),
@@ -50,8 +52,6 @@ const processData = (data) => {
       source: movie.record.fields.Source,
       notes: movie.record.fields.Notes,
     };
-
-    return processedMovie;
   });
 };
 
