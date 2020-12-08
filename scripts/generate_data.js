@@ -75,7 +75,7 @@ fetchAllAirtableRecords()
     return Promise.all(records.map((movie) => fetchTMDBDetailsForMovie(movie)));
   })
   .then((details) => {
-    return fs.promises.writeFile('src/data/movies.json', JSON.stringify(details));
+    return fs.promises.writeFile('raw-data/movies.json', JSON.stringify(details));
   })
   .catch((err) => {
     console.error(err);
