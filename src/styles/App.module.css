@@ -25,6 +25,7 @@ button:hover, button:focus{
   width: 100%;
   padding: 10px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 @media (min-width: 850px), (orientation: landscape) {
@@ -56,13 +57,17 @@ button:hover, button:focus{
   display: flex;
   flex-direction: row;
   list-style-type: none;
+  overflow-x: scroll;
+  padding: 0 10px;
+  margin: 16px -10px;
 }
 
 .content ol li {
-  width: 120px;
+  flex: 1 0 85px;
 }
 
 .content ol li button {
+  width: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;

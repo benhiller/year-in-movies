@@ -79,7 +79,7 @@ const Home = ({ movieData }) => {
     [movieData],
   );
 
-  const topDecades = useMemo(
+  const decadesHistogram = useMemo(
     () =>
       Object.entries(
         movieData.reduce((acc, movie) => {
@@ -145,7 +145,7 @@ const Home = ({ movieData }) => {
             {'\uD83C\uDFAC'} Top Directors
           </span>
           <ol>
-            {topDirectors.slice(0, 5).map((director, idx) => (
+            {topDirectors.slice(0, 15).map((director, idx) => (
               <li key={director.name}>
                 <button
                   onClick={() => setSelectedFilter({ director: director.name })}
@@ -158,9 +158,8 @@ const Home = ({ movieData }) => {
                   ) : (
                     <div className={styles.directorPlaceholder} />
                   )}
-                  <span>
-                    {idx + 1}. {director.name}
-                  </span>
+                  <span>{director.name}</span>{' '}
+                  {/* TODO - split name so last name is always on last line? */}
                 </button>
               </li>
             ))}
@@ -176,7 +175,7 @@ const Home = ({ movieData }) => {
             {'\uD83C\uDFC6'} Top Cast Members
           </span>
           <ol>
-            {topCastMembers.slice(0, 5).map((castMember, idx) => (
+            {topCastMembers.slice(0, 15).map((castMember, idx) => (
               <li key={castMember.name}>
                 <button
                   onClick={() =>
@@ -204,7 +203,7 @@ const Home = ({ movieData }) => {
             {'\uD83D\uDDD3\uFE0F'} Movies by Decade
           </span>
           <ol>
-            {topDecades.slice(0, 5).map((decade) => (
+            {decadesHistogram.slice(0, 5).map((decade) => (
               <li key={decade[0]}>
                 <button
                   onClick={() => setSelectedFilter({ decade: decade[0] })}
