@@ -15,6 +15,8 @@ const filterMovies = (movieData, filter) => {
     return movieData.filter((movie) =>
       movie.releaseDate.startsWith(filter.decade.slice(0, 3)),
     );
+  } else if (filter.genre) {
+    return movieData.filter((movie) => movie.genres.includes(filter.genre));
   }
 };
 
@@ -25,6 +27,76 @@ const titleForFilter = (filter) => {
     return `Cast Member: ${filter.castMember}`;
   } else if (filter.decade) {
     return `Release Year: ${filter.decade}`;
+  } else if (filter.genre) {
+    return `Genre: ${filter.genre}`;
+  }
+};
+
+// Probably should specify per-emoji padding values to get better alignment...
+// though maybe that is too Apple specific?
+// TODO - remove alternative emojis
+const emojiForGenre = (genre) => {
+  switch (genre) {
+    case 'Action':
+      return '\uD83E\uDD35\uFE0F'; // man in tux (like james bond?)
+    case 'Adventure':
+      return '\uD83E\uDDF3'; // luggage
+    // return '\uD83E\uDD20'; // cowboy hat face (like indiana jones?)
+    // map?
+    case 'Animation':
+      return '\uD83D\uDC2D'; // mouse
+    // return '\uD83C\uDFA8'; // palette
+    // mouse?
+    case 'Comedy':
+      return '\uD83E\uDD21'; // clown
+    case 'Crime':
+      return '\uD83D\uDC6E\u200D\u2642\uFE0F'; // police
+    // cop car? siren?
+    case 'Documentary':
+      return '\uD83D\uDDDE\uFE0F'; // rolled-up newspaper
+    // return '\uD83D\uDCF0'; // newspaper
+    case 'Drama':
+      return '\uD83D\uDE4E\u200D\u2642\uFE0F'; // man pouting
+    // broken heart?
+    case 'Family':
+      return '\uD83D\uDC6A';
+    // return '\uD83D\uDC68\u200D\uD83D\uDC68\u200D\uD83D\uDC67\u200D\uD83D\uDC66';
+    case 'Fantasy':
+      return '\uD83E\uDDD9\u200D\u2642\uFE0F'; // man mage
+    // return '\uD83E\uDDDA'; // fairy
+    // return '\uD83E\uDDD9'; // mage
+    case 'History':
+      return '\uD83D\uDDFF'; // moyai
+    // greek vase?
+    case 'Horror':
+      // return '\uD83D\uDC7B'; // ghost
+      // return '\uD83E\uDDDB\u200D\u2642\uFE0F'; // vampire
+      return '\uD83E\uDDDF\u200D\u2642\uFE0F'; // zombie
+    case 'Music':
+      return '\uD83C\uDFB8'; // guitar
+    // return '\uD83C\uDFB7'; // sax
+    case 'Mystery':
+      return '\uD83D\uDD75\uFE0F';
+    case 'Romance':
+      return '\uD83D\uDC8B'; // kiss mark
+    case 'Science Fiction':
+      // return '\uD83D\uDC7D'; // alien
+      return '\uD83D\uDC68\u200D\uD83D\uDE80'; // astronaut
+    // return '\uD83E\uDD16'; // robot
+    // space ship?
+    case 'TV Movie':
+      return '\uD83D\uDCFA'; // television
+    case 'Thriller':
+      return '\uD83D\uDD2A'; // knife
+    case 'War':
+      return '\uD83C\uDF96\uFE0F'; // military medal
+    // bomb?
+    case 'Western':
+      return '\uD83E\uDD20'; // cowboy hat face (like indiana jones?)
+    // return '\uD83D\uDC34'; // horse
+    // cowboy hat face?
+    default:
+      return '\uD83C\uDFA6'; // movie camera icon
   }
 };
 
@@ -76,6 +148,50 @@ const Home = ({ movieData }) => {
       )
         .sort((a, b) => b[1].count - a[1].count)
         .map(([_, { castMember }]) => castMember),
+    [movieData],
+  );
+
+  // const allGenres = [
+  //   'Action',
+  //   'Adventure',
+  //   'Animation',
+  //   'Comedy',
+  //   'Crime',
+  //   'Documentary',
+  //   'Drama',
+  //   'Family',
+  //   'Fantasy',
+  //   'History',
+  //   'Horror',
+  //   'Music',
+  //   'Mystery',
+  //   'Romance',
+  //   'Science Fiction',
+  //   'TV Movie',
+  //   'Thriller',
+  //   'War',
+  //   'Western',
+  //   'Default',
+  // ];
+  const topGenres = useMemo(
+    () =>
+      Object.entries(
+        movieData.reduce((acc, movie) => {
+          const { genres } = movie;
+          if (!genres) {
+            return acc;
+          }
+
+          genres.forEach((genre) => {
+            if (acc[genre]) {
+              acc[genre] = acc[genre] + 1;
+            } else {
+              acc[genre] = 1;
+            }
+          });
+          return acc;
+        }, {}),
+      ).sort((a, b) => b[1] - a[1]),
     [movieData],
   );
 
@@ -169,6 +285,23 @@ const Home = ({ movieData }) => {
           <span className={styles.sectionTitle}>
             {'\uD83C\uDFAD'} Top Genres
           </span>
+          <ol>
+            {topGenres
+              .slice(0, 15)
+              .map((genre) => genre[0])
+              .map((genre, idx) => (
+                <li key={genre}>
+                  <button onClick={() => setSelectedFilter({ genre: genre })}>
+                    <div className={styles.genreEmoji}>
+                      {emojiForGenre(genre)}
+                    </div>
+                    <span>
+                      {idx + 1}. {genre}
+                    </span>
+                  </button>
+                </li>
+              ))}
+          </ol>
         </div>
         <div>
           <span className={styles.sectionTitle}>
