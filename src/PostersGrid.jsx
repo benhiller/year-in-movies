@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import useMeasure from 'react-use-measure';
-import { useTransition, a } from 'react-spring';
+import { useTransition, a, interpolate, config } from 'react-spring';
 
 import styles from './styles/PostersGrid.module.css';
 
@@ -38,11 +38,23 @@ const PostersGrid = ({ movies }) => {
   }, [columns, movies, actualSpacing]);
 
   const transitions = useTransition(gridItems, (item) => item.title, {
-    from: ({ xy, width, height }) => ({ xy, width, height: 0, opacity: 0 }),
-    enter: ({ xy, width, height }) => ({ xy, width, height, opacity: 1 }),
+    from: ({ xy, width, height }) => ({
+      xy,
+      width,
+      height,
+      opacity: 0,
+      scale: 0.25,
+    }),
+    enter: ({ xy, width, height }) => ({
+      xy,
+      width,
+      height,
+      opacity: 1,
+      scale: 1,
+    }),
     update: ({ xy, width, height }) => ({ xy, width, height }),
-    leave: { height: 0, opacity: 0 },
-    config: { mass: 5, tension: 500, friction: 100 },
+    leave: { opacity: 0, scale: 0.25 },
+    config: { mass: 1, tension: 195, friction: 18 },
   });
 
   const height =
@@ -51,13 +63,13 @@ const PostersGrid = ({ movies }) => {
 
   return (
     <div className={styles.posters} ref={ref} style={{ height: `${height}px` }}>
-      {transitions.map(({ item, props: { xy, ...rest }, key }) => {
+      {transitions.map(({ item, props: { xy, scale, ...rest }, key }) => {
         return (
           <a.img
             key={key}
             style={{
-              transform: xy.interpolate((x, y) => {
-                return `translate3d(${x}px,${y}px,0)`;
+              transform: interpolate([xy, scale], ([x, y], scale) => {
+                return `translate3d(${x}px,${y}px,0) scale(${scale})`;
               }),
               ...rest,
             }}
