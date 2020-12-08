@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import useMeasure from 'react-use-measure';
-import { useTransition, a, interpolate, config } from 'react-spring';
+import { useTransition, a, interpolate } from 'react-spring';
 
 import styles from './styles/PostersGrid.module.css';
 
