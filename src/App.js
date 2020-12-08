@@ -84,7 +84,7 @@ const Home = ({ movieData }) => {
       Object.entries(
         movieData.reduce((acc, movie) => {
           const decade = parseInt(movie.releaseDate.slice(0, 3)) * 10;
-          const decadeLabel = `${decade}'s`;
+          const decadeLabel = `${decade}s`;
           if (acc[decadeLabel]) {
             acc[decadeLabel] = acc[decadeLabel] + 1;
           } else {
@@ -92,7 +92,7 @@ const Home = ({ movieData }) => {
           }
           return acc;
         }, {}),
-      ).sort((a, b) => b[1] - a[1]),
+      ),
     [movieData],
   );
 
@@ -152,7 +152,7 @@ const Home = ({ movieData }) => {
                 >
                   {director.imageSrc ? (
                     <img
-                      src={`https://image.tmdb.org/t/p/w185${director.imageSrc}`}
+                      src={`https://image.tmdb.org/t/p/w180_and_h180_face${director.imageSrc}`}
                       alt={director.name}
                     />
                   ) : (
@@ -185,7 +185,7 @@ const Home = ({ movieData }) => {
                 >
                   {castMember.imageSrc ? (
                     <img
-                      src={`https://image.tmdb.org/t/p/w185${castMember.imageSrc}`}
+                      src={`https://image.tmdb.org/t/p/w180_and_h180_face${castMember.imageSrc}`}
                       alt={castMember.name}
                     />
                   ) : (
@@ -209,7 +209,7 @@ const Home = ({ movieData }) => {
                 <button
                   onClick={() => setSelectedFilter({ decade: decade[0] })}
                 >
-                  {decade[0]}
+                  {decade[0]}: {decade[1]}
                 </button>
               </li>
             ))}
