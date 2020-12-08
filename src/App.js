@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
-import styles from './styles/App.module.css';
-import PostersGrid from './PostersGrid.jsx';
+import styles from 'styles/App.module.css';
+import PostersGrid from 'PostersGrid';
 
 const filterMovies = (movieData, filter) => {
   if (filter.director) {
