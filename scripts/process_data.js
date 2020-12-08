@@ -39,6 +39,14 @@ const listCastMembers = (movie) => {
     .filter((castMember) => !!castMember);
 };
 
+const listGenres = (movie) => {
+  if (!movie.details.genres) {
+    return null;
+  }
+
+  return movie.details.genres.map((genre) => genre.name);
+};
+
 const processData = (data) => {
   return data.map((movie) => {
     return {
@@ -47,6 +55,7 @@ const processData = (data) => {
       releaseDate: movie.details.release_date,
       director: findDirector(movie),
       cast: listCastMembers(movie),
+      genres: listGenres(movie),
       runtime: movie.details.runtime,
       watchDate: movie.record.fields.Date,
       source: movie.record.fields.Source,
