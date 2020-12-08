@@ -19,3 +19,5 @@ tooltip for movie poster, show when i watched it, other details?
 - only include directors/cast members who were in more than 1 movie
 - show number only between cells with different count -> or will this look less good on actual data?
 - add question mark to directorPlaceholder?
+
+- credit tmdb for data!
