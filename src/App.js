@@ -168,6 +168,11 @@ const Home = ({ movieData }) => {
         </div>
         <div>
           <span className={styles.sectionTitle}>
+            {'\uD83C\uDFAD'} Top Genres
+          </span>
+        </div>
+        <div>
+          <span className={styles.sectionTitle}>
             {'\uD83C\uDFC6'} Top Cast Members
           </span>
           <ol>
@@ -196,7 +201,7 @@ const Home = ({ movieData }) => {
         </div>
         <div>
           <span className={styles.sectionTitle}>
-            {'\uD83D\uDDD3\uFE0F'} Top Decades
+            {'\uD83D\uDDD3\uFE0F'} Movies by Decade
           </span>
           <ol>
             {topDecades.slice(0, 5).map((decade) => (
@@ -209,6 +214,17 @@ const Home = ({ movieData }) => {
               </li>
             ))}
           </ol>
+        </div>
+        <div>
+          <span className={styles.sectionTitle}>
+            {'\uD83C\uDF9F\uFE0F'} Movie Schedule
+          </span>
+        </div>
+        <div>
+          <span className={styles.sectionTitle}>
+            {/* TODO - need to use emoji here, not unicode */}
+            {'\u25B6'} Movies by Source
+          </span>
         </div>
       </div>
       <div className={styles.postersContainer}>
