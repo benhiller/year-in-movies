@@ -1,3 +1,17 @@
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+button:hover, button:focus{
+  text-decoration: none;
+}
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -33,11 +47,14 @@
   padding-bottom: 10px;
 }
 
+.sectionTitle {
+  font-weight: 600;
+  font-size: 18px;
+}
+
 .content ol {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-content: center;
   list-style-type: none;
 }
 
@@ -46,7 +63,7 @@
   height: 150px;
 }
 
-.content ol li a {
+.content ol li button {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,4 +89,8 @@
   margin-bottom: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+.clear {
+  color: white;
 }

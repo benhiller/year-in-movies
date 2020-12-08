@@ -141,11 +141,13 @@ const Home = ({ movieData }) => {
           </div>
         </div>
         <div>
-          Top Directors:
+          <span className={styles.sectionTitle}>
+            {'\uD83C\uDFAC'} Top Directors
+          </span>
           <ol>
             {topDirectors.slice(0, 5).map((director, idx) => (
               <li key={director.name}>
-                <a
+                <button
                   onClick={() => setSelectedFilter({ director: director.name })}
                 >
                   {director.imageSrc ? (
@@ -159,17 +161,21 @@ const Home = ({ movieData }) => {
                   <span>
                     {idx + 1}. {director.name}
                   </span>
-                </a>
+                </button>
               </li>
             ))}
           </ol>
         </div>
         <div>
-          Top Actors:
+          <span className={styles.sectionTitle}>
+            {'\uD83C\uDFC6'} Top Actors
+          </span>
           <ol>
             {topActors.slice(0, 5).map((actor, idx) => (
               <li key={actor.name}>
-                <a onClick={() => setSelectedFilter({ actor: actor.name })}>
+                <button
+                  onClick={() => setSelectedFilter({ actor: actor.name })}
+                >
                   {actor.imageSrc ? (
                     <img
                       src={`https://image.tmdb.org/t/p/w185${actor.imageSrc}`}
@@ -181,19 +187,23 @@ const Home = ({ movieData }) => {
                   <span>
                     {idx + 1}. {actor.name}
                   </span>
-                </a>
+                </button>
               </li>
             ))}
           </ol>
         </div>
         <div>
-          Top Decades:
+          <span className={styles.sectionTitle}>
+            {'\uD83D\uDDD3\uFE0F'} Top Decades
+          </span>
           <ol>
             {topDecades.slice(0, 5).map((decade) => (
               <li key={decade[0]}>
-                <a onClick={() => setSelectedFilter({ decade: decade[0] })}>
+                <button
+                  onClick={() => setSelectedFilter({ decade: decade[0] })}
+                >
                   {decade[0]}
-                </a>
+                </button>
               </li>
             ))}
           </ol>
@@ -203,9 +213,12 @@ const Home = ({ movieData }) => {
         <div className={styles.controls}>
           <span>{currentTitle}</span>
           {selectedFilter && (
-            <a className={styles.clear} onClick={() => setSelectedFilter(null)}>
+            <button
+              className={styles.clear}
+              onClick={() => setSelectedFilter(null)}
+            >
               Clear
-            </a>
+            </button>
           )}
         </div>
         {typeof window !== 'undefined' && (
