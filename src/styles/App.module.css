@@ -28,7 +28,6 @@ button:hover, button:focus{
   padding: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
-  overscroll-behavior: contain;
 }
 
 @media (min-width: 850px), (orientation: landscape) {
