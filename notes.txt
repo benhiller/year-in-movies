@@ -21,3 +21,4 @@ tooltip for movie poster, show when i watched it, other details?
 - add question mark to directorPlaceholder?
 
 - credit tmdb for data!
+- padding for scrollbar?

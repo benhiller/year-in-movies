@@ -122,7 +122,7 @@ const Home = ({ movieData }) => {
         }, {}),
       )
         .sort((a, b) => b[1].count - a[1].count)
-        .map(([_, { director }]) => director),
+        .map(([_, item]) => item),
     [movieData],
   );
 
@@ -147,7 +147,7 @@ const Home = ({ movieData }) => {
         }, {}),
       )
         .sort((a, b) => b[1].count - a[1].count)
-        .map(([_, { castMember }]) => castMember),
+        .map(([_, item]) => item),
     [movieData],
   );
 
@@ -261,19 +261,22 @@ const Home = ({ movieData }) => {
             {'\uD83C\uDFAC'} Top Directors
           </span>
           <ol>
-            {topDirectors.slice(0, 15).map((director, idx) => (
+            {topDirectors.slice(0, 15).map(({ director, count }, idx) => (
               <li key={director.name}>
                 <button
                   onClick={() => setSelectedFilter({ director: director.name })}
                 >
-                  {director.imageSrc ? (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w180_and_h180_face${director.imageSrc}`}
-                      alt={director.name}
-                    />
-                  ) : (
-                    <div className={styles.directorPlaceholder} />
-                  )}
+                  <div className={styles.pic}>
+                    <span className={styles.position}>{count}</span>
+                    {director.imageSrc ? (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w180_and_h180_face${director.imageSrc}`}
+                        alt={director.name}
+                      />
+                    ) : (
+                      <div className={styles.directorPlaceholder} />
+                    )}
+                  </div>
                   <span>{director.name}</span>{' '}
                   {/* TODO - split name so last name is always on last line? */}
                 </button>
@@ -288,16 +291,17 @@ const Home = ({ movieData }) => {
           <ol>
             {topGenres
               .slice(0, 15)
-              .map((genre) => genre[0])
-              .map((genre, idx) => (
+              .map((genre) => ({ genre: genre[0], count: genre[1] }))
+              .map(({ genre, count }, idx) => (
                 <li key={genre}>
                   <button onClick={() => setSelectedFilter({ genre: genre })}>
-                    <div className={styles.genreEmoji}>
-                      {emojiForGenre(genre)}
+                    <div className={styles.pic}>
+                      <span className={styles.position}>{count}</span>
+                      <div className={styles.genreEmoji}>
+                        {emojiForGenre(genre)}
+                      </div>
                     </div>
-                    <span>
-                      {idx + 1}. {genre}
-                    </span>
+                    <span>{genre}</span>
                   </button>
                 </li>
               ))}
@@ -308,24 +312,25 @@ const Home = ({ movieData }) => {
             {'\uD83C\uDFC6'} Top Cast Members
           </span>
           <ol>
-            {topCastMembers.slice(0, 15).map((castMember, idx) => (
+            {topCastMembers.slice(0, 15).map(({ castMember, count }, idx) => (
               <li key={castMember.name}>
                 <button
                   onClick={() =>
                     setSelectedFilter({ castMember: castMember.name })
                   }
                 >
-                  {castMember.imageSrc ? (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w180_and_h180_face${castMember.imageSrc}`}
-                      alt={castMember.name}
-                    />
-                  ) : (
-                    <div className={styles.directorPlaceholder} />
-                  )}
-                  <span>
-                    {idx + 1}. {castMember.name}
-                  </span>
+                  <div className={styles.pic}>
+                    <span className={styles.position}>{count}</span>
+                    {castMember.imageSrc ? (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w180_and_h180_face${castMember.imageSrc}`}
+                        alt={castMember.name}
+                      />
+                    ) : (
+                      <div className={styles.directorPlaceholder} />
+                    )}
+                  </div>
+                  <span>{castMember.name}</span>
                 </button>
               </li>
             ))}

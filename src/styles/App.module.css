@@ -44,7 +44,7 @@ button:hover, button:focus{
   text-align: center;
 }
 
-.content div {
+.content > div {
   padding-bottom: 10px;
 }
 
@@ -90,6 +90,23 @@ button:hover, button:focus{
   font-size: 32px;
   padding-top: 3px;
   padding-right: 1px;
+}
+
+.pic {
+  position: relative;
+}
+
+.position {
+  position: absolute;
+  /* TODO - probably need to tweak this, test w/ different widths */
+  right: -5px;
+  bottom: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  height: 20px;
+  padding: 0 5px;
+  line-height: 20px;
+  border-radius: 10px;
 }
 
 .content ol li span {
