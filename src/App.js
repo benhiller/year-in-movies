@@ -6,10 +6,10 @@ import PostersGrid from './PostersGrid.jsx';
 const filterMovies = (movieData, filter) => {
   if (filter.director) {
     return movieData.filter((movie) => movie.director.name === filter.director);
-  } else if (filter.actor) {
+  } else if (filter.castMember) {
     return movieData.filter(
       (movie) =>
-        movie.cast && movie.cast.map((c) => c.name).includes(filter.actor),
+        movie.cast && movie.cast.map((c) => c.name).includes(filter.castMember),
     );
   } else if (filter.decade) {
     return movieData.filter((movie) =>
@@ -21,8 +21,8 @@ const filterMovies = (movieData, filter) => {
 const titleForFilter = (filter) => {
   if (filter.director) {
     return `Director: ${filter.director}`;
-  } else if (filter.actor) {
-    return `Cast Member: ${filter.actor}`;
+  } else if (filter.castMember) {
+    return `Cast Member: ${filter.castMember}`;
   } else if (filter.decade) {
     return `Release Year: ${filter.decade}`;
   }
@@ -54,7 +54,7 @@ const Home = ({ movieData }) => {
     [movieData],
   );
 
-  const topActors = useMemo(
+  const topCastMembers = useMemo(
     () =>
       Object.entries(
         movieData.reduce((acc, movie) => {
@@ -168,24 +168,26 @@ const Home = ({ movieData }) => {
         </div>
         <div>
           <span className={styles.sectionTitle}>
-            {'\uD83C\uDFC6'} Top Actors
+            {'\uD83C\uDFC6'} Top Cast Members
           </span>
           <ol>
-            {topActors.slice(0, 5).map((actor, idx) => (
-              <li key={actor.name}>
+            {topCastMembers.slice(0, 5).map((castMember, idx) => (
+              <li key={castMember.name}>
                 <button
-                  onClick={() => setSelectedFilter({ actor: actor.name })}
+                  onClick={() =>
+                    setSelectedFilter({ castMember: castMember.name })
+                  }
                 >
-                  {actor.imageSrc ? (
+                  {castMember.imageSrc ? (
                     <img
-                      src={`https://image.tmdb.org/t/p/w185${actor.imageSrc}`}
-                      alt={actor.name}
+                      src={`https://image.tmdb.org/t/p/w185${castMember.imageSrc}`}
+                      alt={castMember.name}
                     />
                   ) : (
                     <div className={styles.directorPlaceholder} />
                   )}
                   <span>
-                    {idx + 1}. {actor.name}
+                    {idx + 1}. {castMember.name}
                   </span>
                 </button>
               </li>
