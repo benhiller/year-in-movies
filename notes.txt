@@ -13,3 +13,5 @@ v minutes spent watching movies
 layout ideas:
 - split page in half, with covers of movies i watched on right. click on item to filter to just those movies?
 - more standard layout, two columns of units, maybe section with posters at bottom?
+
+tooltip for movie poster, show when i watched it, other details?
