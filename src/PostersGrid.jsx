@@ -6,6 +6,7 @@ import styles from './styles/PostersGrid.module.css';
 
 const POSTER_WIDTH = 100;
 const POSTER_HEIGHT = 150;
+// TODO - this is really min. spacing. maybe there should also be max spacing and to fit to a value in between the two the posters will resize?
 const POSTER_SPACING = 10;
 
 const PostersGrid = ({ movies }) => {
