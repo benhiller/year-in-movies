@@ -3,12 +3,11 @@
 }
 
 .posters div {
-  position: absolute;
-  will-change: transform, width, height, opacity;
 }
 
 .posters img {
-  width: 100px;
-  height: 150px;
+  display: block;
+  position: absolute;
+  will-change: transform, width, height, opacity;
   object-fit: cover;
 }

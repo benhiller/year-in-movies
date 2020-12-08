@@ -1,12 +1,22 @@
 .container {
   min-height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  overflow: hidden;
+  height: 1vh;
 }
 
 .content, .postersContainer {
+  flex: 1;
   width: 100%;
   padding: 10px;
+  overflow-y: scroll;
+}
+
+@media (min-width: 850px), (orientation: landscape) {
+  .container {
+    flex-direction: row;
+  }
 }
 
 .summary {

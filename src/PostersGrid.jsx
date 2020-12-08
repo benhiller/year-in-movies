@@ -9,10 +9,11 @@ const POSTER_HEIGHT = 150;
 const POSTER_SPACING = 10;
 
 const PostersGrid = ({ movies }) => {
-  const [ref, bounds] = useMeasure();
+  const [ref, bounds] = useMeasure({ debounce: 64 });
   const { width: w } = bounds;
   // necessary so xy values don't get all messed up on initial render
   const width = w || 600;
+  // TODO - don't render until w is defined
 
   // TODO - cleanup
   let columns = 1;
@@ -36,12 +37,11 @@ const PostersGrid = ({ movies }) => {
   }, [columns, movies, actualSpacing]);
 
   const transitions = useTransition(gridItems, (item) => item.title, {
-    from: ({ xy, width, height }) => ({ xy, width, height, opacity: 0 }),
+    from: ({ xy, width, height }) => ({ xy, width, height: 0, opacity: 0 }),
     enter: ({ xy, width, height }) => ({ xy, width, height, opacity: 1 }),
     update: ({ xy, width, height }) => ({ xy, width, height }),
     leave: { height: 0, opacity: 0 },
     config: { mass: 5, tension: 500, friction: 100 },
-    trail: 25,
   });
 
   const height =
@@ -52,7 +52,7 @@ const PostersGrid = ({ movies }) => {
     <div className={styles.posters} ref={ref} style={{ height: `${height}px` }}>
       {transitions.map(({ item, props: { xy, ...rest }, key }) => {
         return (
-          <a.div
+          <a.img
             key={key}
             style={{
               transform: xy.interpolate((x, y) => {
@@ -60,9 +60,9 @@ const PostersGrid = ({ movies }) => {
               }),
               ...rest,
             }}
-          >
-            <img src={item.poster} alt={item.title} />
-          </a.div>
+            src={item.poster}
+            alt={item.title}
+          />
         );
       })}
     </div>
