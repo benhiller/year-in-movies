@@ -41,13 +41,16 @@ const Home = ({ movieData }) => {
           }
 
           if (acc[director.name]) {
-            acc[director.name] = acc[director.name] + 1;
+            const { count } = acc[director.name];
+            acc[director.name] = { director, count: count + 1 };
           } else {
-            acc[director.name] = 1;
+            acc[director.name] = { director, count: 1 };
           }
           return acc;
         }, {}),
-      ).sort((a, b) => b[1] - a[1]),
+      )
+        .sort((a, b) => b[1].count - a[1].count)
+        .map(([_, { director }]) => director),
     [movieData],
   );
 
@@ -62,14 +65,17 @@ const Home = ({ movieData }) => {
 
           cast.forEach((castMember) => {
             if (acc[castMember.name]) {
-              acc[castMember.name] = acc[castMember.name] + 1;
+              const { count } = acc[castMember.name];
+              acc[castMember.name] = { castMember, count: count + 1 };
             } else {
-              acc[castMember.name] = 1;
+              acc[castMember.name] = { castMember, count: 1 };
             }
           });
           return acc;
         }, {}),
-      ).sort((a, b) => b[1] - a[1]),
+      )
+        .sort((a, b) => b[1].count - a[1].count)
+        .map(([_, { castMember }]) => castMember),
     [movieData],
   );
 
@@ -137,10 +143,22 @@ const Home = ({ movieData }) => {
         <div>
           Top Directors:
           <ol>
-            {topDirectors.slice(0, 5).map((director) => (
-              <li key={director[0]}>
-                <a onClick={() => setSelectedFilter({ director: director[0] })}>
-                  {director[0]}
+            {topDirectors.slice(0, 5).map((director, idx) => (
+              <li key={director.name}>
+                <a
+                  onClick={() => setSelectedFilter({ director: director.name })}
+                >
+                  {director.imageSrc ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w185${director.imageSrc}`}
+                      alt={director.name}
+                    />
+                  ) : (
+                    <div className={styles.directorPlaceholder} />
+                  )}
+                  <span>
+                    {idx + 1}. {director.name}
+                  </span>
                 </a>
               </li>
             ))}
@@ -149,10 +167,20 @@ const Home = ({ movieData }) => {
         <div>
           Top Actors:
           <ol>
-            {topActors.slice(0, 5).map((actor) => (
-              <li key={actor[0]}>
-                <a onClick={() => setSelectedFilter({ actor: actor[0] })}>
-                  {actor[0]}
+            {topActors.slice(0, 5).map((actor, idx) => (
+              <li key={actor.name}>
+                <a onClick={() => setSelectedFilter({ actor: actor.name })}>
+                  {actor.imageSrc ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w185${actor.imageSrc}`}
+                      alt={actor.name}
+                    />
+                  ) : (
+                    <div className={styles.directorPlaceholder} />
+                  )}
+                  <span>
+                    {idx + 1}. {actor.name}
+                  </span>
                 </a>
               </li>
             ))}
