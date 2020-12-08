@@ -73,7 +73,7 @@ const PostersGrid = ({ movies }) => {
               }),
               ...rest,
             }}
-            src={item.poster}
+            src={`https://image.tmdb.org/t/p/w342${item.posterSrc}`}
             alt={item.title}
           />
         );

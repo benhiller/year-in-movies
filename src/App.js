@@ -5,10 +5,11 @@ import PostersGrid from './PostersGrid.jsx';
 
 const filterMovies = (movieData, filter) => {
   if (filter.director) {
-    return movieData.filter((movie) => movie.director === filter.director);
+    return movieData.filter((movie) => movie.director.name === filter.director);
   } else if (filter.actor) {
     return movieData.filter(
-      (movie) => movie.cast && movie.cast.includes(filter.actor),
+      (movie) =>
+        movie.cast && movie.cast.map((c) => c.name).includes(filter.actor),
     );
   } else if (filter.decade) {
     return movieData.filter((movie) =>
@@ -39,10 +40,10 @@ const Home = ({ movieData }) => {
             return acc;
           }
 
-          if (acc[director]) {
-            acc[director] = acc[director] + 1;
+          if (acc[director.name]) {
+            acc[director.name] = acc[director.name] + 1;
           } else {
-            acc[director] = 1;
+            acc[director.name] = 1;
           }
           return acc;
         }, {}),
@@ -60,10 +61,10 @@ const Home = ({ movieData }) => {
           }
 
           cast.forEach((castMember) => {
-            if (acc[castMember]) {
-              acc[castMember] = acc[castMember] + 1;
+            if (acc[castMember.name]) {
+              acc[castMember.name] = acc[castMember.name] + 1;
             } else {
-              acc[castMember] = 1;
+              acc[castMember.name] = 1;
             }
           });
           return acc;
@@ -123,8 +124,16 @@ const Home = ({ movieData }) => {
             </div>
           </div>
         </div>
-        <div>First movie watched: {firstTitle}</div>
-        <div>Last movie watched: {lastTitle}</div>
+        <div className={styles.summary}>
+          <div className={styles.summaryStat}>
+            <div>First Movie Watched</div>
+            <div>{firstTitle}</div>
+          </div>
+          <div className={styles.summaryStat}>
+            <div>Last Movie Watched</div>
+            <div>{lastTitle}</div>
+          </div>
+        </div>
         <div>
           Top Directors:
           <ol>
