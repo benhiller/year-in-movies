@@ -1,13 +1,13 @@
 ideas for units:
-- top directors
-- top actors
+v top directors
+v top actors
+v top decades
 - top genres
-- top decades
 - longest/shortest movie
 - watches by month
 - most obscure movie
-- highest rated/lowest rated
-- minutes spent watching movies
+- highest rated/lowest rated (but not my me... just average ratings)
+v minutes spent watching movies
 - where i watched the movie
 
 layout ideas:
