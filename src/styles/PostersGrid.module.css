@@ -2,10 +2,7 @@
   position: relative;
 }
 
-.posters div {
-}
-
-.posters img {
+.posterImage {
   display: block;
   position: absolute;
   will-change: transform, width, height, opacity;

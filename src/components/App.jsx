@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import styles from 'styles/App.module.css';
+import MetricSection from 'components/MetricSection';
 import PostersGrid from 'components/PostersGrid';
 import Footer from 'components/Footer';
 
@@ -257,10 +258,7 @@ const Home = ({ movieData }) => {
             <div>{lastTitle}</div>
           </div>
         </div>
-        <div>
-          <span className={styles.sectionTitle}>
-            {'\uD83C\uDFAC'} Top Directors
-          </span>
+        <MetricSection metricName={'\uD83C\uDFAC Most Watched Directors'}>
           <ol>
             {topDirectors.slice(0, 15).map(({ director, count }, idx) => (
               <li key={director.name}>
@@ -284,11 +282,8 @@ const Home = ({ movieData }) => {
               </li>
             ))}
           </ol>
-        </div>
-        <div>
-          <span className={styles.sectionTitle}>
-            {'\uD83C\uDFAD'} Top Genres
-          </span>
+        </MetricSection>
+        <MetricSection metricName={'\uD83C\uDFAD Most Watched Genres'}>
           <ol>
             {topGenres
               .slice(0, 15)
@@ -307,11 +302,8 @@ const Home = ({ movieData }) => {
                 </li>
               ))}
           </ol>
-        </div>
-        <div>
-          <span className={styles.sectionTitle}>
-            {'\uD83C\uDFC6'} Top Cast Members
-          </span>
+        </MetricSection>
+        <MetricSection metricName={'\uD83C\uDFC6 Most Watched Actors'}>
           <ol>
             {topCastMembers.slice(0, 15).map(({ castMember, count }, idx) => (
               <li key={castMember.name}>
@@ -336,11 +328,8 @@ const Home = ({ movieData }) => {
               </li>
             ))}
           </ol>
-        </div>
-        <div>
-          <span className={styles.sectionTitle}>
-            {'\uD83D\uDDD3\uFE0F'} Movies by Decade
-          </span>
+        </MetricSection>
+        <MetricSection metricName={'\uD83D\uDDD3\uFE0F Movies by Decade'}>
           <ol>
             {decadesHistogram.slice(0, 5).map((decade) => (
               <li key={decade[0]}>
@@ -352,12 +341,10 @@ const Home = ({ movieData }) => {
               </li>
             ))}
           </ol>
-        </div>
-        <div>
-          <span className={styles.sectionTitle}>
-            {'\uD83C\uDF9F\uFE0F'} Movie Schedule
-          </span>
-        </div>
+        </MetricSection>
+        <MetricSection
+          metricName={'\uD83C\uDF9F\uFE0F Movie Schedule'}
+        ></MetricSection>
         <Footer />
       </div>
       <div className={styles.postersContainer}>

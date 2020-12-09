@@ -51,11 +51,6 @@ button:hover, button:focus{
   padding-bottom: 10px;
 }
 
-.sectionTitle {
-  font-weight: 600;
-  font-size: 18px;
-}
-
 .content ol {
   display: flex;
   flex-direction: row;

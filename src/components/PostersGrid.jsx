@@ -67,6 +67,7 @@ const PostersGrid = ({ movies }) => {
         return (
           <a.img
             key={key}
+            className={styles.posterImage}
             style={{
               transform: interpolate([xy, scale], ([x, y], scale) => {
                 return `translate3d(${x}px,${y}px,0) scale(${scale})`;
