@@ -57,6 +57,7 @@ const processData = (data) => {
       cast: listCastMembers(movie),
       genres: listGenres(movie),
       runtime: movie.details.runtime,
+      popularity: movie.details.popularity,
       watchDate: movie.record.fields.Date,
       source: movie.record.fields.Source,
       notes: movie.record.fields.Notes,
