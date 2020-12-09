@@ -1,0 +1,73 @@
+.pic {
+  position: relative;
+}
+
+.position {
+  position: absolute;
+  /* TODO - probably need to tweak this, test w/ different widths */
+  right: -5px;
+  bottom: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  height: 20px;
+  padding: 0 5px;
+  line-height: 20px;
+  border-radius: 10px;
+}
+
+.rankedList li img, .directorPlaceholder, .genreEmoji {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-bottom: 5px;
+  background-color: #ccc;
+}
+
+.rankedList {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  overflow-x: scroll;
+  padding: 0 10px;
+  margin: 16px -10px;
+}
+
+.rankedList li {
+  flex: 1 0 85px;
+}
+
+.rankedList li button {
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.genreEmoji {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  font-size: 32px;
+  padding-top: 3px;
+  padding-right: 1px;
+}
+
+.rankedList li span {
+  text-align: center;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+button:hover, button:focus{
+  text-decoration: none;
+}

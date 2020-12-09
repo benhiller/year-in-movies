@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 
 import styles from 'styles/App.module.css';
 import MetricSection from 'components/MetricSection';
+import RankedMetric from 'components/RankedMetric';
 import PostersGrid from 'components/PostersGrid';
 import Footer from 'components/Footer';
 
@@ -259,75 +260,44 @@ const Home = ({ movieData }) => {
           </div>
         </div>
         <MetricSection metricName={'\uD83C\uDFAC Most Watched Directors'}>
-          <ol>
-            {topDirectors.slice(0, 15).map(({ director, count }, idx) => (
-              <li key={director.name}>
-                <button
-                  onClick={() => setSelectedFilter({ director: director.name })}
-                >
-                  <div className={styles.pic}>
-                    <span className={styles.position}>{count}</span>
-                    {director.imageSrc ? (
-                      <img
-                        src={`https://image.tmdb.org/t/p/w180_and_h180_face${director.imageSrc}`}
-                        alt={director.name}
-                      />
-                    ) : (
-                      <div className={styles.directorPlaceholder} />
-                    )}
-                  </div>
-                  <span>{director.name}</span>{' '}
-                  {/* TODO - split name so last name is always on last line? */}
-                </button>
-              </li>
-            ))}
-          </ol>
+          <RankedMetric
+            items={topDirectors.slice(0, 15).map(({ director, count }) => ({
+              count,
+              name: director.name,
+              imageSrc: director.imageSrc
+                ? `https://image.tmdb.org/t/p/w180_and_h180_face${director.imageSrc}`
+                : null,
+            }))}
+            onClickItem={(itemName) => {
+              setSelectedFilter({ director: itemName });
+            }}
+          />
         </MetricSection>
         <MetricSection metricName={'\uD83C\uDFAD Most Watched Genres'}>
-          <ol>
-            {topGenres
-              .slice(0, 15)
-              .map((genre) => ({ genre: genre[0], count: genre[1] }))
-              .map(({ genre, count }, idx) => (
-                <li key={genre}>
-                  <button onClick={() => setSelectedFilter({ genre: genre })}>
-                    <div className={styles.pic}>
-                      <span className={styles.position}>{count}</span>
-                      <div className={styles.genreEmoji}>
-                        {emojiForGenre(genre)}
-                      </div>
-                    </div>
-                    <span>{genre}</span>
-                  </button>
-                </li>
-              ))}
-          </ol>
+          <RankedMetric
+            items={topGenres.slice(0, 15).map(([genre, count]) => ({
+              count,
+              name: genre,
+              emoji: emojiForGenre(genre),
+            }))}
+            onClickItem={(itemName) => {
+              setSelectedFilter({ genre: itemName });
+            }}
+          />
         </MetricSection>
         <MetricSection metricName={'\uD83C\uDFC6 Most Watched Actors'}>
-          <ol>
-            {topCastMembers.slice(0, 15).map(({ castMember, count }, idx) => (
-              <li key={castMember.name}>
-                <button
-                  onClick={() =>
-                    setSelectedFilter({ castMember: castMember.name })
-                  }
-                >
-                  <div className={styles.pic}>
-                    <span className={styles.position}>{count}</span>
-                    {castMember.imageSrc ? (
-                      <img
-                        src={`https://image.tmdb.org/t/p/w180_and_h180_face${castMember.imageSrc}`}
-                        alt={castMember.name}
-                      />
-                    ) : (
-                      <div className={styles.directorPlaceholder} />
-                    )}
-                  </div>
-                  <span>{castMember.name}</span>
-                </button>
-              </li>
-            ))}
-          </ol>
+          <RankedMetric
+            items={topCastMembers.slice(0, 15).map(({ castMember, count }) => ({
+              count,
+              name: castMember.name,
+              imageSrc: castMember.imageSrc
+                ? `https://image.tmdb.org/t/p/w180_and_h180_face${castMember.imageSrc}`
+                : null,
+            }))}
+            onClickItem={(itemName) => {
+              setSelectedFilter({ castMember: itemName });
+            }}
+          />
         </MetricSection>
         <MetricSection metricName={'\uD83D\uDDD3\uFE0F Movies by Decade'}>
           <ol>
