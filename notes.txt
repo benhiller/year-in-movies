@@ -37,6 +37,7 @@ ui:
 - tweak emoji spacing (maybe chrome specific?)
 - use dark theme overall
 - lots of polishing
+- confirm badge positioning works for larger numbers
 
 data:
 - only include directors/cast members who were in more than 1 movie
