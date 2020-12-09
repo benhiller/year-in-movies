@@ -260,10 +260,50 @@ const Home = ({ movieData }) => {
       ),
     [movieData],
   );
-  const mostObscureMovie = useMemo(
+  const shortestMovie = useMemo(
     () =>
       movieData.reduce(
-        (acc, movie) => (movie.popularity < acc.popularity ? movie : acc),
+        (acc, movie) => (movie.runtime < acc.runtime ? movie : acc),
+        movieData[0],
+      ),
+    [movieData],
+  );
+
+  const leastRatedMovie = useMemo(
+    () =>
+      movieData.reduce(
+        (acc, movie) => (movie.voteCount < acc.voteCount ? movie : acc),
+        movieData[0],
+      ),
+    [movieData],
+  );
+  const mostRatedMovie = useMemo(
+    () =>
+      movieData.reduce(
+        (acc, movie) => (movie.voteCount > acc.voteCount ? movie : acc),
+        movieData[0],
+      ),
+    [movieData],
+  );
+
+  const lowestRatedMovie = useMemo(
+    () =>
+      movieData.reduce(
+        (acc, movie) =>
+          movie.voteCount > 0 && movie.averageVote < acc.averageVote
+            ? movie
+            : acc,
+        movieData[0],
+      ),
+    [movieData],
+  );
+  const highestRatedMovie = useMemo(
+    () =>
+      movieData.reduce(
+        (acc, movie) =>
+          movie.voteCount > 0 && movie.averageVote > acc.averageVote
+            ? movie
+            : acc,
         movieData[0],
       ),
     [movieData],
@@ -311,10 +351,22 @@ const Home = ({ movieData }) => {
             <div>Most Obscure Movie Watched</div>
             <div
               onClick={() =>
-                setSelectedFilter({ title: mostObscureMovie.title })
+                setSelectedFilter({ title: leastRatedMovie.title })
               }
             >
-              {mostObscureMovie.title}
+              {leastRatedMovie.title}{' '}
+              <span>({leastRatedMovie.voteCount} ratings)</span>
+            </div>
+          </div>
+          <div className={styles.summaryStat}>
+            <div>Least Popular Movie Watched</div>
+            <div
+              onClick={() =>
+                setSelectedFilter({ title: lowestRatedMovie.title })
+              }
+            >
+              {lowestRatedMovie.title}{' '}
+              <span>({lowestRatedMovie.averageVote} average rating)</span>
             </div>
           </div>
         </div>
