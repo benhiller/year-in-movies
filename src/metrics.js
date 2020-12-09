@@ -80,8 +80,20 @@ export const monthFromDate = (date) => {
 };
 
 export const labelForMonth = (month) => {
-  const dateObj = new Date(0, month - 1);
-  return dateObj.toLocaleString('default', { month: 'long' });
+  return [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ][month - 1];
 };
 
 export const computeMonthsHistogram = (movieData) =>
