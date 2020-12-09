@@ -29,6 +29,8 @@ const filterMovies = (movieData, filter) => {
     return movieData.filter(
       (movie) => monthFromDate(movie.watchDate) === filter.month,
     );
+  } else if (filter.title) {
+    return movieData.filter((movie) => movie.title === filter.title);
   }
 };
 
@@ -43,6 +45,8 @@ const titleForFilter = (filter) => {
     return `Genre: ${filter.genre}`;
   } else if (filter.month) {
     return `Watched in: ${filter.month}`;
+  } else if (filter.title) {
+    return filter.title;
   }
 };
 
@@ -248,8 +252,22 @@ const Home = ({ movieData }) => {
     [movieData],
   );
 
-  const firstTitle = movieData[0].title;
-  const lastTitle = movieData[movieData.length - 1].title;
+  const longestMovie = useMemo(
+    () =>
+      movieData.reduce(
+        (acc, movie) => (movie.runtime > acc.runtime ? movie : acc),
+        movieData[0],
+      ),
+    [movieData],
+  );
+  const mostObscureMovie = useMemo(
+    () =>
+      movieData.reduce(
+        (acc, movie) => (movie.popularity < acc.popularity ? movie : acc),
+        movieData[0],
+      ),
+    [movieData],
+  );
 
   const filteredMovies = useMemo(
     () =>
@@ -278,12 +296,26 @@ const Home = ({ movieData }) => {
         </div>
         <div className={styles.summary}>
           <div className={styles.summaryStat}>
-            <div>First Movie Watched</div>
-            <div>{firstTitle}</div>
+            <div>Longest Movie Watched</div>
+            <div
+              onClick={() => setSelectedFilter({ title: longestMovie.title })}
+            >
+              {longestMovie.title}{' '}
+              <span>
+                ({Math.floor(longestMovie.runtime / 60)}h{' '}
+                {longestMovie.runtime % 60}m)
+              </span>
+            </div>
           </div>
           <div className={styles.summaryStat}>
-            <div>Last Movie Watched</div>
-            <div>{lastTitle}</div>
+            <div>Most Obscure Movie Watched</div>
+            <div
+              onClick={() =>
+                setSelectedFilter({ title: mostObscureMovie.title })
+              }
+            >
+              {mostObscureMovie.title}
+            </div>
           </div>
         </div>
         <MetricSection metricName={'\uD83C\uDFAC Most Watched Directors'}>

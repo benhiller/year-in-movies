@@ -22,3 +22,5 @@ tooltip for movie poster, show when i watched it, other details?
 
 - credit tmdb for data!
 - padding for scrollbar?
+
+- support sorting movies in posters by different values
