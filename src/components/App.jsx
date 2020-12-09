@@ -74,6 +74,7 @@ const emojiForGenre = (genre) => {
       return '\uD83D\uDDDE\uFE0F'; // rolled-up newspaper
     // return '\uD83D\uDCF0'; // newspaper
     case 'Drama':
+      return '\uD83C\uDFAD'; // comedy + tragedy masks
       return '\uD83D\uDE4E\u200D\u2642\uFE0F'; // man pouting
     // broken heart?
     case 'Family':
@@ -334,42 +335,18 @@ const Home = ({ movieData }) => {
             </div>
           </div>
         </div>
-        <div className={styles.summary}>
-          <div className={styles.summaryStat}>
-            <div>Longest Movie Watched</div>
-            <div
-              onClick={() => setSelectedFilter({ title: longestMovie.title })}
-            >
-              {longestMovie.title}{' '}
-              <span>
-                ({Math.floor(longestMovie.runtime / 60)}h{' '}
-                {longestMovie.runtime % 60}m)
-              </span>
-            </div>
-          </div>
-          <div className={styles.summaryStat}>
-            <div>Most Obscure Movie Watched</div>
-            <div
-              onClick={() =>
-                setSelectedFilter({ title: leastRatedMovie.title })
-              }
-            >
-              {leastRatedMovie.title}{' '}
-              <span>({leastRatedMovie.voteCount} ratings)</span>
-            </div>
-          </div>
-          <div className={styles.summaryStat}>
-            <div>Least Popular Movie Watched</div>
-            <div
-              onClick={() =>
-                setSelectedFilter({ title: lowestRatedMovie.title })
-              }
-            >
-              {lowestRatedMovie.title}{' '}
-              <span>({lowestRatedMovie.averageVote} average rating)</span>
-            </div>
-          </div>
-        </div>
+        <MetricSection metricName={'\uD83C\uDF9E\uFE0F Most Watched Genres'}>
+          <RankedMetric
+            items={topGenres.slice(0, 15).map(([genre, count]) => ({
+              count,
+              name: genre,
+              emoji: emojiForGenre(genre),
+            }))}
+            onClickItem={(itemName) => {
+              setSelectedFilter({ genre: itemName });
+            }}
+          />
+        </MetricSection>
         <MetricSection metricName={'\uD83C\uDFAC Most Watched Directors'}>
           <RankedMetric
             items={topDirectors.slice(0, 15).map(({ director, count }) => ({
@@ -381,18 +358,6 @@ const Home = ({ movieData }) => {
             }))}
             onClickItem={(itemName) => {
               setSelectedFilter({ director: itemName });
-            }}
-          />
-        </MetricSection>
-        <MetricSection metricName={'\uD83C\uDFAD Most Watched Genres'}>
-          <RankedMetric
-            items={topGenres.slice(0, 15).map(([genre, count]) => ({
-              count,
-              name: genre,
-              emoji: emojiForGenre(genre),
-            }))}
-            onClickItem={(itemName) => {
-              setSelectedFilter({ genre: itemName });
             }}
           />
         </MetricSection>
@@ -438,6 +403,42 @@ const Home = ({ movieData }) => {
             ))}
           </ol>
         </MetricSection>
+        <div className={styles.summary}>
+          <div className={styles.summaryStat}>
+            <div>Longest Movie Watched</div>
+            <div
+              onClick={() => setSelectedFilter({ title: longestMovie.title })}
+            >
+              {longestMovie.title}{' '}
+              <span>
+                ({Math.floor(longestMovie.runtime / 60)}h{' '}
+                {longestMovie.runtime % 60}m)
+              </span>
+            </div>
+          </div>
+          <div className={styles.summaryStat}>
+            <div>Most Obscure Movie Watched</div>
+            <div
+              onClick={() =>
+                setSelectedFilter({ title: leastRatedMovie.title })
+              }
+            >
+              {leastRatedMovie.title}{' '}
+              <span>({leastRatedMovie.voteCount} ratings)</span>
+            </div>
+          </div>
+          <div className={styles.summaryStat}>
+            <div>Least Popular Movie Watched</div>
+            <div
+              onClick={() =>
+                setSelectedFilter({ title: lowestRatedMovie.title })
+              }
+            >
+              {lowestRatedMovie.title}{' '}
+              <span>({lowestRatedMovie.averageVote} average rating)</span>
+            </div>
+          </div>
+        </div>
         <Footer />
       </div>
       <div className={styles.postersContainer}>
