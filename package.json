@@ -7,6 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "generate-data": "node scripts/generate_data.js",
     "process-data": "node scripts/process_data.js"
   },
@@ -34,7 +35,8 @@
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-standard": "^4.0.1",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "source-map-explorer": "^2.5.1"
   },
   "browserslist": {
     "production": [
