@@ -4,23 +4,31 @@ v top actors
 v top decades
 v top genres
 v minutes spent watching movies
-- longest/shortest movie
-- watches by month
-- most obscure movie
-- highest rated/lowest rated (but not my me... just average ratings)
-- where i watched the movie
+v longest/shortest movie
+v watches by month
+v most obscure movie
+v highest rated/lowest rated (but not my me... just average ratings)
+x where i watched the movie
 
 layout ideas:
 - split page in half, with covers of movies i watched on right. click on item to filter to just those movies?
 - more standard layout, two columns of units, maybe section with posters at bottom?
 
-tooltip for movie poster, show when i watched it, other details?
 
-- only include directors/cast members who were in more than 1 movie
-- show number only between cells with different count -> or will this look less good on actual data?
+x show number only between cells with different count -> or will this look less good on actual data?
+
+v credit tmdb for data!
+
+--
+
+functionality:
+- support sorting movies in posters by different values (watch date, release date, runtime, num ratings, average rating)
+- tooltip for movie poster, show when i watched it, other details?
+
+ui:
+- histogram for decade/month units
+- padding for scrollbar?
 - add question mark to directorPlaceholder?
 
-- credit tmdb for data!
-- padding for scrollbar?
-
-- support sorting movies in posters by different values (watch date, release date, runtime, num ratings, average rating)
+data:
+- only include directors/cast members who were in more than 1 movie
