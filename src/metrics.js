@@ -71,10 +71,16 @@ export const computeDecadesHistogram = (movieData) =>
       }
       return acc;
     }, {}),
-  );
+  ).sort((a, b) => {
+    return parseInt(a[0].slice(0, 4)) - parseInt(b[0].slice(0, 4));
+  });
 
 export const monthFromDate = (date) => {
-  const dateObj = new Date(date.slice(0, 4), parseInt(date.slice(5, 7)) - 1);
+  return parseInt(date.slice(5, 7));
+};
+
+export const labelForMonth = (month) => {
+  const dateObj = new Date(0, month - 1);
   return dateObj.toLocaleString('default', { month: 'long' });
 };
 
@@ -89,7 +95,11 @@ export const computeMonthsHistogram = (movieData) =>
       }
       return acc;
     }, {}),
-  );
+  )
+    .sort((a, b) => {
+      return a[0] - b[0];
+    })
+    .map(([month, count]) => [labelForMonth(month), count]);
 
 export const computeTimeSpent = (movieData) =>
   movieData.reduce((acc, movie) => acc + movie.runtime, 0);

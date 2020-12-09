@@ -58,6 +58,7 @@
   text-align: center;
 }
 
+/* TODO - should be in global css? */
 button {
   background-color: transparent;
   border: none;

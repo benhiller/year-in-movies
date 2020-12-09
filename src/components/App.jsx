@@ -4,6 +4,7 @@ import styles from 'styles/App.module.css';
 import MetricSection from 'components/MetricSection';
 import RankedMetric from 'components/RankedMetric';
 import PostersGrid from 'components/PostersGrid';
+import Histogram from 'components/Histogram';
 import Footer from 'components/Footer';
 import {
   computeTopDirectors,
@@ -19,6 +20,7 @@ import {
   computeLowestRatedMovie,
   computeHighestRatedMovie,
   monthFromDate,
+  labelForMonth,
 } from 'metrics';
 
 const filterMovies = (movieData, filter) => {
@@ -37,7 +39,7 @@ const filterMovies = (movieData, filter) => {
     return movieData.filter((movie) => movie.genres.includes(filter.genre));
   } else if (filter.month) {
     return movieData.filter(
-      (movie) => monthFromDate(movie.watchDate) === filter.month,
+      (movie) => labelForMonth(monthFromDate(movie.watchDate)) === filter.month,
     );
   } else if (filter.title) {
     return movieData.filter((movie) => movie.title === filter.title);
@@ -105,6 +107,25 @@ const emojiForGenre = (genre) => {
     default:
       return '\uD83C\uDFA6'; // movie camera icon
   }
+};
+
+const generateMonths = () =>
+  [...Array(12).keys()].map((i) => labelForMonth(i + 1));
+
+const generateDecadeRange = (decadesHistogram) => {
+  const firstDecade = parseInt(decadesHistogram[0][0].slice(0, 4));
+  const lastDecade = parseInt(
+    decadesHistogram[decadesHistogram.length - 1][0].slice(0, 4),
+  );
+
+  const decades = [];
+  let currentDecade = firstDecade;
+  while (currentDecade <= lastDecade) {
+    decades.push(`${currentDecade}s`);
+    currentDecade += 10;
+  }
+
+  return decades;
 };
 
 const Home = ({ movieData }) => {
@@ -234,30 +255,20 @@ const Home = ({ movieData }) => {
         <MetricSection
           metricName={'\uD83D\uDDD3\uFE0F Movies Watched by Decade'}
         >
-          <ol>
-            {decadesHistogram.slice(0, 5).map((decade) => (
-              <li key={decade[0]}>
-                <button
-                  onClick={() => setSelectedFilter({ decade: decade[0] })}
-                >
-                  {decade[0]}: {decade[1]}
-                </button>
-              </li>
-            ))}
-          </ol>
+          <Histogram
+            items={decadesHistogram}
+            orderedGroups={generateDecadeRange(decadesHistogram)}
+            onClickItem={(itemName) => setSelectedFilter({ decade: itemName })}
+          />
         </MetricSection>
         <MetricSection
           metricName={'\uD83C\uDF9F\uFE0F Movies Watched by Month'}
         >
-          <ol>
-            {monthsHistogram.slice(0, 5).map((month) => (
-              <li key={month[0]}>
-                <button onClick={() => setSelectedFilter({ month: month[0] })}>
-                  {month[0]}: {month[1]}
-                </button>
-              </li>
-            ))}
-          </ol>
+          <Histogram
+            items={monthsHistogram}
+            orderedGroups={generateMonths()}
+            onClickItem={(itemName) => setSelectedFilter({ month: itemName })}
+          />
         </MetricSection>
         <div className={styles.summary}>
           <div className={styles.summaryStat}>
