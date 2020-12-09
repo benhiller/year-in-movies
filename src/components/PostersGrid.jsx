@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import useMeasure from 'react-use-measure';
 import { useTransition, a, interpolate } from 'react-spring';
+import { ResizeObserver } from '@juggle/resize-observer';
 
 import styles from 'styles/PostersGrid.module.css';
 
@@ -10,7 +11,7 @@ const POSTER_HEIGHT = 150;
 const POSTER_SPACING = 10;
 
 const PostersGrid = ({ movies }) => {
-  const [ref, bounds] = useMeasure({ debounce: 64 });
+  const [ref, bounds] = useMeasure({ debounce: 64, polyfill: ResizeObserver });
   const { width: w } = bounds;
   // necessary so xy values don't get all messed up on initial render
   const width = w || 600;

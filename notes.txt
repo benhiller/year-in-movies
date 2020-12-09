@@ -28,7 +28,15 @@ functionality:
 ui:
 - histogram for decade/month units
 - padding for scrollbar?
+- custom scrollbar UI for horiz scrolling?
 - add question mark to directorPlaceholder?
+- modify how vh is calculated to avoid scrolling on ios
+- improve spacing logic in posters grid
+- delay rendering posters grid until width is known
+- disable animation on initial load
+- tweak emoji spacing (maybe chrome specific?)
+- use dark theme overall
+- lots of polishing
 
 data:
 - only include directors/cast members who were in more than 1 movie
