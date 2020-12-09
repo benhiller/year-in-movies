@@ -130,29 +130,3 @@ button:hover, button:focus{
 .clear {
   color: white;
 }
-
-.footer {
-  background-color: #f2f2f2;
-  margin: 20px -10px -10px;
-  padding: 20px 10px 60px;
-  text-align: center;
-}
-.footer p {
-  margin-bottom: 10px;
-}
-.footer a {
-  color: #007bff;
-}
-
-.footerRow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.footerIcon, .roundedFooterIcon {
-  width: 40px;
-  margin-right: 10px;
-}
-.roundedFooterIcon {
-  border-radius: 40px;
-}
