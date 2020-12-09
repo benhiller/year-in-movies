@@ -6,6 +6,11 @@ import RankedMetric from 'components/RankedMetric';
 import PostersGrid from 'components/PostersGrid';
 import Footer from 'components/Footer';
 
+const monthFromDate = (date) => {
+  const dateObj = new Date(date.slice(0, 4), parseInt(date.slice(5, 7)) - 1);
+  return dateObj.toLocaleString('default', { month: 'long' });
+};
+
 const filterMovies = (movieData, filter) => {
   if (filter.director) {
     return movieData.filter((movie) => movie.director.name === filter.director);
@@ -20,6 +25,10 @@ const filterMovies = (movieData, filter) => {
     );
   } else if (filter.genre) {
     return movieData.filter((movie) => movie.genres.includes(filter.genre));
+  } else if (filter.month) {
+    return movieData.filter(
+      (movie) => monthFromDate(movie.watchDate) === filter.month,
+    );
   }
 };
 
@@ -32,6 +41,8 @@ const titleForFilter = (filter) => {
     return `Release Year: ${filter.decade}`;
   } else if (filter.genre) {
     return `Genre: ${filter.genre}`;
+  } else if (filter.month) {
+    return `Watched in: ${filter.month}`;
   }
 };
 
@@ -215,6 +226,22 @@ const Home = ({ movieData }) => {
     [movieData],
   );
 
+  const monthsHistogram = useMemo(
+    () =>
+      Object.entries(
+        movieData.reduce((acc, movie) => {
+          const month = monthFromDate(movie.watchDate);
+          if (acc[month]) {
+            acc[month] = acc[month] + 1;
+          } else {
+            acc[month] = 1;
+          }
+          return acc;
+        }, {}),
+      ),
+    [movieData],
+  );
+
   const movieCount = movieData.length;
   const timeSpent = useMemo(
     () => movieData.reduce((acc, movie) => acc + movie.runtime, 0),
@@ -299,7 +326,9 @@ const Home = ({ movieData }) => {
             }}
           />
         </MetricSection>
-        <MetricSection metricName={'\uD83D\uDDD3\uFE0F Movies by Decade'}>
+        <MetricSection
+          metricName={'\uD83D\uDDD3\uFE0F Movies Watched by Decade'}
+        >
           <ol>
             {decadesHistogram.slice(0, 5).map((decade) => (
               <li key={decade[0]}>
@@ -313,8 +342,18 @@ const Home = ({ movieData }) => {
           </ol>
         </MetricSection>
         <MetricSection
-          metricName={'\uD83C\uDF9F\uFE0F Movie Schedule'}
-        ></MetricSection>
+          metricName={'\uD83C\uDF9F\uFE0F Movies Watched by Month'}
+        >
+          <ol>
+            {monthsHistogram.slice(0, 5).map((month) => (
+              <li key={month[0]}>
+                <button onClick={() => setSelectedFilter({ month: month[0] })}>
+                  {month[0]}: {month[1]}
+                </button>
+              </li>
+            ))}
+          </ol>
+        </MetricSection>
         <Footer />
       </div>
       <div className={styles.postersContainer}>
