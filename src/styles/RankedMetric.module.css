@@ -28,8 +28,8 @@
   flex-direction: row;
   list-style-type: none;
   overflow-x: scroll;
-  padding: 0 10px;
-  margin: 16px -10px;
+  padding: 0 10px 15px;
+  margin: 16px -10px -10px;
 }
 
 .rankedList li {
@@ -71,4 +71,8 @@ button {
 
 button:hover, button:focus{
   text-decoration: none;
+}
+
+.name {
+  white-space: pre-line;
 }

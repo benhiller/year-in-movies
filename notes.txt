@@ -27,7 +27,7 @@ functionality:
 
 ui:
 - histogram for decade/month units
-- padding for scrollbar?
+v padding for scrollbar?
 - custom scrollbar UI for horiz scrolling?
 - add question mark to directorPlaceholder?
 - modify how vh is calculated to avoid scrolling on ios

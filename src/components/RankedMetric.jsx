@@ -1,5 +1,21 @@
 import styles from 'styles/RankedMetric.module.css';
 
+const formatName = (name) => {
+  const tokens = name.split(' ');
+
+  const finalToken = tokens[tokens.length - 1];
+  const hasJrOrSr = finalToken === 'Jr.' || finalToken === 'Sr.';
+  const finalPart = tokens.slice(
+    tokens.length - (hasJrOrSr ? 2 : 1),
+    tokens.length,
+  );
+  const initialPart = tokens.slice(0, tokens.length - (hasJrOrSr ? 2 : 1));
+
+  // Ensure the last name is on a separate line
+  return ((initialPart.length ? initialPart.join(' ') + '\n' : '') +
+    finalPart.join(' '): '');
+};
+
 const RankedMetric = ({ items, onClickItem }) => {
   return (
     <ol className={styles.rankedList}>
@@ -16,7 +32,7 @@ const RankedMetric = ({ items, onClickItem }) => {
                 <div className={styles.directorPlaceholder} />
               )}
             </div>
-            <span>{name}</span>
+            <span className={styles.name}>{formatName(name)}</span>
           </button>
         </li>
       ))}
