@@ -66,7 +66,10 @@ const PostersGrid = ({ movies }) => {
     <div className={styles.posters} ref={ref} style={{ height: `${height}px` }}>
       {transitions.map(({ item, props: { xy, scale, ...rest }, key }) => {
         return (
-          <a.img
+          <a.a
+            href={`https://www.themoviedb.org/movie/${item.tmdbId}`}
+            target="_blank"
+            rel="noreferrer"
             key={key}
             className={styles.posterImage}
             style={{
@@ -75,9 +78,14 @@ const PostersGrid = ({ movies }) => {
               }),
               ...rest,
             }}
-            src={`https://image.tmdb.org/t/p/w342${item.posterSrc}`}
-            alt={item.title}
-          />
+          >
+            <img
+              src={`https://image.tmdb.org/t/p/w342${item.posterSrc}`}
+              alt={item.title}
+              width={POSTER_WIDTH}
+              height={POSTER_HEIGHT}
+            />
+          </a.a>
         );
       })}
     </div>
