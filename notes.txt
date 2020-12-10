@@ -18,11 +18,11 @@ layout ideas:
 x show number only between cells with different count -> or will this look less good on actual data?
 
 v credit tmdb for data!
+v support sorting movies in posters by different values (watch date, release date, runtime, num ratings, average rating)
 
 --
 
 functionality:
-- support sorting movies in posters by different values (watch date, release date, runtime, num ratings, average rating)
 - tooltip for movie poster, show when i watched it, other details?
 
 ui:
@@ -38,6 +38,7 @@ ui:
 - use dark theme overall
 - lots of polishing
 - confirm badge positioning works for larger numbers
+- animate sort order toggle rotation
 
 data:
 - only include directors/cast members who were in more than 1 movie

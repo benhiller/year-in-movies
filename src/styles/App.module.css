@@ -48,6 +48,10 @@
   justify-content: space-between;
 }
 
-.clear {
+.toggleOrder, .clear {
   color: white;
+}
+
+.toggleOrderDesc {
+  transform: rotate(180deg);
 }

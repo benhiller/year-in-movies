@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import classNames from 'classnames';
 
 import styles from 'styles/App.module.css';
 import MetricSection from 'components/MetricSection';
@@ -132,8 +133,27 @@ const generateDecadeRange = (decadesHistogram) => {
   return decades;
 };
 
+const compareMovies = (m1, m2, posterSort) => {
+  console.log(m1);
+  switch (posterSort) {
+    case 'runtime':
+      return m1.runtime - m2.runtime;
+    case 'average-rating':
+      return m1.averageVote - m2.averageVote;
+    case 'num-ratings':
+      return m1.voteCount - m2.voteCount;
+    case 'release-date':
+      return new Date(m1.releaseDate) - new Date(m2.releaseDate);
+    case 'watch-date':
+    default:
+      return new Date(m1.watchDate) - new Date(m2.watchDate);
+  }
+};
+
 const Home = ({ movieData }) => {
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const [posterSort, setPosterSort] = useState('watch-date');
+  const [posterSortAscending, setPosterSortAscending] = useState(true);
 
   // const allGenres = [
   //   'Action',
@@ -193,8 +213,15 @@ const Home = ({ movieData }) => {
 
   const filteredMovies = useMemo(
     () =>
-      selectedFilter ? filterMovies(movieData, selectedFilter) : movieData,
-    [movieData, selectedFilter],
+      [
+        ...(selectedFilter
+          ? filterMovies(movieData, selectedFilter)
+          : movieData),
+      ].sort(
+        (m1, m2) =>
+          (posterSortAscending ? 1 : -1) * compareMovies(m1, m2, posterSort),
+      ),
+    [movieData, selectedFilter, posterSort, posterSortAscending],
   );
 
   const currentTitle = selectedFilter
@@ -314,15 +341,43 @@ const Home = ({ movieData }) => {
       </div>
       <div className={styles.postersContainer}>
         <div className={styles.controls}>
-          <span>{currentTitle}</span>
-          {selectedFilter && (
-            <button
-              className={styles.clear}
-              onClick={() => setSelectedFilter(null)}
-            >
-              Clear
-            </button>
-          )}
+          <div>
+            <span>{currentTitle}</span>{' '}
+            {selectedFilter && (
+              <button
+                className={styles.clear}
+                onClick={() => setSelectedFilter(null)}
+              >
+                Clear
+              </button>
+            )}
+          </div>
+          <div>
+            <label>
+              Sort:{' '}
+              <select
+                id="poster-sort"
+                value={posterSort}
+                onChange={(e) => setPosterSort(e.target.value)}
+              >
+                <option value="watch-date">Watch Date</option>
+                <option value="release-date">Release Date</option>
+                <option value="average-rating">Average Rating</option>
+                <option value="num-ratings">Number of Ratings</option>
+                <option value="runtime">Runtime</option>
+              </select>
+            </label>{' '}
+            <span>
+              <button
+                className={classNames(styles.toggleOrder, {
+                  [styles.toggleOrderDesc]: !posterSortAscending,
+                })}
+                onClick={() => setPosterSortAscending(!posterSortAscending)}
+              >
+                &uarr;
+              </button>
+            </span>
+          </div>
         </div>
         <PostersGrid movies={filteredMovies} />
       </div>
