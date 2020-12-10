@@ -59,6 +59,7 @@ const processData = (data) => {
       runtime: movie.details.runtime,
       voteCount: movie.details.vote_count,
       averageVote: movie.details.vote_average,
+      tmdbId: movie.details.id,
       watchDate: movie.record.fields.Date,
       source: movie.record.fields.Source,
       notes: movie.record.fields.Notes,
