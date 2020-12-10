@@ -110,7 +110,10 @@ const emojiForGenre = (genre) => {
 };
 
 const generateMonths = () =>
-  [...Array(12).keys()].map((i) => labelForMonth(i + 1));
+  [...Array(12).keys()].map((i) => ({
+    fullName: labelForMonth(i + 1),
+    shortName: labelForMonth(i + 1).slice(0, 1),
+  }));
 
 const generateDecadeRange = (decadesHistogram) => {
   const firstDecade = parseInt(decadesHistogram[0][0].slice(0, 4));
@@ -121,7 +124,8 @@ const generateDecadeRange = (decadesHistogram) => {
   const decades = [];
   let currentDecade = firstDecade;
   while (currentDecade <= lastDecade) {
-    decades.push(`${currentDecade}s`);
+    const label = `${currentDecade}s`;
+    decades.push({ fullName: label, shortName: label.slice(2, 5) });
     currentDecade += 10;
   }
 
