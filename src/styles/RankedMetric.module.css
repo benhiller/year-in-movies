@@ -72,6 +72,7 @@ button {
   cursor: pointer;
   text-decoration: none;
   display: inline;
+  outline: none;
   margin: 0;
   padding: 0;
   color: #ddd;

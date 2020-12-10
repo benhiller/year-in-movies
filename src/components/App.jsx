@@ -371,6 +371,7 @@ const Home = ({ movieData }) => {
               <button
                 className={classNames(styles.toggleOrder, {
                   [styles.toggleOrderDesc]: !posterSortAscending,
+                  [styles.toggleOrderAsc]: posterSortAscending,
                 })}
                 onClick={() => setPosterSortAscending(!posterSortAscending)}
               >

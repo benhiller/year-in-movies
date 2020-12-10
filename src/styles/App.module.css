@@ -58,6 +58,15 @@
   color: white;
 }
 
+.toggleOrder {
+  transition: transform .3s;
+}
+
+.toggleOrderAsc {
+  transform: rotate(0deg) translate(0, -3px);
+}
+
+
 .toggleOrderDesc {
   transform: rotate(180deg);
 }
