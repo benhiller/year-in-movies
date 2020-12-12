@@ -253,12 +253,12 @@ const Home = ({ movieData }) => {
           <SummaryStats
             stats={[
               {
-                statValue: 'First Movie of 2020',
-                statName: firstMovie.title,
+                statName: 'First Movie of 2020',
+                statValue: firstMovie.title,
               },
               {
-                statValue: 'Last Movie of 2020',
-                statName: lastMovie.title,
+                statName: 'Last Movie of 2020',
+                statValue: lastMovie.title,
               },
             ]}
             onClickStat={(idx) => {
