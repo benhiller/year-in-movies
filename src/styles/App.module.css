@@ -1,6 +1,4 @@
 .container {
-  /* TODO - use this trick to avoid scrolling whole page on mobile? */
-  /* https://css-tricks.com/the-trick-to-viewport-units-on-mobile/ */
   min-height: 100vh;
   height: 100vh;
   display: flex;

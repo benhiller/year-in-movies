@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import styles from 'styles/App.module.css';
+import useWindowSize from 'useWindowSize';
 import MetricSection from 'components/MetricSection';
 import RankedMetric from 'components/RankedMetric';
 import PostersGridControls from 'components/PostersGridControls';
@@ -151,6 +152,7 @@ const compareMovies = (m1, m2, posterSort) => {
 };
 
 const Home = ({ movieData }) => {
+  const { height } = useWindowSize();
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [posterSort, setPosterSort] = useState('watch-date');
   const [posterSortAscending, setPosterSortAscending] = useState(true);
@@ -233,7 +235,12 @@ const Home = ({ movieData }) => {
     : 'All Movies';
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={
+        height ? { height: `${height}px`, minHeight: `${height}px` } : null
+      }
+    >
       <div className={styles.content}>
         <h1>
           Ben&apos;s Year in Movies - <span className={styles.year}>2020</span>

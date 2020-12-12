@@ -43,7 +43,7 @@ v improve histogram + summary stats ui
 - histogram labels?
 
 mobile:
-- modify how vh is calculated to avoid scrolling on ios
+v modify how vh is calculated to avoid scrolling on ios
 - fix rendering on mobile
 
 data:
