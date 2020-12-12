@@ -33,15 +33,15 @@
   border-radius: 4px;
   margin-bottom: 8px;
   background-color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .directorPlaceholder {
   font-weight: 900;
   font-size: 60px;
   color: #444;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .rankedList {
@@ -84,12 +84,8 @@
 }
 
 .genreEmoji {
-  width: 80px;
-  height: 80px;
-  border-radius: 4px;
   font-size: 45px;
-  padding-top: 11px;
-  padding-right: 1px;
+  padding-top: 5px;
 }
 
 .rankedList li span {
