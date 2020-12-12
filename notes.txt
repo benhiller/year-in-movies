@@ -42,4 +42,5 @@ v animate sort order toggle rotation
 - fix rendering on mobile
 
 data:
+- take position in credits into account when sorting actors?
 - only include directors/cast members who were in more than 1 movie
