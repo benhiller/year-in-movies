@@ -32,10 +32,10 @@
 }
 
 .controls select {
-  border: 1px solid #ccc;
+  border: 1px solid #e7e7e7;
   font-size: 20px;
-  background-color: #222;
-  color: #ddd;
+  background-color: #e7e7e7;
+  color: #111;
   border-radius: 3px;
 }
 
