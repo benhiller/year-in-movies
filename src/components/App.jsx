@@ -6,6 +6,7 @@ import MetricSection from 'components/MetricSection';
 import RankedMetric from 'components/RankedMetric';
 import PostersGrid from 'components/PostersGrid';
 import Histogram from 'components/Histogram';
+import SummaryStats from 'components/SummaryStats';
 import Footer from 'components/Footer';
 import {
   computeTopDirectors,
@@ -132,7 +133,6 @@ const generateDecadeRange = (decadesHistogram) => {
 };
 
 const compareMovies = (m1, m2, posterSort) => {
-  console.log(m1);
   switch (posterSort) {
     case 'runtime':
       return m1.runtime - m2.runtime;
@@ -232,17 +232,16 @@ const Home = ({ movieData }) => {
         <h1>
           Ben&apos;s Year in Movies - <span className={styles.year}>2020</span>
         </h1>
-        <div className={classNames(styles.summary, styles.section)}>
-          <div className={styles.summaryStatContainer}>
-            <div className={styles.summaryValue}>{movieCount}</div>
-            <div className={styles.summaryStat}>Movies Watched</div>
-          </div>
-          <div className={styles.summaryStatContainer}>
-            <div className={styles.summaryValue}>
-              {Math.floor(timeSpent / 60)}h {timeSpent % 60}m
-            </div>
-            <div className={styles.summaryStat}>Spent Watching Movies</div>
-          </div>
+        <div className={styles.section}>
+          <SummaryStats
+            stats={[
+              { statName: 'Movies Watched', statValue: movieCount },
+              {
+                statName: 'Spent Watching Movies',
+                statValue: `${Math.floor(timeSpent / 60)}h ${timeSpent % 60}m`,
+              },
+            ]}
+          />
         </div>
         <MetricSection
           className={styles.section}
@@ -343,46 +342,70 @@ const Home = ({ movieData }) => {
             }
           />
         </MetricSection>
-        <div className={classNames(styles.summary, styles.section)}>
-          <div className={styles.summaryStat}>
-            <div>Longest Movie Watched</div>
-            <div
-              onClick={() => {
-                setPosterSort('runtime');
-                setPosterSortAscending(false);
-              }}
-            >
-              {longestMovie.title}{' '}
-              <span>
-                ({Math.floor(longestMovie.runtime / 60)}h{' '}
-                {longestMovie.runtime % 60}m)
-              </span>
-            </div>
-          </div>
-          <div className={styles.summaryStat}>
-            <div>Most Obscure Movie Watched</div>
-            <div
-              onClick={() => {
-                setPosterSort('num-ratings');
-                setPosterSortAscending(true);
-              }}
-            >
-              {leastRatedMovie.title}{' '}
-              <span>({leastRatedMovie.voteCount} ratings)</span>
-            </div>
-          </div>
-          <div className={styles.summaryStat}>
-            <div>Least Popular Movie Watched</div>
-            <div
-              onClick={() => {
-                setPosterSort('average-rating');
-                setPosterSortAscending(true);
-              }}
-            >
-              {lowestRatedMovie.title}{' '}
-              <span>({lowestRatedMovie.averageVote} average rating)</span>
-            </div>
-          </div>
+        <div className={styles.separator} />
+        <div className={styles.section}>
+          <SummaryStats
+            stats={[
+              {
+                statValue: 'Longest Movie',
+                statName: longestMovie.title,
+                statDetailLabel: `${Math.floor(longestMovie.runtime / 60)}h ${
+                  longestMovie.runtime % 60
+                }m`,
+              },
+              {
+                statValue: 'Shortest Movie',
+                statName: shortestMovie.title,
+                statDetailLabel: `${Math.floor(shortestMovie.runtime / 60)}h ${
+                  shortestMovie.runtime % 60
+                }m`,
+              },
+            ]}
+            onClickStat={(idx) => {
+              setPosterSort('runtime');
+              setPosterSortAscending(idx === 1);
+            }}
+          />
+        </div>
+        <div className={styles.section}>
+          <SummaryStats
+            stats={[
+              {
+                statValue: 'Most Obscure',
+                statName: leastRatedMovie.title,
+                statDetailLabel: `${leastRatedMovie.voteCount} ratings`,
+              },
+              {
+                statValue: 'Least Obscure',
+                statName: mostRatedMovie.title,
+                statDetailLabel: `${mostRatedMovie.voteCount} ratings`,
+              },
+            ]}
+            onClickStat={(idx) => {
+              setPosterSort('num-ratings');
+              setPosterSortAscending(idx === 0);
+            }}
+          />
+        </div>
+        <div className={styles.section}>
+          <SummaryStats
+            stats={[
+              {
+                statValue: 'Lowest Rated',
+                statName: lowestRatedMovie.title,
+                statDetailLabel: `${lowestRatedMovie.averageVote} average rating`,
+              },
+              {
+                statValue: 'Higest Rated',
+                statName: highestRatedMovie.title,
+                statDetailLabel: `${highestRatedMovie.averageVote} average rating`,
+              },
+            ]}
+            onClickStat={(idx) => {
+              setPosterSort('average-rating');
+              setPosterSortAscending(idx === 0);
+            }}
+          />
         </div>
         <Footer />
       </div>

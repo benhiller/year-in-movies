@@ -23,17 +23,6 @@
   }
 }
 
-.summary {
-  display: flex;
-  flex-direction: row;
-  padding-bottom: 15px;
-}
-
-.summary div {
-  width: 100%;
-  text-align: center;
-}
-
 .container {
   background-color: var(--container-background-color);
   color: #ddd;
@@ -69,22 +58,12 @@
   transform: rotate(180deg);
 }
 
-.summaryStat {
-  font-size: 24px;
-  font-weight: 300;
-}
-
 h1 {
   text-align: center;
   font-weight: 300;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 15px;
   margin-top: 10px;
-}
-
-.summaryValue {
-  font-size: 30px;
-  font-weight: bold;
 }
 
 .year {
