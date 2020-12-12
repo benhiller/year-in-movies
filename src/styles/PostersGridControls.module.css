@@ -8,17 +8,52 @@
   justify-content: space-between;
 }
 
+.controls div {
+  display: flex;
+}
+
 .toggleOrder,
 .clear {
   color: white;
 }
 
+.clear {
+  color: #111;
+  display: inline-block;
+  background-color: #e7e7e7;
+  font-size: 14px;
+  line-height: 14px;
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  margin-top: 3px;
+  margin-left: 5px;
+  border-radius: 10px;
+}
+
+.controls select {
+  border: 1px solid #ccc;
+  font-size: 20px;
+  background-color: #222;
+  color: #ddd;
+  border-radius: 3px;
+}
+
 .toggleOrder {
+  font-weight: 800;
+  font-family: sans-serif;
+  background-color: #e7e7e7;
+  color: #111;
+  border-radius: 3px;
+  width: 20px;
+  height: 26px;
+  font-size: 20px;
   transition: transform 0.3s;
+  margin-left: 10px;
 }
 
 .toggleOrderAsc {
-  transform: rotate(0deg) translate(0, -3px);
+  transform: rotate(0deg);
 }
 
 .toggleOrderDesc {

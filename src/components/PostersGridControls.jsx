@@ -16,7 +16,7 @@ const PostersGridControls = ({
       <span>{currentTitle}</span>{' '}
       {selectedFilter && (
         <button className={styles.clear} onClick={() => onChangeFilter(null)}>
-          Clear
+          {'\u2716'}
         </button>
       )}
     </div>
@@ -35,17 +35,15 @@ const PostersGridControls = ({
           <option value="runtime">Runtime</option>
         </select>
       </label>{' '}
-      <span>
-        <button
-          className={classNames(styles.toggleOrder, {
-            [styles.toggleOrderDesc]: !posterSortAscending,
-            [styles.toggleOrderAsc]: posterSortAscending,
-          })}
-          onClick={() => onChangePosterSortAscending(!posterSortAscending)}
-        >
-          &uarr;
-        </button>
-      </span>
+      <button
+        className={classNames(styles.toggleOrder, {
+          [styles.toggleOrderDesc]: !posterSortAscending,
+          [styles.toggleOrderAsc]: posterSortAscending,
+        })}
+        onClick={() => onChangePosterSortAscending(!posterSortAscending)}
+      >
+        &uarr;
+      </button>
     </div>
   </div>
 );
