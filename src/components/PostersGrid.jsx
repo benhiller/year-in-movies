@@ -55,7 +55,7 @@ const PostersGrid = ({ movies }) => {
     }),
     update: ({ xy, width, height }) => ({ xy, width, height }),
     leave: { opacity: 0, scale: 0.25 },
-    config: { mass: 1, tension: 195, friction: 18 },
+    config: { mass: 1, tension: 195, friction: 22 },
   });
 
   const height =
