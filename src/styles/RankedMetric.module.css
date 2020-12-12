@@ -48,6 +48,7 @@
   flex-direction: row;
   list-style-type: none;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 0 25px 15px;
   margin: 16px -25px 0;
 }
