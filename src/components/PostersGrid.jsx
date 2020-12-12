@@ -6,28 +6,34 @@ import { ResizeObserver } from '@juggle/resize-observer';
 import styles from 'styles/PostersGrid.module.css';
 
 const POSTER_MIN_WIDTH = 120;
+const POSTER_MIN_WIDTH_MOBILE = 90;
 const POSTER_HEIGHT_MULTIPLIER = 1.5;
 const POSTER_SPACING = 15;
+const POSTER_SPACING_MOBILE = 10;
 
 const PostersGrid = ({ width, movies }) => {
   const ref = useRef();
 
+  const posterMinWidth =
+    width > 375 ? POSTER_MIN_WIDTH : POSTER_MIN_WIDTH_MOBILE;
+  const posterSpacing = width > 375 ? POSTER_SPACING : POSTER_SPACING_MOBILE;
+
   // TODO - There should be a way to compute this without the while loop
   let columns = 1;
-  while (columns * POSTER_MIN_WIDTH + (columns - 1) * POSTER_SPACING < width) {
+  while (columns * posterMinWidth + (columns - 1) * posterSpacing < width) {
     columns += 1;
   }
   columns--;
-  const posterWidth = (width - POSTER_SPACING * (columns - 1)) / columns;
+  const posterWidth = (width - posterSpacing * (columns - 1)) / columns;
   const posterHeight = posterWidth * POSTER_HEIGHT_MULTIPLIER;
 
   const gridItems = useMemo(() => {
     return movies.map((child, i) => {
       const column = i % columns;
       const xy = [
-        posterWidth * column + POSTER_SPACING * column,
+        posterWidth * column + posterSpacing * column,
         posterHeight * Math.floor(i / columns) +
-          POSTER_SPACING * Math.floor(i / columns),
+          posterSpacing * Math.floor(i / columns),
       ];
       return {
         ...child,
@@ -36,7 +42,7 @@ const PostersGrid = ({ width, movies }) => {
         height: posterHeight,
       };
     });
-  }, [columns, movies, posterWidth, posterHeight]);
+  }, [columns, movies, posterWidth, posterHeight, posterSpacing]);
 
   const transitions = useTransition(gridItems, (item) => item.title, {
     from: ({ xy, width, height }) => ({
@@ -62,7 +68,7 @@ const PostersGrid = ({ width, movies }) => {
 
   const height =
     Math.ceil(movies.length / columns) * posterHeight +
-    (Math.ceil(movies.length / columns) - 1) * POSTER_SPACING;
+    (Math.ceil(movies.length / columns) - 1) * posterSpacing;
 
   return (
     <div className={styles.posters} ref={ref} style={{ height: `${height}px` }}>

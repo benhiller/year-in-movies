@@ -20,7 +20,7 @@
 .postersContainer {
   flex: 1;
   width: 100%;
-  padding: 25px;
+  padding: 10px;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -31,6 +31,7 @@
 }
 
 .container h1 {
+  font-size: 26px;
   text-align: center;
   font-weight: 300;
   border-bottom: 1px solid var(--border-color);
@@ -43,7 +44,20 @@
 }
 
 .section {
-  padding-bottom: 30px;
+  padding-bottom: 25px;
+}
+
+@media (min-width: 850px) {
+  .container h1 {
+    font-size: 32px;
+  }
+  .section {
+    padding-bottom: 30px;
+  }
+  .content,
+  .postersContainer {
+    padding: 25px;
+  }
 }
 
 .separator {

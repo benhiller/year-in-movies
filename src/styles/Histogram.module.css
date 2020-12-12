@@ -15,10 +15,16 @@
 
 .histogram button div {
   border-radius: 4px 4px 0 0;
-  margin: 0 10px;
+  margin: 0 2px;
   background-color: #994343;
   border: 1px solid #994343;
   border-width: 1px 1px 0;
+}
+
+@media (min-width: 850px) {
+  .histogram button div {
+    margin: 0 10px;
+  }
 }
 
 .histogram button:hover div {

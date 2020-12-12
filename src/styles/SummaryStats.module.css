@@ -1,22 +1,35 @@
 .summaryStats {
   display: flex;
   flex-direction: row;
-  padding-bottom: 15px;
 }
 
 .summaryStats div {
   width: 100%;
   text-align: center;
+  padding: 0 5px;
 }
 
 .summaryStat {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 300;
 }
 
 .summaryValue {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: bold;
+}
+
+@media (min-width: 850px) {
+  .summaryStats {
+    padding-bottom: 15px;
+  }
+
+  .summaryStat {
+    font-size: 24px;
+  }
+  .summaryValue {
+    font-size: 30px;
+  }
 }
 
 .summaryDetail {
