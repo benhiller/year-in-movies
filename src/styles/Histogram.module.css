@@ -14,5 +14,9 @@
 
 .histogram button div {
   border-radius: 4px;
-  background-color: green;
+  background-color: #994343;
+}
+
+.histogram button:hover div {
+  background-color: #70161c;
 }
