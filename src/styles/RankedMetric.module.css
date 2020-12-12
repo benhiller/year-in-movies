@@ -10,11 +10,16 @@
   right: 0;
   top: 0;
   background-color: #fff;
-  color: #222;
+  color: #111;
   height: 20px;
   padding: 0 5px;
   line-height: 20px;
   border-radius: 0 4px 0 4px;
+}
+
+/* Hacky fix to ensure position container fits nicely against border when item is focused/selected */
+.rankedList li button:hover .position, .rankedList li button:active .position, .rankedList li.selected button  .position{
+  border-top-right-radius: 3px;
 }
 
 .rankedList li img, .directorPlaceholder, .genreEmoji {
@@ -60,7 +65,7 @@
   flex-direction: column;
   align-items: center;
   padding-bottom: 5px;
-  border: 1px solid #222;
+  border: 1px solid var(--container-background-color);
   border-radius: 4px;
 }
 

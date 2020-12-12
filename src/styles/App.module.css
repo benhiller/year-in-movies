@@ -34,7 +34,7 @@
 }
 
 .container {
-  background-color: #202020;
+  background-color: var(--container-background-color);
   color: #ddd;
 }
 
