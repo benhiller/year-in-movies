@@ -50,7 +50,7 @@
   list-style-type: none;
   overflow-x: scroll;
   padding: 0 25px 15px;
-  margin: 16px -25px -15px;
+  margin: 16px -25px 0;
 }
 
 .rankedList li {

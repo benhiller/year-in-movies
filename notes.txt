@@ -38,7 +38,9 @@ v animate sort order toggle rotation
 v histogram for decade/month units
 x custom scrollbar UI for horiz scrolling?
 v lots of polishing
-- improve histogram + summary stats ui
+v improve histogram + summary stats ui
+- poster grid controls
+- histogram labels?
 
 mobile:
 - modify how vh is calculated to avoid scrolling on ios
