@@ -312,8 +312,17 @@ const Home = ({ movieData }) => {
         >
           <Histogram
             items={decadesHistogram}
-            orderedGroups={generateDecadeRange(decadesHistogram)}
-            onClickItem={(itemName) => setSelectedFilter({ decade: itemName })}
+            orderedGroups={generateDecadeRange(decadesHistogram).map(
+              (decade) => ({
+                ...decade,
+                selected: selectedFilter?.decade === decade.fullName,
+              }),
+            )}
+            onClickItem={(itemName) =>
+              selectedFilter?.decade === itemName
+                ? setSelectedFilter(null)
+                : setSelectedFilter({ decade: itemName })
+            }
           />
         </MetricSection>
         <MetricSection
@@ -323,8 +332,15 @@ const Home = ({ movieData }) => {
         >
           <Histogram
             items={monthsHistogram}
-            orderedGroups={generateMonths()}
-            onClickItem={(itemName) => setSelectedFilter({ month: itemName })}
+            orderedGroups={generateMonths().map((month) => ({
+              ...month,
+              selected: selectedFilter?.month === month.fullName,
+            }))}
+            onClickItem={(itemName) =>
+              selectedFilter?.month === itemName
+                ? setSelectedFilter(null)
+                : setSelectedFilter({ month: itemName })
+            }
           />
         </MetricSection>
         <div className={classNames(styles.summary, styles.section)}>

@@ -6,8 +6,12 @@ const Histogram = ({ items, orderedGroups, onClickItem }) => {
 
   return (
     <div className={styles.histogram}>
-      {orderedGroups.map(({ fullName, shortName }) => (
-        <button key={fullName} onClick={() => onClickItem(fullName)}>
+      {orderedGroups.map(({ fullName, shortName, selected }) => (
+        <button
+          key={fullName}
+          className={selected ? styles.selected : null}
+          onClick={() => onClickItem(fullName)}
+        >
           <span className={styles.count}>{countByGroup[fullName] || '0'}</span>
           <div
             style={{ height: `${(countByGroup[fullName] / maxCount) * 100}px` }}
