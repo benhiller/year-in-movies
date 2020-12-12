@@ -28,16 +28,31 @@ export const computeTopCastMembers = (movieData) =>
 
       cast.forEach((castMember) => {
         if (acc[castMember.name]) {
-          const { count } = acc[castMember.name];
-          acc[castMember.name] = { castMember, count: count + 1 };
+          const { count, score } = acc[castMember.name];
+          acc[castMember.name] = {
+            castMember,
+            count: count + 1,
+            score: score + (9 - castMember.position),
+          };
         } else {
-          acc[castMember.name] = { castMember, count: 1 };
+          acc[castMember.name] = {
+            castMember,
+            count: 1,
+            score: 9 - castMember.position,
+          };
         }
       });
       return acc;
     }, {}),
   )
-    .sort((a, b) => b[1].count - a[1].count)
+    .sort((a, b) => {
+      const cmp = b[1].count - a[1].count;
+      if (cmp !== 0) {
+        return cmp;
+      } else {
+        return b[1].score - a[1].score;
+      }
+    })
     .map(([_, item]) => item);
 
 export const computeTopGenres = (movieData) =>
