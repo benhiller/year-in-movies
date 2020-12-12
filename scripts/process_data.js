@@ -34,7 +34,11 @@ const listCastMembers = (movie) => {
         return null;
       }
 
-      return { name: castMember.name, imageSrc: castMember.profile_path };
+      return {
+        name: castMember.name,
+        imageSrc: castMember.profile_path,
+        position: castMember.order,
+      };
     })
     .filter((castMember) => !!castMember);
 };
