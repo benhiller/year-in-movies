@@ -10,6 +10,18 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+body {
+  /* Use a gradient so this matches the background of both sides of the screen */
+  background-image: linear-gradient(
+    90deg,
+    rgba(32, 32, 32, 1) 0%,
+    rgba(32, 32, 32, 1) 48%,
+    rgba(29, 29, 29, 1) 51%,
+    rgba(29, 29, 29, 1) 100%
+  );
+  padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+}
+
 a {
   color: inherit;
   text-decoration: none;
