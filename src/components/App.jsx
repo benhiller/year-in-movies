@@ -241,7 +241,7 @@ const Home = ({ movieData }) => {
             <div className={styles.summaryValue}>
               {Math.floor(timeSpent / 60)}h {timeSpent % 60}m
             </div>
-            <div className={styles.summaryStat}>Time Spent</div>
+            <div className={styles.summaryStat}>Spent Watching Movies</div>
           </div>
         </div>
         <MetricSection
