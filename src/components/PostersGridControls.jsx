@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 
 import styles from 'styles/PostersGridControls.module.css';
+import { ReactComponent as Arrow } from 'img/arrow.svg';
+import { ReactComponent as Clear } from 'img/clear.svg';
 
 const PostersGridControls = ({
   currentTitle,
@@ -16,7 +18,7 @@ const PostersGridControls = ({
       <span>{currentTitle}</span>{' '}
       {selectedFilter && (
         <button className={styles.clear} onClick={() => onChangeFilter(null)}>
-          {'\u2716'}
+          <Clear />
         </button>
       )}
     </div>
@@ -42,7 +44,7 @@ const PostersGridControls = ({
         })}
         onClick={() => onChangePosterSortAscending(!posterSortAscending)}
       >
-        &uarr;
+        <Arrow />
       </button>
     </div>
   </div>
