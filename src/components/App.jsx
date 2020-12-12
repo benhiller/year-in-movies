@@ -9,6 +9,8 @@ import PostersGrid from 'components/PostersGrid';
 import Histogram from 'components/Histogram';
 import SummaryStats from 'components/SummaryStats';
 import Footer from 'components/Footer';
+import { filterMovies } from 'filters';
+import { emojiForGenre } from 'genre';
 import {
   computeTopDirectors,
   computeTopCastMembers,
@@ -24,93 +26,8 @@ import {
   computeHighestRatedMovie,
   computeFirstMovie,
   computeLastMovie,
-  monthFromDate,
   labelForMonth,
 } from 'metrics';
-
-const filterMovies = (movieData, filter) => {
-  if (filter.director) {
-    return movieData.filter((movie) => movie.director.name === filter.director);
-  } else if (filter.castMember) {
-    return movieData.filter(
-      (movie) =>
-        movie.cast && movie.cast.map((c) => c.name).includes(filter.castMember),
-    );
-  } else if (filter.decade) {
-    return movieData.filter((movie) =>
-      movie.releaseDate.startsWith(filter.decade.slice(0, 3)),
-    );
-  } else if (filter.genre) {
-    return movieData.filter((movie) => movie.genres.includes(filter.genre));
-  } else if (filter.month) {
-    return movieData.filter(
-      (movie) => labelForMonth(monthFromDate(movie.watchDate)) === filter.month,
-    );
-  } else if (filter.title) {
-    return movieData.filter((movie) => movie.title === filter.title);
-  }
-};
-
-const titleForFilter = (filter) => {
-  if (filter.director) {
-    return `Director: ${filter.director}`;
-  } else if (filter.castMember) {
-    return `Cast Member: ${filter.castMember}`;
-  } else if (filter.decade) {
-    return `Release Year: ${filter.decade}`;
-  } else if (filter.genre) {
-    return `Genre: ${filter.genre}`;
-  } else if (filter.month) {
-    return `Watched in: ${filter.month}`;
-  } else if (filter.title) {
-    return filter.title;
-  }
-};
-
-const emojiForGenre = (genre) => {
-  switch (genre) {
-    case 'Action':
-      return '\uD83E\uDD35\uFE0F'; // man in tux (like james bond)
-    case 'Adventure':
-      return '\uD83E\uDDF3'; // luggage
-    case 'Animation':
-      return '\uD83D\uDC2D'; // mouse
-    case 'Comedy':
-      return '\uD83E\uDD21'; // clown
-    case 'Crime':
-      return '\uD83D\uDC6E\u200D\u2642\uFE0F'; // police
-    case 'Documentary':
-      return '\uD83D\uDDDE\uFE0F'; // rolled-up newspaper
-    case 'Drama':
-      return '\uD83C\uDFAD'; // comedy + tragedy masks
-    case 'Family':
-      return '\uD83D\uDC6A';
-    case 'Fantasy':
-      return '\uD83E\uDDD9\u200D\u2642\uFE0F'; // man mage
-    case 'History':
-      return '\uD83D\uDDFF'; // moyai
-    case 'Horror':
-      return '\uD83E\uDDDF\u200D\u2642\uFE0F'; // zombie
-    case 'Music':
-      return '\uD83C\uDFB8'; // guitar
-    case 'Mystery':
-      return '\uD83D\uDD75\uFE0F';
-    case 'Romance':
-      return '\uD83D\uDC8B'; // kiss mark
-    case 'Science Fiction':
-      return '\uD83D\uDC68\u200D\uD83D\uDE80'; // astronaut
-    case 'TV Movie':
-      return '\uD83D\uDCFA'; // television
-    case 'Thriller':
-      return '\uD83D\uDD2A'; // knife
-    case 'War':
-      return '\uD83C\uDF96\uFE0F'; // military medal
-    case 'Western':
-      return '\uD83E\uDD20'; // cowboy hat face (like indiana jones)
-    default:
-      return '\uD83C\uDFA6'; // movie camera icon
-  }
-};
 
 const generateMonths = () =>
   [...Array(12).keys()].map((i) => ({
@@ -156,29 +73,6 @@ const Home = ({ movieData }) => {
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [posterSort, setPosterSort] = useState('watch-date');
   const [posterSortAscending, setPosterSortAscending] = useState(true);
-
-  // const allGenres = [
-  //   'Action',
-  //   'Adventure',
-  //   'Animation',
-  //   'Comedy',
-  //   'Crime',
-  //   'Documentary',
-  //   'Drama',
-  //   'Family',
-  //   'Fantasy',
-  //   'History',
-  //   'Horror',
-  //   'Music',
-  //   'Mystery',
-  //   'Romance',
-  //   'Science Fiction',
-  //   'TV Movie',
-  //   'Thriller',
-  //   'War',
-  //   'Western',
-  //   'Default',
-  // ];
 
   const {
     topDirectors,
@@ -229,10 +123,6 @@ const Home = ({ movieData }) => {
       ),
     [movieData, selectedFilter, posterSort, posterSortAscending],
   );
-
-  const currentTitle = selectedFilter
-    ? titleForFilter(selectedFilter)
-    : 'All Movies';
 
   return (
     <div
@@ -442,7 +332,6 @@ const Home = ({ movieData }) => {
       </div>
       <div className={styles.postersContainer}>
         <PostersGridControls
-          currentTitle={currentTitle}
           selectedFilter={selectedFilter}
           posterSort={posterSort}
           posterSortAscending={posterSortAscending}
