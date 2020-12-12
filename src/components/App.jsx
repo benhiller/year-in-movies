@@ -254,9 +254,12 @@ const Home = ({ movieData }) => {
               count,
               name: genre,
               emoji: emojiForGenre(genre),
+              selected: selectedFilter?.genre === genre,
             }))}
             onClickItem={(itemName) => {
-              setSelectedFilter({ genre: itemName });
+              selectedFilter?.genre === itemName
+                ? setSelectedFilter(null)
+                : setSelectedFilter({ genre: itemName });
             }}
           />
         </MetricSection>
@@ -272,9 +275,12 @@ const Home = ({ movieData }) => {
               imageSrc: director.imageSrc
                 ? `https://image.tmdb.org/t/p/w180_and_h180_face${director.imageSrc}`
                 : null,
+              selected: selectedFilter?.director === director.name,
             }))}
             onClickItem={(itemName) => {
-              setSelectedFilter({ director: itemName });
+              selectedFilter?.director === itemName
+                ? setSelectedFilter(null)
+                : setSelectedFilter({ director: itemName });
             }}
           />
         </MetricSection>
@@ -290,9 +296,12 @@ const Home = ({ movieData }) => {
               imageSrc: castMember.imageSrc
                 ? `https://image.tmdb.org/t/p/w180_and_h180_face${castMember.imageSrc}`
                 : null,
+              selected: selectedFilter?.castMember === castMember.name,
             }))}
             onClickItem={(itemName) => {
-              setSelectedFilter({ castMember: itemName });
+              selectedFilter?.castMember === itemName
+                ? setSelectedFilter(null)
+                : setSelectedFilter({ castMember: itemName });
             }}
           />
         </MetricSection>

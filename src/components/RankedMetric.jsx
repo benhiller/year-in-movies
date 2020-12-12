@@ -20,10 +20,10 @@ const separateNameTokens = (name) => {
 const RankedMetric = ({ items, onClickItem }) => {
   return (
     <ol className={styles.rankedList}>
-      {items.map(({ name, imageSrc, emoji, count }) => {
+      {items.map(({ name, imageSrc, emoji, count, selected }) => {
         const [initialPart, finalPart] = separateNameTokens(name);
         return (
-          <li key={name}>
+          <li key={name} className={selected ? styles.selected : null}>
             <button onClick={() => onClickItem(name)}>
               <div className={styles.pic}>
                 <span className={styles.position}>{count}</span>

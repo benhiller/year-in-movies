@@ -69,7 +69,7 @@
   border-color: var(--border-color);
 }
 
-.rankedList li button:active, .rankedList li button:focus {
+.rankedList li button:active, .rankedList li.selected button {
   background-color: #060606;
   border-color: #aaa;
 }
