@@ -3,24 +3,28 @@
 }
 
 .position {
+  font-size: 14px;
+  font-weight: 600;
   position: absolute;
+  opacity: 0.9;
   /* TODO - probably need to tweak this, test w/ different widths */
-  right: -5px;
-  bottom: 4px;
-  border: 1px solid #666;
-  background-color: #444;
+  right: 0;
+  bottom: 5px;
+  background-color: #fff;
+  color: #222;
   height: 20px;
   padding: 0 5px;
   line-height: 20px;
-  border-radius: 10px;
+  border-radius: 4px 0 4px 0;
 }
 
 .rankedList li img, .directorPlaceholder, .genreEmoji {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
   margin-bottom: 5px;
-  background-color: #777;
+  background-color: #111;
 }
 
 .rankedList {
@@ -39,7 +43,7 @@
 
 @media (min-width: 850px) {
   .rankedList li {
-    flex: 1 0 85px;
+    flex: 1 0 110px;
   }
 }
 
@@ -51,13 +55,11 @@
 }
 
 .genreEmoji {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  border: 2px solid #666;
-  background-color: #444;
-  font-size: 32px;
-  padding-top: 3px;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  font-size: 45px;
+  padding-top: 11px;
   padding-right: 1px;
 }
 

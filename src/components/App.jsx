@@ -231,19 +231,26 @@ const Home = ({ movieData }) => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <div className={styles.summary}>
-          <div className={styles.summaryStat}>
-            <div>Movies Watched</div>
-            <div>{movieCount}</div>
+        <h1>
+          Ben&apos;s Year in Movies - <span className={styles.year}>2020</span>
+        </h1>
+        <div className={classNames(styles.summary, styles.section)}>
+          <div className={styles.summaryStatContainer}>
+            <div className={styles.summaryValue}>{movieCount}</div>
+            <div className={styles.summaryStat}>Movies Watched</div>
           </div>
-          <div className={styles.summaryStat}>
-            <div>Time Spent</div>
-            <div>
+          <div className={styles.summaryStatContainer}>
+            <div className={styles.summaryValue}>
               {Math.floor(timeSpent / 60)}h {timeSpent % 60}m
             </div>
+            <div className={styles.summaryStat}>Time Spent</div>
           </div>
         </div>
-        <MetricSection metricName={'\uD83C\uDF9E\uFE0F Most Watched Genres'}>
+        <MetricSection
+          className={styles.section}
+          emoji={'\uD83C\uDF9E\uFE0F'}
+          metricName="Most Watched Genres"
+        >
           <RankedMetric
             items={topGenres.slice(0, 15).map(([genre, count]) => ({
               count,
@@ -255,7 +262,11 @@ const Home = ({ movieData }) => {
             }}
           />
         </MetricSection>
-        <MetricSection metricName={'\uD83C\uDFAC Most Watched Directors'}>
+        <MetricSection
+          className={styles.section}
+          emoji={'\uD83C\uDFAC'}
+          metricName="Most Watched Directors"
+        >
           <RankedMetric
             items={topDirectors.slice(0, 15).map(({ director, count }) => ({
               count,
@@ -269,7 +280,11 @@ const Home = ({ movieData }) => {
             }}
           />
         </MetricSection>
-        <MetricSection metricName={'\uD83C\uDFC6 Most Watched Actors'}>
+        <MetricSection
+          emoji={'\uD83C\uDFC6'}
+          metricName="Most Watched Actors"
+          className={styles.section}
+        >
           <RankedMetric
             items={topCastMembers.slice(0, 15).map(({ castMember, count }) => ({
               count,
@@ -284,7 +299,9 @@ const Home = ({ movieData }) => {
           />
         </MetricSection>
         <MetricSection
-          metricName={'\uD83D\uDDD3\uFE0F Movies Watched by Decade'}
+          className={styles.section}
+          emoji={'\uD83D\uDDD3\uFE0F'}
+          metricName="Movies Watched by Decade"
         >
           <Histogram
             items={decadesHistogram}
@@ -293,7 +310,9 @@ const Home = ({ movieData }) => {
           />
         </MetricSection>
         <MetricSection
-          metricName={'\uD83C\uDF9F\uFE0F Movies Watched by Month'}
+          className={styles.section}
+          emoji={'\uD83C\uDF9F\uFE0F'}
+          metricName="Movies Watched by Month"
         >
           <Histogram
             items={monthsHistogram}
@@ -301,7 +320,7 @@ const Home = ({ movieData }) => {
             onClickItem={(itemName) => setSelectedFilter({ month: itemName })}
           />
         </MetricSection>
-        <div className={styles.summary}>
+        <div className={classNames(styles.summary, styles.section)}>
           <div className={styles.summaryStat}>
             <div>Longest Movie Watched</div>
             <div

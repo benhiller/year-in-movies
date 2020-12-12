@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
@@ -11,6 +15,14 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+a:hover {
+  text-decoration: underline;
+}
+
+select {
+  font-size: 16px;
+}
+
+:root {
+  --border-color: #363636;
 }

@@ -1,9 +1,13 @@
 import styles from 'styles/MetricSection.module.css';
 
-const MetricSection = ({ metricName, children }) => {
+const MetricSection = ({ emoji, metricName, children, ...props }) => {
   return (
-    <div>
-      <span className={styles.sectionTitle}>{metricName}</span>
+    <div className={styles.metricContainer} {...props}>
+      <div className={styles.titleContainer}>
+        <span className={styles.sectionEmoji}>{emoji}</span>
+        <span className={styles.sectionTitle}>{metricName}</span>
+        <div className={styles.rule} />
+      </div>
       {children}
     </div>
   );

@@ -1,4 +1,17 @@
-.sectionTitle {
-  font-weight: 600;
-  font-size: 18px;
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sectionEmoji, .sectionTitle {
+  font-weight: 500;
+  font-size: 24px;
+  padding-right: 12px;
+}
+
+.rule {
+  height: 1px;
+  flex: 1;
+  background-color: var(--border-color);
 }
