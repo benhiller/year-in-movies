@@ -21,6 +21,8 @@ import {
   computeMostRatedMovie,
   computeLowestRatedMovie,
   computeHighestRatedMovie,
+  computeFirstMovie,
+  computeLastMovie,
   monthFromDate,
   labelForMonth,
 } from 'metrics';
@@ -189,6 +191,8 @@ const Home = ({ movieData }) => {
     mostRatedMovie,
     lowestRatedMovie,
     highestRatedMovie,
+    firstMovie,
+    lastMovie,
   } = useMemo(
     () => ({
       topDirectors: computeTopDirectors(movieData),
@@ -203,6 +207,8 @@ const Home = ({ movieData }) => {
       mostRatedMovie: computeMostRatedMovie(movieData),
       lowestRatedMovie: computeLowestRatedMovie(movieData),
       highestRatedMovie: computeHighestRatedMovie(movieData),
+      firstMovie: computeFirstMovie(movieData),
+      lastMovie: computeLastMovie(movieData),
     }),
     [movieData],
   );
@@ -241,6 +247,24 @@ const Home = ({ movieData }) => {
                 statValue: `${Math.floor(timeSpent / 60)}h ${timeSpent % 60}m`,
               },
             ]}
+          />
+        </div>
+        <div className={styles.section}>
+          <SummaryStats
+            stats={[
+              {
+                statValue: 'First Movie of 2020',
+                statName: firstMovie.title,
+              },
+              {
+                statValue: 'Last Movie of 2020',
+                statName: lastMovie.title,
+              },
+            ]}
+            onClickStat={(idx) => {
+              setPosterSort('watch-data');
+              setPosterSortAscending(idx === 0);
+            }}
           />
         </div>
         <MetricSection

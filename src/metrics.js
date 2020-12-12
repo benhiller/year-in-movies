@@ -154,3 +154,7 @@ export const computeHighestRatedMovie = (movieData) =>
       movie.voteCount > 0 && movie.averageVote > acc.averageVote ? movie : acc,
     movieData[0],
   );
+
+export const computeFirstMovie = (movieData) => movieData[0];
+
+export const computeLastMovie = (movieData) => movieData[movieData.length - 1];
