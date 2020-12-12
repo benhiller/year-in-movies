@@ -18,11 +18,15 @@
 }
 
 /* Hacky fix to ensure position container fits nicely against border when item is focused/selected */
-.rankedList li button:hover .position, .rankedList li button:active .position, .rankedList li.selected button  .position{
+.rankedList li button:hover .position,
+.rankedList li button:active .position,
+.rankedList li.selected button .position {
   border-top-right-radius: 3px;
 }
 
-.rankedList li img, .directorPlaceholder, .genreEmoji {
+.rankedList li img,
+.directorPlaceholder,
+.genreEmoji {
   display: block;
   width: 80px;
   height: 80px;
@@ -49,7 +53,6 @@
   margin: 16px -25px -15px;
 }
 
-
 .rankedList li {
   flex: 1 0 75px;
 }
@@ -74,7 +77,8 @@
   border-color: var(--border-color);
 }
 
-.rankedList li button:active, .rankedList li.selected button {
+.rankedList li button:active,
+.rankedList li.selected button {
   background-color: #060606;
   border-color: #aaa;
 }
@@ -105,7 +109,8 @@ button {
   color: #ddd;
 }
 
-button:hover, button:focus{
+button:hover,
+button:focus {
   text-decoration: none;
 }
 

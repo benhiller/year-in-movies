@@ -8,7 +8,8 @@
   overflow: hidden;
 }
 
-.content, .postersContainer {
+.content,
+.postersContainer {
   flex: 1;
   width: 100%;
   padding: 25px;
@@ -51,18 +52,18 @@
   justify-content: space-between;
 }
 
-.toggleOrder, .clear {
+.toggleOrder,
+.clear {
   color: white;
 }
 
 .toggleOrder {
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
 
 .toggleOrderAsc {
   transform: rotate(0deg) translate(0, -3px);
 }
-
 
 .toggleOrderDesc {
   transform: rotate(180deg);

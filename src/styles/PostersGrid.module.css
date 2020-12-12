@@ -13,7 +13,8 @@
   object-fit: cover;
 }
 
-.posterImage img, .posterImage div {
+.posterImage img,
+.posterImage div {
   border-radius: 3px;
 }
 

@@ -26,7 +26,8 @@
   border-color: #7f272a;
 }
 
-.histogram button:active div, .histogram button.selected div {
+.histogram button:active div,
+.histogram button.selected div {
   background-color: #70161c;
   border-color: #aaa;
 }
