@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
-import classNames from 'classnames';
 
 import styles from 'styles/App.module.css';
 import MetricSection from 'components/MetricSection';
 import RankedMetric from 'components/RankedMetric';
+import PostersGridControls from 'components/PostersGridControls';
 import PostersGrid from 'components/PostersGrid';
 import Histogram from 'components/Histogram';
 import SummaryStats from 'components/SummaryStats';
@@ -410,46 +410,15 @@ const Home = ({ movieData }) => {
         <Footer />
       </div>
       <div className={styles.postersContainer}>
-        <div className={styles.controls}>
-          <div>
-            <span>{currentTitle}</span>{' '}
-            {selectedFilter && (
-              <button
-                className={styles.clear}
-                onClick={() => setSelectedFilter(null)}
-              >
-                Clear
-              </button>
-            )}
-          </div>
-          <div>
-            <label>
-              Sort:{' '}
-              <select
-                id="poster-sort"
-                value={posterSort}
-                onChange={(e) => setPosterSort(e.target.value)}
-              >
-                <option value="watch-date">Watch Date</option>
-                <option value="release-date">Release Date</option>
-                <option value="average-rating">Average Rating</option>
-                <option value="num-ratings">Number of Ratings</option>
-                <option value="runtime">Runtime</option>
-              </select>
-            </label>{' '}
-            <span>
-              <button
-                className={classNames(styles.toggleOrder, {
-                  [styles.toggleOrderDesc]: !posterSortAscending,
-                  [styles.toggleOrderAsc]: posterSortAscending,
-                })}
-                onClick={() => setPosterSortAscending(!posterSortAscending)}
-              >
-                &uarr;
-              </button>
-            </span>
-          </div>
-        </div>
+        <PostersGridControls
+          currentTitle={currentTitle}
+          selectedFilter={selectedFilter}
+          posterSort={posterSort}
+          posterSortAscending={posterSortAscending}
+          onChangeFilter={setSelectedFilter}
+          onChangePosterSort={setPosterSort}
+          onChangePosterSortAscending={setPosterSortAscending}
+        />
         <PostersGrid movies={filteredMovies} />
       </div>
     </div>

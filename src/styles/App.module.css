@@ -6,6 +6,14 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  background-color: var(--container-background-color);
+  color: #ddd;
+}
+
+@media (min-width: 850px), (orientation: landscape) {
+  .container {
+    flex-direction: row;
+  }
 }
 
 .content,
@@ -17,48 +25,12 @@
   overflow-x: hidden;
 }
 
-@media (min-width: 850px), (orientation: landscape) {
-  .container {
-    flex-direction: row;
-  }
-}
-
-.container {
-  background-color: var(--container-background-color);
-  color: #ddd;
-}
-
 .postersContainer {
   background-color: #1d1d1d;
   box-shadow: 0px 0 25px #000;
 }
 
-.controls {
-  color: white;
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.toggleOrder,
-.clear {
-  color: white;
-}
-
-.toggleOrder {
-  transition: transform 0.3s;
-}
-
-.toggleOrderAsc {
-  transform: rotate(0deg) translate(0, -3px);
-}
-
-.toggleOrderDesc {
-  transform: rotate(180deg);
-}
-
-h1 {
+.container h1 {
   text-align: center;
   font-weight: 300;
   border-bottom: 1px solid var(--border-color);
