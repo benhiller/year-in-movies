@@ -27,7 +27,6 @@
 .rankedList li img,
 .directorPlaceholder,
 .genreEmoji {
-  display: block;
   width: 80px;
   height: 80px;
   border-radius: 4px;
@@ -54,13 +53,7 @@
 }
 
 .rankedList li {
-  flex: 1 0 75px;
-}
-
-@media (min-width: 850px) {
-  .rankedList li {
-    flex: 1 0 110px;
-  }
+  flex: 1 0 110px;
 }
 
 .rankedList li button {
