@@ -73,3 +73,9 @@ h1 {
 .section {
   padding-bottom: 45px;
 }
+
+.separator {
+  width: 100%;
+  border-top: 1px solid var(--border-color);
+  padding-bottom: 25px;
+}
