@@ -26,14 +26,14 @@ functionality:
 - tooltip for movie poster, show when i watched it, other details?
 
 ui:
-- histogram for decade/month units
+v delay rendering posters grid until width is known
+v disable animation on initial load
 v padding for scrollbar?
+- histogram for decade/month units
 - custom scrollbar UI for horiz scrolling?
 - add question mark to directorPlaceholder?
 - modify how vh is calculated to avoid scrolling on ios
 - improve spacing logic in posters grid
-- delay rendering posters grid until width is known
-- disable animation on initial load
 - tweak emoji spacing (maybe chrome specific?)
 - use dark theme overall
 - lots of polishing

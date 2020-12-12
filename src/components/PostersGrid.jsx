@@ -1,42 +1,42 @@
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 import useMeasure from 'react-use-measure';
 import { useTransition, a, interpolate } from 'react-spring';
 import { ResizeObserver } from '@juggle/resize-observer';
 
 import styles from 'styles/PostersGrid.module.css';
 
-const POSTER_WIDTH = 100;
-const POSTER_HEIGHT = 150;
-// TODO - this is really min. spacing. maybe there should also be max spacing and to fit to a value in between the two the posters will resize?
-const POSTER_SPACING = 10;
+const POSTER_MIN_WIDTH = 120;
+const POSTER_HEIGHT_MULTIPLIER = 1.5;
+const POSTER_SPACING = 15;
 
-const PostersGrid = ({ movies }) => {
-  const [ref, bounds] = useMeasure({ debounce: 64, polyfill: ResizeObserver });
-  const { width: w } = bounds;
-  // necessary so xy values don't get all messed up on initial render
-  const width = w || 600;
-  // TODO - don't render until w is defined
+const PostersGrid = ({ width, movies }) => {
+  const ref = useRef();
 
-  // TODO - cleanup
+  // TODO - There should be a way to compute this without the while loop
   let columns = 1;
-  while (columns * POSTER_WIDTH + (columns - 1) * POSTER_SPACING < width) {
+  while (columns * POSTER_MIN_WIDTH + (columns - 1) * POSTER_SPACING < width) {
     columns += 1;
   }
   columns--;
-
-  const actualSpacing = (width - POSTER_WIDTH * columns) / (columns - 1);
+  const posterWidth = (width - POSTER_SPACING * (columns - 1)) / columns;
+  const posterHeight = posterWidth * POSTER_HEIGHT_MULTIPLIER;
 
   const gridItems = useMemo(() => {
     return movies.map((child, i) => {
       const column = i % columns;
       const xy = [
-        POSTER_WIDTH * column + Math.max(0, actualSpacing * column),
-        POSTER_HEIGHT * Math.floor(i / columns) +
-          Math.max(0, POSTER_SPACING * Math.floor(i / columns)),
+        posterWidth * column + POSTER_SPACING * column,
+        posterHeight * Math.floor(i / columns) +
+          POSTER_SPACING * Math.floor(i / columns),
       ];
-      return { ...child, xy, width: POSTER_WIDTH, height: POSTER_HEIGHT };
+      return {
+        ...child,
+        xy,
+        width: posterWidth,
+        height: posterHeight,
+      };
     });
-  }, [columns, movies, actualSpacing]);
+  }, [columns, movies, posterWidth, posterHeight]);
 
   const transitions = useTransition(gridItems, (item) => item.title, {
     from: ({ xy, width, height }) => ({
@@ -56,10 +56,12 @@ const PostersGrid = ({ movies }) => {
     update: ({ xy, width, height }) => ({ xy, width, height }),
     leave: { opacity: 0, scale: 0.25 },
     config: { mass: 1, tension: 195, friction: 22 },
+    // Disable animation on initial render
+    immediate: !ref.current,
   });
 
   const height =
-    Math.ceil(movies.length / columns) * POSTER_HEIGHT +
+    Math.ceil(movies.length / columns) * posterHeight +
     (Math.ceil(movies.length / columns) - 1) * POSTER_SPACING;
 
   return (
@@ -82,9 +84,11 @@ const PostersGrid = ({ movies }) => {
             <img
               src={`https://image.tmdb.org/t/p/w342${item.posterSrc}`}
               alt={item.title}
-              width={POSTER_WIDTH}
-              height={POSTER_HEIGHT}
+              width={posterWidth}
+              height={posterHeight}
             />
+            {/* This div shows a nice little border on top of the poster image */}
+            <div />
           </a.a>
         );
       })}
@@ -92,4 +96,18 @@ const PostersGrid = ({ movies }) => {
   );
 };
 
-export default PostersGrid;
+// Used to ensure PostersGrid does not render until we know the width it will be rendered at
+const PostersGridWrapper = (props) => {
+  const [ref, { width }] = useMeasure({
+    debounce: 64,
+    polyfill: ResizeObserver,
+  });
+
+  return (
+    <div ref={ref} className={styles.wrapper}>
+      {!!width && <PostersGrid width={width} {...props} />}
+    </div>
+  );
+};
+
+export default PostersGridWrapper;
