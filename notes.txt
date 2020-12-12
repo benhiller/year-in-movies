@@ -29,16 +29,17 @@ ui:
 v delay rendering posters grid until width is known
 v disable animation on initial load
 v padding for scrollbar?
+v add question mark to directorPlaceholder?
+v improve spacing logic in posters grid
+v tweak emoji spacing (maybe chrome specific?)
+v use dark theme overall
+v confirm badge positioning works for larger numbers
+v animate sort order toggle rotation
 - histogram for decade/month units
 - custom scrollbar UI for horiz scrolling?
-- add question mark to directorPlaceholder?
 - modify how vh is calculated to avoid scrolling on ios
-- improve spacing logic in posters grid
-- tweak emoji spacing (maybe chrome specific?)
-- use dark theme overall
 - lots of polishing
-- confirm badge positioning works for larger numbers
-- animate sort order toggle rotation
+- fix rendering on mobile
 
 data:
 - only include directors/cast members who were in more than 1 movie

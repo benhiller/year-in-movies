@@ -63,8 +63,6 @@ const titleForFilter = (filter) => {
   }
 };
 
-// TODO - Probably should specify per-emoji padding values to get better
-// alignment. though maybe that is too Apple specific?
 const emojiForGenre = (genre) => {
   switch (genre) {
     case 'Action':

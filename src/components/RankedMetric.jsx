@@ -32,7 +32,7 @@ const RankedMetric = ({ items, onClickItem }) => {
                 ) : emoji ? (
                   <div className={styles.genreEmoji}>{emoji}</div>
                 ) : (
-                  <div className={styles.directorPlaceholder} />
+                  <div className={styles.directorPlaceholder}>?</div>
                 )}
               </div>
               <span className={styles.name}>
