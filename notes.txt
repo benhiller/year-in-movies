@@ -39,12 +39,12 @@ v histogram for decade/month units
 x custom scrollbar UI for horiz scrolling?
 v lots of polishing
 v improve histogram + summary stats ui
-- poster grid controls
+v poster grid controls
 - histogram labels?
 
 mobile:
 v modify how vh is calculated to avoid scrolling on ios
-- fix rendering on mobile
+v fix rendering on mobile
 
 data:
 v take position in credits into account when sorting actors?
