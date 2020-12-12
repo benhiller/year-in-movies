@@ -35,12 +35,15 @@ v tweak emoji spacing (maybe chrome specific?)
 v use dark theme overall
 v confirm badge positioning works for larger numbers
 v animate sort order toggle rotation
-- histogram for decade/month units
-- custom scrollbar UI for horiz scrolling?
+v histogram for decade/month units
+x custom scrollbar UI for horiz scrolling?
+v lots of polishing
+- improve histogram + summary stats ui
+
+mobile:
 - modify how vh is calculated to avoid scrolling on ios
-- lots of polishing
 - fix rendering on mobile
 
 data:
 - take position in credits into account when sorting actors?
-- only include directors/cast members who were in more than 1 movie
+- only include directors/cast members who were in more than 1 movie?
