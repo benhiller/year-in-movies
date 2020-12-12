@@ -1,22 +1,38 @@
 .histogram {
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
+  margin-top: 25px;
   height: 130px;
   width: 100%;
   align-items: flex-end;
+  justify-content: center;
 }
 
 .histogram button {
   flex: 1;
-  margin: 2px;
+  max-width: 55px;
 }
 
 .histogram button div {
-  border-radius: 4px;
+  border-radius: 4px 4px 0 0;
+  margin: 0 10px;
   background-color: #994343;
 }
 
 .histogram button:hover div {
   background-color: #70161c;
+}
+
+.histogram .count {
+  display: block;
+  padding-bottom: 5px;
+  font-size: 18px;
+}
+
+.histogram .label {
+  width: 100%;
+  display: block;
+  padding-top: 5px;
+  border-top: 1px solid #ccc;
+  font-weight: 800;
 }
