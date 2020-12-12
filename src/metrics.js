@@ -130,7 +130,8 @@ export const computeShortestMovie = (movieData) =>
 
 export const computeLeastRatedMovie = (movieData) =>
   movieData.reduce(
-    (acc, movie) => (movie.voteCount < acc.voteCount ? movie : acc),
+    (acc, movie) =>
+      movie.voteCount && movie.voteCount < acc.voteCount ? movie : acc,
     movieData[0],
   );
 

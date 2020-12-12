@@ -331,7 +331,10 @@ const Home = ({ movieData }) => {
           <div className={styles.summaryStat}>
             <div>Longest Movie Watched</div>
             <div
-              onClick={() => setSelectedFilter({ title: longestMovie.title })}
+              onClick={() => {
+                setPosterSort('runtime');
+                setPosterSortAscending(false);
+              }}
             >
               {longestMovie.title}{' '}
               <span>
@@ -343,9 +346,10 @@ const Home = ({ movieData }) => {
           <div className={styles.summaryStat}>
             <div>Most Obscure Movie Watched</div>
             <div
-              onClick={() =>
-                setSelectedFilter({ title: leastRatedMovie.title })
-              }
+              onClick={() => {
+                setPosterSort('num-ratings');
+                setPosterSortAscending(true);
+              }}
             >
               {leastRatedMovie.title}{' '}
               <span>({leastRatedMovie.voteCount} ratings)</span>
@@ -354,9 +358,10 @@ const Home = ({ movieData }) => {
           <div className={styles.summaryStat}>
             <div>Least Popular Movie Watched</div>
             <div
-              onClick={() =>
-                setSelectedFilter({ title: lowestRatedMovie.title })
-              }
+              onClick={() => {
+                setPosterSort('average-rating');
+                setPosterSortAscending(true);
+              }}
             >
               {lowestRatedMovie.title}{' '}
               <span>({lowestRatedMovie.averageVote} average rating)</span>
