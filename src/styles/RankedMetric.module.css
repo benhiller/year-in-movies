@@ -9,7 +9,7 @@
   opacity: 0.9;
   /* TODO - probably need to tweak this, test w/ different widths */
   right: 0;
-  bottom: 5px;
+  bottom: 8px;
   background-color: #fff;
   color: #222;
   height: 20px;
@@ -23,7 +23,7 @@
   width: 80px;
   height: 80px;
   border-radius: 4px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   background-color: #111;
 }
 
@@ -32,8 +32,8 @@
   flex-direction: row;
   list-style-type: none;
   overflow-x: scroll;
-  padding: 0 10px 15px;
-  margin: 16px -10px -10px;
+  padding: 0 25px 20px;
+  margin: 16px -25px -15px;
 }
 
 
@@ -85,5 +85,10 @@ button:hover, button:focus{
 }
 
 .name {
+  font-size: 16px;
   white-space: pre-line;
+}
+
+.lastName {
+  font-weight: 600;
 }
