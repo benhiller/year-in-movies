@@ -93,6 +93,23 @@ export const computeDecadesHistogram = (movieData) =>
     return parseInt(a[0].slice(0, 4)) - parseInt(b[0].slice(0, 4));
   });
 
+export const computeTopLanguages = (movieData) =>
+  Object.entries(
+    movieData.reduce((acc, movie) => {
+      const { language } = movie;
+      if (!language) {
+        return acc;
+      }
+
+      if (acc[language]) {
+        acc[language] = acc[language] + 1;
+      } else {
+        acc[language] = 1;
+      }
+      return acc;
+    }, {}),
+  ).sort((a, b) => b[1] - a[1]);
+
 export const monthFromDate = (date) => {
   return parseInt(date.slice(5, 7));
 };

@@ -53,5 +53,5 @@ v handle movies with more than 1 director
 v maybe remove lowest/highest rating + avg rating sort
 v put runtime below release date in select
 v add text on most/least obscure saying 'on TMDb'?
+v add films watched by language?
 - only include directors/cast members who were in more than 1 movie?
-- add films watched by language?

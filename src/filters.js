@@ -1,4 +1,5 @@
 import { monthFromDate, labelForMonth } from 'metrics';
+import { labelForLanguage } from 'language';
 
 export const filterMovies = (movieData, filter) => {
   if (filter.director) {
@@ -16,6 +17,10 @@ export const filterMovies = (movieData, filter) => {
     );
   } else if (filter.genre) {
     return movieData.filter((movie) => movie.genres.includes(filter.genre));
+  } else if (filter.language) {
+    return movieData.filter(
+      (movie) => labelForLanguage(movie.language) === filter.language,
+    );
   } else if (filter.month) {
     return movieData.filter(
       (movie) => labelForMonth(monthFromDate(movie.watchDate)) === filter.month,
@@ -34,6 +39,8 @@ export const filterType = (filter) => {
     return 'Genre';
   } else if (filter.month) {
     return 'Watched in';
+  } else if (filter.language) {
+    return 'Language';
   }
 };
 
@@ -48,5 +55,7 @@ export const filterValue = (filter) => {
     return filter.genre;
   } else if (filter.month) {
     return filter.month;
+  } else if (filter.language) {
+    return filter.language;
   }
 };

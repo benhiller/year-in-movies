@@ -11,10 +11,12 @@ import SummaryStats from 'components/SummaryStats';
 import Footer from 'components/Footer';
 import { filterMovies } from 'filters';
 import { emojiForGenre } from 'genre';
+import { emojiForLanguage, labelForLanguage } from 'language';
 import {
   computeTopDirectors,
   computeTopCastMembers,
   computeTopGenres,
+  computeTopLanguages,
   computeDecadesHistogram,
   computeMonthsHistogram,
   computeTimeSpent,
@@ -76,6 +78,7 @@ const Home = ({ movieData }) => {
     topDirectors,
     topCastMembers,
     topGenres,
+    topLanguages,
     decadesHistogram,
     monthsHistogram,
     timeSpent,
@@ -90,6 +93,7 @@ const Home = ({ movieData }) => {
       topDirectors: computeTopDirectors(movieData),
       topCastMembers: computeTopCastMembers(movieData),
       topGenres: computeTopGenres(movieData),
+      topLanguages: computeTopLanguages(movieData),
       decadesHistogram: computeDecadesHistogram(movieData),
       monthsHistogram: computeMonthsHistogram(movieData),
       timeSpent: computeTimeSpent(movieData),
@@ -164,7 +168,7 @@ const Home = ({ movieData }) => {
           metricName="Most Watched Genres"
         >
           <RankedMetric
-            items={topGenres.slice(0, 15).map(([genre, count]) => ({
+            items={topGenres.map(([genre, count]) => ({
               count,
               name: genre,
               emoji: emojiForGenre(genre),
@@ -216,6 +220,25 @@ const Home = ({ movieData }) => {
               selectedFilter?.castMember === itemName
                 ? setSelectedFilter(null)
                 : setSelectedFilter({ castMember: itemName });
+            }}
+          />
+        </MetricSection>
+        <MetricSection
+          className={styles.section}
+          emoji={'\uD83C\uDF0E'}
+          metricName="Top Languages"
+        >
+          <RankedMetric
+            items={topLanguages.map(([language, count]) => ({
+              count,
+              name: labelForLanguage(language),
+              emoji: emojiForLanguage(language),
+              selected: selectedFilter?.language === language,
+            }))}
+            onClickItem={(itemName) => {
+              selectedFilter?.language === itemName
+                ? setSelectedFilter(null)
+                : setSelectedFilter({ language: itemName });
             }}
           />
         </MetricSection>
