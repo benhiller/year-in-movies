@@ -33,7 +33,7 @@
 
 .controls select {
   -webkit-appearance: none;
-  padding: 0 5px;
+  padding: 0 20px 0 5px;
   background-image: url(../img/chevron.svg);
   background-size: 10px 18px;
   background-position: right 4px bottom 50%;
