@@ -18,6 +18,8 @@
 .postersContainer {
   flex: 1;
   width: 100%;
+  /* This value is referenced in the poster grid to calculate the correct width
+   * for the detail row */
   padding: 10px;
   overflow-y: auto;
   overflow-x: hidden;

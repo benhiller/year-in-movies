@@ -5,6 +5,7 @@ import { ResizeObserver } from '@juggle/resize-observer';
 
 import styles from 'styles/PostersGrid.module.css';
 import DetailsRow from 'components/DetailsRow';
+import useMediaQuery from 'useMediaQuery';
 
 const POSTER_MIN_WIDTH = 120;
 const POSTER_MIN_WIDTH_MOBILE = 90;
@@ -21,6 +22,7 @@ const itemKey = (item) =>
 
 const PostersGrid = ({ width, movies }) => {
   const ref = useRef();
+  const desktopMode = useMediaQuery('(min-width: 850px)');
   const [selectedPoster, setSelectedPoster] = useState(null);
 
   const posterMinWidth =
@@ -40,6 +42,7 @@ const PostersGrid = ({ width, movies }) => {
     ? movies.findIndex((movie) => itemKey(movie) === selectedPoster)
     : null;
 
+  console.log(width);
   const gridItems = useMemo(() => {
     const detailsColumn = selectedIndex % columns;
     const detailsRow =
@@ -68,7 +71,7 @@ const PostersGrid = ({ width, movies }) => {
         detailRow: detailsRow,
         movie: movies[selectedIndex],
         xy: [0, posterHeight * detailsRow + posterSpacing * (detailsRow - 1)],
-        width: width + 50,
+        width: desktopMode ? width + 50 : width + 20,
         height: DETAILS_SECTION_HEIGHT,
         chevronPosition:
           25 +
@@ -87,6 +90,7 @@ const PostersGrid = ({ width, movies }) => {
     posterHeight,
     posterSpacing,
     selectedIndex,
+    desktopMode,
   ]);
 
   const transitions = useTransition(gridItems, itemKey, {

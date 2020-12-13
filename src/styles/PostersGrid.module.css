@@ -7,8 +7,7 @@
 }
 
 .posterImage,
-.detailRow,
-.chevron {
+.detailRow {
   display: block;
   position: absolute;
   will-change: transform, width, height, opacity;
@@ -36,9 +35,11 @@
 }
 
 .detailRow {
-  margin: 0 -25px;
+  margin: 0 -10px;
 }
 
-.chevron {
-  background-color: #000;
+@media (min-width: 850px) {
+  .detailRow {
+    margin: 0 -25px;
+  }
 }
