@@ -24,7 +24,7 @@ v support sorting movies in posters by different values (watch date, release dat
 
 functionality:
 x tooltip for movie poster, show when i watched it, other details?
-- row which expands which clicking on a movie poster, show when i watched it, other details?
+v row which expands which clicking on a movie poster, show when i watched it, other details?
 
 ui:
 v delay rendering posters grid until width is known
@@ -42,6 +42,7 @@ v lots of polishing
 v improve histogram + summary stats ui
 v poster grid controls
 x histogram labels?
+- expand detail row to fit contents exactly
 
 mobile:
 v modify how vh is calculated to avoid scrolling on ios
