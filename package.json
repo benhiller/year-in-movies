@@ -43,6 +43,9 @@
     "react-snap": "^1.23.0",
     "source-map-explorer": "^2.5.1"
   },
+  "reactSnap": {
+    "inlineCss": true
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
