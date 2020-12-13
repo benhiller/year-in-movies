@@ -13,10 +13,6 @@
   will-change: transform, width, height, opacity;
 }
 
-.posterImage {
-  object-fit: cover;
-}
-
 .posterImage img,
 .posterImage div {
   border-radius: 3px;

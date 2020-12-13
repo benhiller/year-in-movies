@@ -42,7 +42,6 @@ const PostersGrid = ({ width, movies }) => {
     ? movies.findIndex((movie) => itemKey(movie) === selectedPoster)
     : null;
 
-  console.log(width);
   const gridItems = useMemo(() => {
     const detailsColumn = selectedIndex % columns;
     const detailsRow =
@@ -74,10 +73,11 @@ const PostersGrid = ({ width, movies }) => {
         width: desktopMode ? width + 50 : width + 20,
         height: DETAILS_SECTION_HEIGHT,
         chevronPosition:
-          25 +
+          (desktopMode ? 25 : 10) +
           detailsColumn * posterWidth +
           posterSpacing * detailsColumn +
-          posterWidth / 2,
+          posterWidth / 2 -
+          19 / 2, // take the size of the chevron into account
       });
     }
 

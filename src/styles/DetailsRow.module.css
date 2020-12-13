@@ -7,7 +7,14 @@
 .chevron {
   position: relative;
   will-change: left;
-  top: 3px;
+  margin-top: 5px;
+  width: 19px;
+}
+
+.chevron svg {
+  display: block;
+  width: 19px;
+  height: 11px;
 }
 
 .row {
