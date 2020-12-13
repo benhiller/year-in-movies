@@ -22,8 +22,6 @@ import {
   computeShortestMovie,
   computeLeastRatedMovie,
   computeMostRatedMovie,
-  computeLowestRatedMovie,
-  computeHighestRatedMovie,
   computeFirstMovie,
   computeLastMovie,
   labelForMonth,

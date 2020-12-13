@@ -6,12 +6,15 @@ export const computeTopDirectors = (movieData) =>
         return acc;
       }
 
-      if (acc[director.name]) {
-        const { count } = acc[director.name];
-        acc[director.name] = { director, count: count + 1 };
-      } else {
-        acc[director.name] = { director, count: 1 };
-      }
+      director.forEach((director) => {
+        if (acc[director.name]) {
+          const { count } = acc[director.name];
+          acc[director.name] = { director, count: count + 1 };
+        } else {
+          acc[director.name] = { director, count: 1 };
+        }
+      });
+
       return acc;
     }, {}),
   )

@@ -2,7 +2,9 @@ import { monthFromDate, labelForMonth } from 'metrics';
 
 export const filterMovies = (movieData, filter) => {
   if (filter.director) {
-    return movieData.filter((movie) => movie.director.name === filter.director);
+    return movieData.filter((movie) =>
+      movie.director.map((d) => d.name).includes(filter.director),
+    );
   } else if (filter.castMember) {
     return movieData.filter(
       (movie) =>

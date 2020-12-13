@@ -23,7 +23,8 @@ v support sorting movies in posters by different values (watch date, release dat
 --
 
 functionality:
-- tooltip for movie poster, show when i watched it, other details?
+x tooltip for movie poster, show when i watched it, other details?
+- row which expands which clicking on a movie poster, show when i watched it, other details?
 
 ui:
 v delay rendering posters grid until width is known
@@ -48,9 +49,9 @@ v fix rendering on mobile
 
 data:
 v take position in credits into account when sorting actors?
-- only include directors/cast members who were in more than 1 movie?
-- add films watched by language?
-- handle movies with more than 1 director
+v handle movies with more than 1 director
 v maybe remove lowest/highest rating + avg rating sort
 v put runtime below release date in select
 v add text on most/least obscure saying 'on TMDb'?
+- only include directors/cast members who were in more than 1 movie?
+- add films watched by language?
