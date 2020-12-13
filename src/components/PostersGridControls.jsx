@@ -35,9 +35,8 @@ const PostersGridControls = ({
         >
           <option value="watch-date">Watch Date</option>
           <option value="release-date">Release Date</option>
-          <option value="average-rating">Average Rating</option>
-          <option value="num-ratings">Number of Ratings</option>
           <option value="runtime">Runtime</option>
+          <option value="num-ratings">Number of Ratings</option>
         </select>
       </label>{' '}
       <button

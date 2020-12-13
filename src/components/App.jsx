@@ -85,8 +85,6 @@ const Home = ({ movieData }) => {
     shortestMovie,
     leastRatedMovie,
     mostRatedMovie,
-    lowestRatedMovie,
-    highestRatedMovie,
     firstMovie,
     lastMovie,
   } = useMemo(
@@ -101,8 +99,6 @@ const Home = ({ movieData }) => {
       shortestMovie: computeShortestMovie(movieData),
       leastRatedMovie: computeLeastRatedMovie(movieData),
       mostRatedMovie: computeMostRatedMovie(movieData),
-      lowestRatedMovie: computeLowestRatedMovie(movieData),
-      highestRatedMovie: computeHighestRatedMovie(movieData),
       firstMovie: computeFirstMovie(movieData),
       lastMovie: computeLastMovie(movieData),
     }),
@@ -294,36 +290,16 @@ const Home = ({ movieData }) => {
               {
                 statValue: 'Most Obscure',
                 statName: leastRatedMovie.title,
-                statDetailLabel: `${leastRatedMovie.voteCount} ratings`,
+                statDetailLabel: `${leastRatedMovie.voteCount} ratings on TMDb`,
               },
               {
                 statValue: 'Least Obscure',
                 statName: mostRatedMovie.title,
-                statDetailLabel: `${mostRatedMovie.voteCount} ratings`,
+                statDetailLabel: `${mostRatedMovie.voteCount} ratings on TMDb`,
               },
             ]}
             onClickStat={(idx) => {
               setPosterSort('num-ratings');
-              setPosterSortAscending(idx === 0);
-            }}
-          />
-        </div>
-        <div className={styles.section}>
-          <SummaryStats
-            stats={[
-              {
-                statValue: 'Lowest Rated',
-                statName: lowestRatedMovie.title,
-                statDetailLabel: `${lowestRatedMovie.averageVote} average rating`,
-              },
-              {
-                statValue: 'Higest Rated',
-                statName: highestRatedMovie.title,
-                statDetailLabel: `${highestRatedMovie.averageVote} average rating`,
-              },
-            ]}
-            onClickStat={(idx) => {
-              setPosterSort('average-rating');
               setPosterSortAscending(idx === 0);
             }}
           />
