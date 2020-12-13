@@ -94,24 +94,13 @@ const PostersGrid = ({ width, movies }) => {
   ]);
 
   const transitions = useTransition(gridItems, itemKey, {
-    from: ({ detailRow, xy, width, height }) => {
-      if (detailRow) {
-        return {
-          xy,
-          width,
-          height,
-          opacity: 0,
-        };
-      } else {
-        return {
-          xy,
-          width,
-          height,
-          opacity: 0,
-          scale: 0.25,
-        };
-      }
-    },
+    from: ({ detailRow, xy, width, height }) => ({
+      xy,
+      width,
+      height,
+      opacity: 0,
+      scale: 0.25,
+    }),
     enter: ({ xy, width, height }) => ({
       xy,
       width,
@@ -120,13 +109,10 @@ const PostersGrid = ({ width, movies }) => {
       scale: 1,
     }),
     update: ({ xy, width, height }) => ({ xy, width, height }),
-    leave: ({ detailRow }) => {
-      if (detailRow) {
-        return { opacity: 0 };
-      } else {
-        return { opacity: 0, scale: 0.25 };
-      }
-    },
+    leave: ({ detailRow }) => ({
+      opacity: 0,
+      scale: 0.25,
+    }),
     config: { mass: 1, tension: 195, friction: 22 },
     // Disable animation on initial render
     immediate: !ref.current,
@@ -146,7 +132,7 @@ const PostersGrid = ({ width, movies }) => {
               className={styles.detailRow}
               style={{
                 transform: interpolate([xy, scale], ([x, y], scale) => {
-                  return `translate3d(${x}px,${y}px,0) scale(${scale})`;
+                  return `translate3d(${x}px,${y}px,0) scaleY(${scale})`;
                 }),
                 ...rest,
               }}

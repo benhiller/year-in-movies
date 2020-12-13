@@ -36,6 +36,7 @@
 
 .detailRow {
   margin: 0 -10px;
+  transform-origin: top;
 }
 
 @media (min-width: 850px) {
