@@ -45,21 +45,23 @@
   padding-bottom: 25px;
 }
 
-@media (min-width: 850px) {
-  .container h1 {
-    font-size: 32px;
-  }
-  .section {
-    padding-bottom: 30px;
-  }
-  .content,
-  .postersContainer {
-    padding: 25px;
-  }
-}
-
 .separator {
   width: 100%;
   border-top: 1px solid var(--border-color);
   padding-bottom: 25px;
+}
+
+@media (min-width: 850px) {
+  .container h1 {
+    font-size: 32px;
+  }
+
+  .section {
+    padding-bottom: 30px;
+  }
+
+  .content,
+  .postersContainer {
+    padding: 25px;
+  }
 }

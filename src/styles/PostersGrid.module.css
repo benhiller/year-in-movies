@@ -10,12 +10,15 @@
   display: block;
   position: absolute;
   will-change: transform, width, height, opacity;
-  object-fit: cover;
 }
 
 .posterImage img,
 .posterImage div {
   border-radius: 3px;
+}
+
+.posterImage img {
+  object-fit: cover;
 }
 
 .posterImage div {

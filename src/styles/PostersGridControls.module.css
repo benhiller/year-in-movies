@@ -26,6 +26,7 @@
   height: 18px;
   border-radius: 10px;
 }
+
 .clear svg {
   width: 18px;
   height: 18px;
@@ -42,6 +43,8 @@
   font-size: 16px;
   height: 26px;
   border-radius: 3px;
+  background-color: #e7e7e7;
+  color: #111;
 }
 
 .toggleOrder {
@@ -58,11 +61,6 @@
 .toggleOrder:active svg path,
 .clear:active svg path {
   fill: #aaa;
-}
-
-.controls select {
-  background-color: #e7e7e7;
-  color: #111;
 }
 
 .toggleOrderAsc {

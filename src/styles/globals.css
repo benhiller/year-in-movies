@@ -35,6 +35,23 @@ select {
   font-size: 16px;
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  color: #ddd;
+}
+
+button:hover,
+button:focus {
+  text-decoration: none;
+}
+
 :root {
   --border-color: #363636;
   --container-background-color: #202020;

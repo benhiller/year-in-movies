@@ -1,48 +1,3 @@
-.pic {
-  position: relative;
-}
-
-.position {
-  font-size: 14px;
-  font-weight: 600;
-  position: absolute;
-  opacity: 0.9;
-  right: 0;
-  top: 0;
-  background-color: #fff;
-  color: #111;
-  height: 20px;
-  padding: 0 5px;
-  line-height: 20px;
-  border-radius: 0 4px 0 4px;
-}
-
-/* Hacky fix to ensure position container fits nicely against border when item is focused/selected */
-.rankedList li button:hover .position,
-.rankedList li button:active .position,
-.rankedList li.selected button .position {
-  border-top-right-radius: 3px;
-}
-
-.rankedList li img,
-.directorPlaceholder,
-.genreEmoji {
-  width: 80px;
-  height: 80px;
-  border-radius: 4px;
-  margin-bottom: 8px;
-  background-color: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.directorPlaceholder {
-  font-weight: 900;
-  font-size: 60px;
-  color: #444;
-}
-
 .rankedList {
   display: flex;
   flex-direction: row;
@@ -77,34 +32,58 @@
   border-color: #aaa;
 }
 
+/* Hacky fix to ensure position container fits nicely against border when item is focused/selected */
+.rankedList li button:hover .position,
+.rankedList li button:active .position,
+.rankedList li.selected button .position {
+  border-top-right-radius: 3px;
+}
+
+.pic {
+  position: relative;
+}
+
+.position {
+  font-size: 14px;
+  font-weight: 600;
+  position: absolute;
+  opacity: 0.9;
+  right: 0;
+  top: 0;
+  background-color: #fff;
+  color: #111;
+  height: 20px;
+  padding: 0 5px;
+  line-height: 20px;
+  border-radius: 0 4px 0 4px;
+}
+
+.rankedList li img,
+.directorPlaceholder,
+.genreEmoji {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  background-color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.directorPlaceholder {
+  font-weight: 900;
+  font-size: 60px;
+  color: #444;
+}
+
 .genreEmoji {
   font-size: 45px;
   padding-top: 5px;
 }
 
-.rankedList li span {
-  text-align: center;
-}
-
-/* TODO - should be in global css? */
-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline;
-  outline: none;
-  margin: 0;
-  padding: 0;
-  color: #ddd;
-}
-
-button:hover,
-button:focus {
-  text-decoration: none;
-}
-
 .name {
+  text-align: center;
   font-size: 16px;
   white-space: pre-line;
 }

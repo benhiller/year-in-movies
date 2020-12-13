@@ -9,6 +9,10 @@
   padding: 0 5px;
 }
 
+.summaryStatButton {
+  cursor: pointer;
+}
+
 .summaryStat {
   font-size: 18px;
   font-weight: 300;
@@ -19,6 +23,10 @@
   font-weight: bold;
 }
 
+.summaryDetail {
+  color: #888;
+}
+
 @media (min-width: 850px) {
   .summaryStats {
     padding-bottom: 15px;
@@ -27,15 +35,8 @@
   .summaryStat {
     font-size: 24px;
   }
+
   .summaryValue {
     font-size: 30px;
   }
-}
-
-.summaryDetail {
-  color: #888;
-}
-
-.summaryStatContainer {
-  cursor: pointer;
 }

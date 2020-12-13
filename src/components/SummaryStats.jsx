@@ -6,7 +6,7 @@ const SummaryStats = ({ stats, onClickStat }) => {
       {stats.map(({ statName, statValue, statDetailLabel }, idx) => (
         <div
           key={statName}
-          className={onClickStat ? styles.summaryStatContainer : null}
+          className={onClickStat ? styles.summaryStatButton : null}
           onClick={() => onClickStat && onClickStat(idx)}
         >
           <div className={styles.summaryValue}>{statValue}</div>
