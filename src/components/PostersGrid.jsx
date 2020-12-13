@@ -15,9 +15,11 @@ const POSTER_SPACING_MOBILE = 10;
 const MOBILE_WIDTH_THRESHOLD = 500;
 const DETAILS_SECTION_HEIGHT = 100;
 
+// include the row in the details row key so that we don't animate this moving
+// from one row to another
 const itemKey = (item) =>
-  item.detailRow
-    ? `detail-row-${item.detailRow}`
+  item.detailsRow
+    ? `details-row-${item.detailsRow}`
     : `${item.title}-${item.watchDate}`;
 
 const PostersGrid = ({ width, movies }) => {
@@ -38,14 +40,17 @@ const PostersGrid = ({ width, movies }) => {
   columns--;
   const posterWidth = (width - posterSpacing * (columns - 1)) / columns;
   const posterHeight = posterWidth * POSTER_HEIGHT_MULTIPLIER;
-  const selectedIndex = selectedPoster
+  const selectedItemIndex = selectedPoster
     ? movies.findIndex((movie) => itemKey(movie) === selectedPoster)
     : null;
 
   const gridItems = useMemo(() => {
-    const detailsColumn = selectedIndex % columns;
+    const detailsColumn =
+      selectedItemIndex !== null ? selectedItemIndex % columns : null;
     const detailsRow =
-      selectedIndex !== null ? Math.floor(selectedIndex / columns) + 1 : null;
+      selectedItemIndex !== null
+        ? Math.floor(selectedItemIndex / columns) + 1
+        : null;
 
     const items = movies.map((child, i) => {
       const column = i % columns;
@@ -53,11 +58,11 @@ const PostersGrid = ({ width, movies }) => {
       const xy = [
         posterWidth * column + posterSpacing * column,
         posterHeight * Math.floor(i / columns) +
-          posterSpacing * Math.floor(i / columns),
+          posterSpacing * Math.floor(i / columns) +
+          (selectedItemIndex !== null && row >= detailsRow
+            ? DETAILS_SECTION_HEIGHT
+            : 0),
       ];
-      if (detailsRow !== null && row >= detailsRow) {
-        xy[1] += DETAILS_SECTION_HEIGHT;
-      }
       return {
         ...child,
         xy,
@@ -65,10 +70,10 @@ const PostersGrid = ({ width, movies }) => {
         height: posterHeight,
       };
     });
-    if (detailsRow !== null) {
+    if (selectedItemIndex !== null) {
       items.push({
-        detailRow: detailsRow,
-        movie: movies[selectedIndex],
+        detailsRow: detailsRow,
+        movie: movies[selectedItemIndex],
         xy: [0, posterHeight * detailsRow + posterSpacing * (detailsRow - 1)],
         width: desktopMode ? width + 50 : width + 20,
         height: DETAILS_SECTION_HEIGHT,
@@ -89,12 +94,12 @@ const PostersGrid = ({ width, movies }) => {
     posterWidth,
     posterHeight,
     posterSpacing,
-    selectedIndex,
+    selectedItemIndex,
     desktopMode,
   ]);
 
   const transitions = useTransition(gridItems, itemKey, {
-    from: ({ detailRow, xy, width, height }) => ({
+    from: ({ xy, width, height }) => ({
       xy,
       width,
       height,
@@ -109,10 +114,7 @@ const PostersGrid = ({ width, movies }) => {
       scale: 1,
     }),
     update: ({ xy, width, height }) => ({ xy, width, height }),
-    leave: ({ detailRow }) => ({
-      opacity: 0,
-      scale: 0.25,
-    }),
+    leave: { opacity: 0, scale: 0.25 },
     config: { mass: 1, tension: 195, friction: 22 },
     // Disable animation on initial render
     immediate: !ref.current,
@@ -120,16 +122,17 @@ const PostersGrid = ({ width, movies }) => {
 
   const height =
     Math.ceil(movies.length / columns) * posterHeight +
-    (Math.ceil(movies.length / columns) - 1) * posterSpacing;
+    (Math.ceil(movies.length / columns) - 1) * posterSpacing +
+    (selectedItemIndex !== null ? DETAILS_SECTION_HEIGHT : 0);
 
   return (
     <div className={styles.posters} ref={ref} style={{ height: `${height}px` }}>
       {transitions.map(({ item, props: { xy, scale, ...rest }, key }) => {
-        if (item.detailRow) {
+        if (item.detailsRow) {
           return (
             <a.div
               key={key}
-              className={styles.detailRow}
+              className={styles.detailsRow}
               style={{
                 transform: interpolate([xy, scale], ([x, y], scale) => {
                   return `translate3d(${x}px,${y}px,0) scaleY(${scale})`;
