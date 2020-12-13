@@ -1,9 +1,10 @@
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import useMeasure from 'react-use-measure';
 import { useTransition, a, interpolate } from 'react-spring';
 import { ResizeObserver } from '@juggle/resize-observer';
 
 import styles from 'styles/PostersGrid.module.css';
+import DetailsRow from 'components/DetailsRow';
 
 const POSTER_MIN_WIDTH = 120;
 const POSTER_MIN_WIDTH_MOBILE = 90;
@@ -11,9 +12,16 @@ const POSTER_HEIGHT_MULTIPLIER = 1.5;
 const POSTER_SPACING = 15;
 const POSTER_SPACING_MOBILE = 10;
 const MOBILE_WIDTH_THRESHOLD = 500;
+const DETAILS_SECTION_HEIGHT = 100;
+
+const itemKey = (item) =>
+  item.detailRow
+    ? `detail-row-${item.detailRow}`
+    : `${item.title}-${item.watchDate}`;
 
 const PostersGrid = ({ width, movies }) => {
   const ref = useRef();
+  const [selectedPoster, setSelectedPoster] = useState(null);
 
   const posterMinWidth =
     width > MOBILE_WIDTH_THRESHOLD ? POSTER_MIN_WIDTH : POSTER_MIN_WIDTH_MOBILE;
@@ -28,15 +36,26 @@ const PostersGrid = ({ width, movies }) => {
   columns--;
   const posterWidth = (width - posterSpacing * (columns - 1)) / columns;
   const posterHeight = posterWidth * POSTER_HEIGHT_MULTIPLIER;
+  const selectedIndex = selectedPoster
+    ? movies.findIndex((movie) => itemKey(movie) === selectedPoster)
+    : null;
 
   const gridItems = useMemo(() => {
-    return movies.map((child, i) => {
+    const detailsColumn = selectedIndex % columns;
+    const detailsRow =
+      selectedIndex !== null ? Math.floor(selectedIndex / columns) + 1 : null;
+
+    const items = movies.map((child, i) => {
       const column = i % columns;
+      const row = Math.floor(i / columns);
       const xy = [
         posterWidth * column + posterSpacing * column,
         posterHeight * Math.floor(i / columns) +
           posterSpacing * Math.floor(i / columns),
       ];
+      if (detailsRow !== null && row >= detailsRow) {
+        xy[1] += DETAILS_SECTION_HEIGHT;
+      }
       return {
         ...child,
         xy,
@@ -44,16 +63,51 @@ const PostersGrid = ({ width, movies }) => {
         height: posterHeight,
       };
     });
-  }, [columns, movies, posterWidth, posterHeight, posterSpacing]);
+    if (detailsRow !== null) {
+      items.push({
+        detailRow: detailsRow,
+        movie: movies[selectedIndex],
+        xy: [0, posterHeight * detailsRow + posterSpacing * (detailsRow - 1)],
+        width: width + 50,
+        height: DETAILS_SECTION_HEIGHT,
+        chevronPosition:
+          25 +
+          detailsColumn * posterWidth +
+          posterSpacing * detailsColumn +
+          posterWidth / 2,
+      });
+    }
 
-  const transitions = useTransition(gridItems, (item) => item.title, {
-    from: ({ xy, width, height }) => ({
-      xy,
-      width,
-      height,
-      opacity: 0,
-      scale: 0.25,
-    }),
+    return items;
+  }, [
+    columns,
+    movies,
+    width,
+    posterWidth,
+    posterHeight,
+    posterSpacing,
+    selectedIndex,
+  ]);
+
+  const transitions = useTransition(gridItems, itemKey, {
+    from: ({ detailRow, xy, width, height }) => {
+      if (detailRow) {
+        return {
+          xy,
+          width,
+          height,
+          opacity: 0,
+        };
+      } else {
+        return {
+          xy,
+          width,
+          height,
+          opacity: 0,
+          scale: 0.25,
+        };
+      }
+    },
     enter: ({ xy, width, height }) => ({
       xy,
       width,
@@ -62,7 +116,13 @@ const PostersGrid = ({ width, movies }) => {
       scale: 1,
     }),
     update: ({ xy, width, height }) => ({ xy, width, height }),
-    leave: { opacity: 0, scale: 0.25 },
+    leave: ({ detailRow }) => {
+      if (detailRow) {
+        return { opacity: 0 };
+      } else {
+        return { opacity: 0, scale: 0.25 };
+      }
+    },
     config: { mass: 1, tension: 195, friction: 22 },
     // Disable animation on initial render
     immediate: !ref.current,
@@ -75,30 +135,52 @@ const PostersGrid = ({ width, movies }) => {
   return (
     <div className={styles.posters} ref={ref} style={{ height: `${height}px` }}>
       {transitions.map(({ item, props: { xy, scale, ...rest }, key }) => {
-        return (
-          <a.a
-            href={`https://www.themoviedb.org/movie/${item.tmdbId}`}
-            target="_blank"
-            rel="noreferrer"
-            key={key}
-            className={styles.posterImage}
-            style={{
-              transform: interpolate([xy, scale], ([x, y], scale) => {
-                return `translate3d(${x}px,${y}px,0) scale(${scale})`;
-              }),
-              ...rest,
-            }}
-          >
-            <img
-              src={`https://image.tmdb.org/t/p/w342${item.posterSrc}`}
-              alt={item.title}
-              width={posterWidth}
-              height={posterHeight}
-            />
-            {/* This div shows a nice little border on top of the poster image */}
-            <div />
-          </a.a>
-        );
+        if (item.detailRow) {
+          return (
+            <a.div
+              key={key}
+              className={styles.detailRow}
+              style={{
+                transform: interpolate([xy, scale], ([x, y], scale) => {
+                  return `translate3d(${x}px,${y}px,0) scale(${scale})`;
+                }),
+                ...rest,
+              }}
+            >
+              <DetailsRow
+                chevronPosition={item.chevronPosition}
+                movie={item.movie}
+              />
+            </a.div>
+          );
+        } else {
+          return (
+            <a.a
+              key={key}
+              className={styles.posterImage}
+              onClick={() =>
+                selectedPoster === itemKey(item)
+                  ? setSelectedPoster(null)
+                  : setSelectedPoster(itemKey(item))
+              }
+              style={{
+                transform: interpolate([xy, scale], ([x, y], scale) => {
+                  return `translate3d(${x}px,${y}px,0) scale(${scale})`;
+                }),
+                ...rest,
+              }}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/w342${item.posterSrc}`}
+                alt={item.title}
+                width={posterWidth}
+                height={posterHeight}
+              />
+              {/* This div shows a nice little border on top of the poster image */}
+              <div />
+            </a.a>
+          );
+        }
       })}
     </div>
   );

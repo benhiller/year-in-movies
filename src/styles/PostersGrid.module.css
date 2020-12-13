@@ -6,10 +6,16 @@
   position: relative;
 }
 
-.posterImage {
+.posterImage,
+.detailRow,
+.chevron {
   display: block;
   position: absolute;
   will-change: transform, width, height, opacity;
+}
+
+.posterImage {
+  object-fit: cover;
 }
 
 .posterImage img,
@@ -27,4 +33,12 @@
   width: 100%;
   height: 100%;
   box-shadow: inset 0 0 1.5px #999;
+}
+
+.detailRow {
+  margin: 0 -25px;
+}
+
+.chevron {
+  background-color: #000;
 }
