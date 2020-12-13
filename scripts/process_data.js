@@ -11,11 +11,12 @@ const findDirector = (movie) => {
     return null;
   }
 
-  const director = movie.details.credits.crew.find(
-    (crewMember) => crewMember.job === 'Director',
-  );
-
-  return { name: director.name, imageSrc: director.profile_path };
+  return movie.details.credits.crew
+    .filter((crewMember) => crewMember.job === 'Director')
+    .map((director) => ({
+      name: director.name,
+      imageSrc: director.profile_path,
+    }));
 };
 
 const listCastMembers = (movie) => {
