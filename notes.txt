@@ -40,7 +40,7 @@ x custom scrollbar UI for horiz scrolling?
 v lots of polishing
 v improve histogram + summary stats ui
 v poster grid controls
-- histogram labels?
+x histogram labels?
 
 mobile:
 v modify how vh is calculated to avoid scrolling on ios
@@ -49,5 +49,8 @@ v fix rendering on mobile
 data:
 v take position in credits into account when sorting actors?
 - only include directors/cast members who were in more than 1 movie?
-
-- maybe remove lowest/highest rating + avg rating sort. put runtime below release date in select. add text on most/least obscure saying 'on TMDb'?
+- add films watched by language?
+- handle movies with more than 1 director
+- maybe remove lowest/highest rating + avg rating sort
+- put runtime below release date in select
+- add text on most/least obscure saying 'on TMDb'?
