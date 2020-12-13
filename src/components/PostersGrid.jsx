@@ -13,7 +13,7 @@ const POSTER_HEIGHT_MULTIPLIER = 1.5;
 const POSTER_SPACING = 15;
 const POSTER_SPACING_MOBILE = 10;
 const MOBILE_WIDTH_THRESHOLD = 500;
-const DETAILS_SECTION_HEIGHT = 100;
+const DETAILS_SECTION_HEIGHT = 240;
 
 // include the row in the details row key so that we don't animate this moving
 // from one row to another

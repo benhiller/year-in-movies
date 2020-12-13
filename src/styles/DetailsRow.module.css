@@ -19,8 +19,40 @@
 
 .row {
   margin-top: -1px;
+  padding: 0 10px;
   background-color: #000;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
   flex: 1;
+  height: 221px;
+  max-height: 221px;
+  overflow-y: auto;
+}
+
+@media (min-width: 850px) {
+  .row {
+    padding: 0 25px;
+  }
+}
+
+.title {
+  margin: 10px 0 0;
+}
+
+.detailedStats {
+  display: flex;
+  flex-direction: row;
+}
+
+.detailedStats div:first-child {
+  flex: 0.75;
+  padding-right: 10px;
+}
+
+.detailedStats div:last-child {
+  flex: 0.25;
+}
+
+.detailedStats p {
+  margin: 15px 0;
 }
