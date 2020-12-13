@@ -62,6 +62,7 @@ const processData = (data) => {
       cast: listCastMembers(movie),
       genres: listGenres(movie),
       runtime: movie.details.runtime,
+      language: movie.details.original_language,
       voteCount: movie.details.vote_count,
       averageVote: movie.details.vote_average,
       tmdbId: movie.details.id,
