@@ -40,9 +40,12 @@ const PostersGrid = ({ width, movies }) => {
   columns--;
   const posterWidth = (width - posterSpacing * (columns - 1)) / columns;
   const posterHeight = posterWidth * POSTER_HEIGHT_MULTIPLIER;
-  const selectedItemIndex = selectedPoster
+  let selectedItemIndex = selectedPoster
     ? movies.findIndex((movie) => itemKey(movie) === selectedPoster)
     : null;
+  if (selectedItemIndex === -1) {
+    selectedItemIndex = null;
+  }
 
   const gridItems = useMemo(() => {
     const detailsColumn =
