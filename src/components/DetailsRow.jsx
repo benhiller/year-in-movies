@@ -14,7 +14,14 @@ const DetailsRow = ({ movie, chevronPosition }) => {
       </a.div>
       <div className={styles.row}>
         <div className={styles.title}>
-          <b>{movie.title}</b> ({releaseYear})
+          <a
+            href={`https://www.themoviedb.org/movie/${movie.tmdbId}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <b>{movie.title}</b>
+          </a>{' '}
+          ({releaseYear})
         </div>
         <div className={styles.detailedStats}>
           <div>
