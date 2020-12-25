@@ -28,7 +28,7 @@ const RankedMetric = ({ items, onClickItem }) => {
               <div className={styles.pic}>
                 <span className={styles.position}>{count}</span>
                 {imageSrc ? (
-                  <img src={imageSrc} alt={name} />
+                  <img width={80} height={80} src={imageSrc} alt={name} />
                 ) : emoji ? (
                   <div className={styles.genreEmoji}>{emoji}</div>
                 ) : (

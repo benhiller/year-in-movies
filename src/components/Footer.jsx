@@ -8,7 +8,13 @@ const Footer = () => {
     <div className={styles.footer}>
       <p className={styles.footerRow}>
         <a target="_blank" rel="noreferrer" href="https://github.com/benhiller">
-          <img src={me} alt="Me" className={styles.roundedFooterIcon} />
+          <img
+            width={40}
+            height={40}
+            src={me}
+            alt="Me"
+            className={styles.roundedFooterIcon}
+          />
         </a>
         <span>
           Created by{' '}
