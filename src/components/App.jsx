@@ -1,4 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useRef } from 'react';
+import useMeasure from 'react-use-measure';
+import mergeRefs from 'react-merge-refs';
 
 import styles from 'styles/App.module.css';
 import useWindowSize from 'useWindowSize';
@@ -73,6 +75,13 @@ const Home = ({ movieData }) => {
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [posterSort, setPosterSort] = useState('watch-date');
   const [posterSortAscending, setPosterSortAscending] = useState(true);
+  const [scrollTop, setScrollTop] = useState(0);
+  const postersContainerRef = useRef(null);
+  const [measureRef, { height: postersContainerHeight }] = useMeasure({
+    debounce: 64,
+    polyfill: ResizeObserver,
+  });
+  const mergedRef = mergeRefs([measureRef, postersContainerRef]);
 
   const {
     topDirectors,
@@ -331,7 +340,13 @@ const Home = ({ movieData }) => {
         </div>
         <Footer />
       </div>
-      <div className={styles.postersContainer}>
+      <div
+        className={styles.postersContainer}
+        ref={mergedRef}
+        onScroll={() => {
+          setScrollTop(postersContainerRef.current.scrollTop);
+        }}
+      >
         <PostersGridControls
           selectedFilter={selectedFilter}
           posterSort={posterSort}
@@ -340,7 +355,11 @@ const Home = ({ movieData }) => {
           onChangePosterSort={setPosterSort}
           onChangePosterSortAscending={setPosterSortAscending}
         />
-        <PostersGrid movies={filteredMovies} />
+        <PostersGrid
+          movies={filteredMovies}
+          scrollTop={scrollTop}
+          height={postersContainerHeight}
+        />
       </div>
     </div>
   );

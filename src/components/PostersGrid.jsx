@@ -22,7 +22,7 @@ const itemKey = (item) =>
     ? `details-row-${item.detailsRow}`
     : `${item.tmdbId}-${item.watchDate}`;
 
-const PostersGrid = ({ width, movies }) => {
+const PostersGrid = ({ movies, width, height, scrollTop }) => {
   const ref = useRef();
   const desktopMode = useMediaQuery('(min-width: 850px)');
   const [selectedPoster, setSelectedPoster] = useState(null);
@@ -89,11 +89,18 @@ const PostersGrid = ({ width, movies }) => {
       });
     }
 
-    return items;
+    // Filter to items near the viewport
+    return items.filter(
+      (item) =>
+        item.xy[1] > scrollTop - posterHeight * 2 &&
+        item.xy[1] < scrollTop + height + posterHeight * 2,
+    );
   }, [
     columns,
     movies,
     width,
+    height,
+    scrollTop,
     posterWidth,
     posterHeight,
     posterSpacing,
@@ -123,13 +130,17 @@ const PostersGrid = ({ width, movies }) => {
     immediate: !ref.current,
   });
 
-  const height =
+  const gridHeight =
     Math.ceil(movies.length / columns) * posterHeight +
     (Math.ceil(movies.length / columns) - 1) * posterSpacing +
     (selectedItemIndex !== null ? DETAILS_SECTION_HEIGHT : 0);
 
   return (
-    <div className={styles.posters} ref={ref} style={{ height: `${height}px` }}>
+    <div
+      className={styles.posters}
+      ref={ref}
+      style={{ height: `${gridHeight}px` }}
+    >
       {transitions.map(({ item, props: { xy, scale, ...rest }, key }) => {
         if (item.detailsRow) {
           return (
