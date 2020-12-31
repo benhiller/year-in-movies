@@ -38,7 +38,7 @@ export const emojiForGenre = (genre) => {
     case 'Drama':
       return '\uD83C\uDFAD'; // comedy + tragedy masks
     case 'Family':
-      return '\uD83D\uDC6A';
+      return '\uD83D\uDC68\u200D\uD83D\uDC69\u200D\uD83D\uDC67';
     case 'Fantasy':
       return '\uD83E\uDDD9\u200D\u2642\uFE0F'; // man mage
     case 'History':
