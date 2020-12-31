@@ -53,32 +53,32 @@ const listGenres = (movie) => {
 };
 
 const processData = (data) => {
-  return data.map((movie) => {
-    return {
-      title: movie.details.title,
-      posterSrc: movie.details.poster_path,
-      releaseDate: movie.details.release_date,
-      director: findDirector(movie),
-      cast: listCastMembers(movie),
-      genres: listGenres(movie),
-      runtime: movie.details.runtime,
-      language: movie.details.original_language,
-      voteCount: movie.details.vote_count,
-      averageVote: movie.details.vote_average,
-      tmdbId: movie.details.id,
-      watchDate: movie.record.fields.Date,
-      source: movie.record.fields.Source,
-      notes: movie.record.fields.Notes,
-    };
-  });
+  return data
+    .filter((movie) => !movie.record.fields.Type)
+    .map((movie) => {
+      return {
+        title: movie.details.title,
+        posterSrc: movie.details.poster_path,
+        releaseDate: movie.details.release_date,
+        director: findDirector(movie),
+        cast: listCastMembers(movie),
+        genres: listGenres(movie),
+        runtime: movie.details.runtime,
+        language: movie.details.original_language,
+        voteCount: movie.details.vote_count,
+        averageVote: movie.details.vote_average,
+        tmdbId: movie.details.id,
+        watchDate: movie.record.fields.Date,
+        source: movie.record.fields.Source,
+      };
+    });
 };
 
 readGeneratedData()
   .then((data) => {
     return fs.promises.writeFile(
       'src/data/processed-movies.json',
-      // TODO - remove slice when I want to run this for all movies
-      JSON.stringify(processData(data.slice(0, 20))),
+      JSON.stringify(processData(data)),
     );
   })
   .catch((err) => {
