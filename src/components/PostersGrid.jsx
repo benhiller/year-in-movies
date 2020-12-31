@@ -20,7 +20,7 @@ const DETAILS_SECTION_HEIGHT = 240;
 const itemKey = (item) =>
   item.detailsRow
     ? `details-row-${item.detailsRow}`
-    : `${item.title}-${item.watchDate}`;
+    : `${item.tmdbId}-${item.watchDate}`;
 
 const PostersGrid = ({ width, movies }) => {
   const ref = useRef();

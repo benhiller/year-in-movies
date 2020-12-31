@@ -187,14 +187,16 @@ const Home = ({ movieData }) => {
           metricName="Most Watched Directors"
         >
           <RankedMetric
-            items={topDirectors.slice(0, 15).map(({ director, count }) => ({
-              count,
-              name: director.name,
-              imageSrc: director.imageSrc
-                ? `https://image.tmdb.org/t/p/w180_and_h180_face${director.imageSrc}`
-                : null,
-              selected: selectedFilter?.director === director.name,
-            }))}
+            items={topDirectors
+              .filter(({ count }) => count > 1)
+              .map(({ director, count }) => ({
+                count,
+                name: director.name,
+                imageSrc: director.imageSrc
+                  ? `https://image.tmdb.org/t/p/w180_and_h180_face${director.imageSrc}`
+                  : null,
+                selected: selectedFilter?.director === director.name,
+              }))}
             onClickItem={(itemName) => {
               selectedFilter?.director === itemName
                 ? setSelectedFilter(null)
@@ -208,14 +210,16 @@ const Home = ({ movieData }) => {
           className={styles.section}
         >
           <RankedMetric
-            items={topCastMembers.slice(0, 15).map(({ castMember, count }) => ({
-              count,
-              name: castMember.name,
-              imageSrc: castMember.imageSrc
-                ? `https://image.tmdb.org/t/p/w180_and_h180_face${castMember.imageSrc}`
-                : null,
-              selected: selectedFilter?.castMember === castMember.name,
-            }))}
+            items={topCastMembers
+              .filter(({ count }) => count > 1)
+              .map(({ castMember, count }) => ({
+                count,
+                name: castMember.name,
+                imageSrc: castMember.imageSrc
+                  ? `https://image.tmdb.org/t/p/w180_and_h180_face${castMember.imageSrc}`
+                  : null,
+                selected: selectedFilter?.castMember === castMember.name,
+              }))}
             onClickItem={(itemName) => {
               selectedFilter?.castMember === itemName
                 ? setSelectedFilter(null)
