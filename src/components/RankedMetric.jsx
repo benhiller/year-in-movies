@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 import styles from 'styles/RankedMetric.module.css';
 
 const separateNameTokens = (name) => {
@@ -28,11 +30,28 @@ const RankedMetric = ({ items, onClickItem }) => {
               <div className={styles.pic}>
                 <span className={styles.position}>{count}</span>
                 {imageSrc ? (
-                  <img width={80} height={80} src={imageSrc} alt={name} />
+                  <img
+                    className={styles.mainPic}
+                    width={80}
+                    height={80}
+                    src={imageSrc}
+                    alt={name}
+                  />
                 ) : emoji ? (
-                  <div className={styles.genreEmoji}>{emoji}</div>
+                  <div
+                    className={classNames(styles.genreEmoji, styles.mainPic)}
+                  >
+                    {emoji}
+                  </div>
                 ) : (
-                  <div className={styles.directorPlaceholder}>?</div>
+                  <div
+                    className={classNames(
+                      styles.directorPlaceholder,
+                      styles.mainPic,
+                    )}
+                  >
+                    ?
+                  </div>
                 )}
               </div>
               <span className={styles.name}>

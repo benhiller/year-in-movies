@@ -19,6 +19,7 @@
   padding-bottom: 5px;
   border: 1px solid var(--container-background-color);
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .rankedList li button:hover {
@@ -30,13 +31,6 @@
 .rankedList li.selected button {
   background-color: #060606;
   border-color: #aaa;
-}
-
-/* Hacky fix to ensure position container fits nicely against border when item is focused/selected */
-.rankedList li button:hover .position,
-.rankedList li button:active .position,
-.rankedList li.selected button .position {
-  border-top-right-radius: 3px;
 }
 
 .pic {
@@ -58,9 +52,13 @@
   border-radius: 0 4px 0 4px;
 }
 
-.rankedList li img,
-.directorPlaceholder,
-.genreEmoji {
+.rankedList li button:hover .position,
+.rankedList li button:active .position,
+.rankedList li.selected button .position {
+  border-top-right-radius: 0px;
+}
+
+.mainPic {
   width: 80px;
   height: 80px;
   border-radius: 4px;
@@ -69,6 +67,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.rankedList li button:hover .mainPic,
+.rankedList li button:active .mainPic,
+.rankedList li.selected button .mainPic {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 .directorPlaceholder {
