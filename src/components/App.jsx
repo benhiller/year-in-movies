@@ -148,7 +148,9 @@ const Home = ({ movieData }) => {
               { statName: 'Movies Watched', statValue: movieCount },
               {
                 statName: 'Spent Watching Movies',
-                statValue: `${Math.floor(timeSpent / 60)}h ${timeSpent % 60}m`,
+                statValue: `${Math.floor(timeSpent / 1440)}d ${Math.floor(
+                  (timeSpent % 1440) / 60,
+                )}h ${timeSpent % 60}m`,
               },
             ]}
           />
