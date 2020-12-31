@@ -53,6 +53,9 @@ const DetailsRow = ({ movie, chevronPosition }) => {
             <p>
               <b>Watched on</b>: {movie.watchDate}
             </p>
+            <p>
+              <b>Ratings on TMDb</b>: {movie.voteCount}
+            </p>
           </div>
         </div>
       </div>
