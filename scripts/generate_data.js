@@ -67,6 +67,10 @@ const fetchTMDBDetailsForMovie = async (record) => {
     case 'Brick':
       movieId = '9270';
       break;
+    case 'F for Fake':
+      movieId = '43003';
+      break;
+
     default:
       movieId = await findMovieId(title, year);
   }
