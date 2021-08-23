@@ -4,8 +4,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 
 const fetchAirtablePage = async (offset) => {
-  const filter = encodeURIComponent("IS_AFTER({Date}, '2019-12-31')");
-  let url = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Movies?maxRecords=200&filterByFormula=${filter}&sort[0][field]=Date&sort[0][direction]=asc`;
+  let url = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Movies?sort[0][field]=Date&sort[0][direction]=asc`;
   if (offset) {
     url = url + `&offset=${offset}`;
   }
@@ -59,6 +58,12 @@ const fetchTMDBDetailsForMovie = async (record) => {
     case 'Twilight':
       movieId = '298275';
       break;
+    case 'High School':
+      movieId = '60315';
+      break;
+    case 'The Damned':
+      movieId = '41876';
+      break;
     default:
       movieId = await findMovieId(title, year);
   }
@@ -75,7 +80,10 @@ fetchAllAirtableRecords()
     return Promise.all(records.map((movie) => fetchTMDBDetailsForMovie(movie)));
   })
   .then((details) => {
-    return fs.promises.writeFile('raw-data/movies.json', JSON.stringify(details));
+    return fs.promises.writeFile(
+      'raw-data/movies.json',
+      JSON.stringify(details),
+    );
   })
   .catch((err) => {
     console.error(err);
