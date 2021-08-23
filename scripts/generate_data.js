@@ -64,6 +64,9 @@ const fetchTMDBDetailsForMovie = async (record) => {
     case 'The Damned':
       movieId = '41876';
       break;
+    case 'Brick':
+      movieId = '9270';
+      break;
     default:
       movieId = await findMovieId(title, year);
   }
