@@ -1,6 +1,7 @@
 import { useMemo, useState, useRef } from 'react';
 import useMeasure from 'react-use-measure';
 import mergeRefs from 'react-merge-refs';
+import classNames from 'classnames';
 
 import styles from 'styles/App.module.css';
 import useWindowSize from 'useWindowSize';
@@ -30,6 +31,7 @@ import {
   computeLastMovie,
   labelForMonth,
 } from 'metrics';
+import { ReactComponent as Arrow } from 'img/arrow.svg';
 
 const generateMonths = () =>
   [...Array(12).keys()].map((i) => ({
@@ -148,10 +150,12 @@ const Home = ({ movieData }) => {
         <h1 className={styles.title}>
           <button
             disabled={selectedYear === 2019}
-            className={selectedYear === 2019 && styles.hidden}
+            className={classNames(styles.previousButton, {
+              [styles.hidden]: selectedYear === 2019,
+            })}
             onClick={() => setSelectedYear(selectedYear - 1)}
           >
-            Previous
+            <Arrow />
           </button>
 
           <div>
@@ -160,10 +164,12 @@ const Home = ({ movieData }) => {
           </div>
           <button
             disabled={selectedYear === 2021}
-            className={selectedYear === 2021 && styles.hidden}
+            className={classNames(styles.nextButton, {
+              [styles.hidden]: selectedYear === 2021,
+            })}
             onClick={() => setSelectedYear(selectedYear + 1)}
           >
-            Next
+            <Arrow />
           </button>
         </h1>
         <div className={styles.section}>
