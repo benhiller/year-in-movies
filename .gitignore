@@ -33,3 +33,5 @@ yarn-error.log*
 .eslintcache
 
 raw-data/movies.json
+
+*.swp
