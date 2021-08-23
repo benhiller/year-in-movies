@@ -1,6 +1,10 @@
 import { monthFromDate, labelForMonth } from 'metrics';
 import { labelForLanguage } from 'language';
 
+export const filterMoviesForYear = (movieData, year) => {
+  return movieData.filter((movie) => movie.watchDate.startsWith(year));
+};
+
 export const filterMovies = (movieData, filter) => {
   if (filter.director) {
     return movieData.filter((movie) =>

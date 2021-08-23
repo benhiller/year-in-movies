@@ -14,10 +14,16 @@ export const labelForLanguage = (language) => {
       return 'Italian';
     case 'ja':
       return 'Japanese';
+    case 'zh':
+      return 'Chinese';
     case 'ko':
       return 'Korean';
     case 'pl':
       return 'Polish';
+    case 'ar':
+      return 'Arabic';
+    case 'xx':
+      return '-';
     case 'en':
     default:
       return 'English';
@@ -44,6 +50,12 @@ export const emojiForLanguage = (language) => {
       return '\uD83C\uDDF0\uD83C\uDDF7';
     case 'pl':
       return '\uD83C\uDDF5\uD83C\uDDF1';
+    case 'zh':
+      return '\uD83C\uDDE8\uD83C\uDDF3';
+    case 'ar':
+      return '';
+    case 'xx':
+      return '';
     case 'en':
     default:
       return '\uD83C\uDDFA\uD83C\uDDF8';

@@ -11,7 +11,7 @@ import PostersGrid from 'components/PostersGrid';
 import Histogram from 'components/Histogram';
 import SummaryStats from 'components/SummaryStats';
 import Footer from 'components/Footer';
-import { filterMovies } from 'filters';
+import { filterMovies, filterMoviesForYear } from 'filters';
 import { emojiForGenre } from 'genre';
 import { emojiForLanguage, labelForLanguage } from 'language';
 import {
@@ -72,6 +72,7 @@ const compareMovies = (m1, m2, posterSort) => {
 
 const Home = ({ movieData }) => {
   const { height } = useWindowSize();
+  const [selectedYear, setSelectedYear] = useState(2020);
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [posterSort, setPosterSort] = useState('watch-date');
   const [posterSortAscending, setPosterSortAscending] = useState(true);
@@ -82,6 +83,11 @@ const Home = ({ movieData }) => {
     polyfill: ResizeObserver,
   });
   const mergedRef = mergeRefs([measureRef, postersContainerRef]);
+
+  const movieDataForYear = useMemo(
+    () => filterMoviesForYear(movieData, selectedYear),
+    [movieData, selectedYear],
+  );
 
   const {
     topDirectors,
@@ -99,36 +105,36 @@ const Home = ({ movieData }) => {
     lastMovie,
   } = useMemo(
     () => ({
-      topDirectors: computeTopDirectors(movieData),
-      topCastMembers: computeTopCastMembers(movieData),
-      topGenres: computeTopGenres(movieData),
-      topLanguages: computeTopLanguages(movieData),
-      decadesHistogram: computeDecadesHistogram(movieData),
-      monthsHistogram: computeMonthsHistogram(movieData),
-      timeSpent: computeTimeSpent(movieData),
-      longestMovie: computeLongestMovie(movieData),
-      shortestMovie: computeShortestMovie(movieData),
-      leastRatedMovie: computeLeastRatedMovie(movieData),
-      mostRatedMovie: computeMostRatedMovie(movieData),
-      firstMovie: computeFirstMovie(movieData),
-      lastMovie: computeLastMovie(movieData),
+      topDirectors: computeTopDirectors(movieDataForYear),
+      topCastMembers: computeTopCastMembers(movieDataForYear),
+      topGenres: computeTopGenres(movieDataForYear),
+      topLanguages: computeTopLanguages(movieDataForYear),
+      decadesHistogram: computeDecadesHistogram(movieDataForYear),
+      monthsHistogram: computeMonthsHistogram(movieDataForYear),
+      timeSpent: computeTimeSpent(movieDataForYear),
+      longestMovie: computeLongestMovie(movieDataForYear),
+      shortestMovie: computeShortestMovie(movieDataForYear),
+      leastRatedMovie: computeLeastRatedMovie(movieDataForYear),
+      mostRatedMovie: computeMostRatedMovie(movieDataForYear),
+      firstMovie: computeFirstMovie(movieDataForYear),
+      lastMovie: computeLastMovie(movieDataForYear),
     }),
-    [movieData],
+    [movieDataForYear],
   );
 
-  const movieCount = movieData.length;
+  const movieCount = movieDataForYear.length;
 
   const filteredMovies = useMemo(
     () =>
       [
         ...(selectedFilter
-          ? filterMovies(movieData, selectedFilter)
-          : movieData),
+          ? filterMovies(movieDataForYear, selectedFilter)
+          : movieDataForYear),
       ].sort(
         (m1, m2) =>
           (posterSortAscending ? 1 : -1) * compareMovies(m1, m2, posterSort),
       ),
-    [movieData, selectedFilter, posterSort, posterSortAscending],
+    [movieDataForYear, selectedFilter, posterSort, posterSortAscending],
   );
 
   return (
@@ -139,8 +145,26 @@ const Home = ({ movieData }) => {
       }
     >
       <div className={styles.content}>
-        <h1>
-          Ben&apos;s Year in Movies - <span className={styles.year}>2020</span>
+        <h1 className={styles.title}>
+          <button
+            disabled={selectedYear === 2019}
+            className={selectedYear === 2019 && styles.hidden}
+            onClick={() => setSelectedYear(selectedYear - 1)}
+          >
+            Previous
+          </button>
+
+          <div>
+            Ben&apos;s Year in Movies -{' '}
+            <span className={styles.year}>{selectedYear}</span>
+          </div>
+          <button
+            disabled={selectedYear === 2021}
+            className={selectedYear === 2021 && styles.hidden}
+            onClick={() => setSelectedYear(selectedYear + 1)}
+          >
+            Next
+          </button>
         </h1>
         <div className={styles.section}>
           <SummaryStats
@@ -159,11 +183,11 @@ const Home = ({ movieData }) => {
           <SummaryStats
             stats={[
               {
-                statName: 'First Movie of 2020',
+                statName: `First Movie of ${selectedYear}`,
                 statValue: firstMovie.title,
               },
               {
-                statName: 'Last Movie of 2020',
+                statName: `Last Movie of ${selectedYear}`,
                 statValue: lastMovie.title,
               },
             ]}

@@ -14,7 +14,9 @@ const Histogram = ({ items, orderedGroups, onClickItem }) => {
         >
           <span className={styles.count}>{countByGroup[fullName] || '0'}</span>
           <div
-            style={{ height: `${(countByGroup[fullName] / maxCount) * 100}px` }}
+            style={{
+              height: `${((countByGroup[fullName] || 0) / maxCount) * 100}px`,
+            }}
           ></div>
           <span className={styles.label}>{shortName}</span>
         </button>
