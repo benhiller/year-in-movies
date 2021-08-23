@@ -74,10 +74,12 @@ const compareMovies = (m1, m2, posterSort) => {
 
 const Home = ({ movieData }) => {
   const { height } = useWindowSize();
-  const [selectedYear, setSelectedYear] = useState(2020);
+  const [selectedYear, setSelectedYear] = useState(
+    Math.max(2019, Math.min(2021, new Date().getFullYear())),
+  );
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [posterSort, setPosterSort] = useState('watch-date');
-  const [posterSortAscending, setPosterSortAscending] = useState(true);
+  const [posterSortAscending, setPosterSortAscending] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
   const postersContainerRef = useRef(null);
   const [measureRef, { height: postersContainerHeight }] = useMeasure({
