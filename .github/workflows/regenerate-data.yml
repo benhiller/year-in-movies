@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.3.0
+      - uses: actions/setup-node@v2
         with:
-          cmd: generate-data
+          node-version: '14.x'
+      - run: yarn --frozen-lockfile
+      - run: yarn generate-data
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-      - uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: process-data
+      - run: yarn process-data
       - uses: stefanzweifel/git-auto-commit-action@v4
