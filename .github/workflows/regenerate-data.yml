@@ -12,6 +12,7 @@ jobs:
         with:
           node-version: '14.x'
       - run: yarn --frozen-lockfile
+      - run: echo "test"
       - run: echo "$AIRTABLE_BASE_ID"
         env:
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
