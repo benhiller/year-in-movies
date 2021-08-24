@@ -7,5 +7,15 @@ jobs:
   Regenerate-Data:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "test"
-
+      - uses: actions/checkout@v2
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: generate-data
+        env:
+          AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+      - uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: process-data
+      - uses: stefanzweifel/git-auto-commit-action@v4
