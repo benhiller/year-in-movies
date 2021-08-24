@@ -3,6 +3,7 @@ on:
   schedule:
     - cron: '00 00 * * *'
   workflow_dispatch:
+  push:
 jobs:
   Regenerate-Data:
     runs-on: ubuntu-latest
@@ -13,9 +14,11 @@ jobs:
           node-version: '14.x'
       - run: yarn --frozen-lockfile
       - run: echo "test"
-      - run: echo "$AIRTABLE_BASE_ID"
+      - shell: bash
         env:
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+        run: |
+          echo "$AIRTABLE_BASE_ID"
       - run: yarn generate-data
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
