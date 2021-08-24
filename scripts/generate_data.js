@@ -87,6 +87,10 @@ fetchAllAirtableRecords()
     return Promise.all(records.map((movie) => fetchTMDBDetailsForMovie(movie)));
   })
   .then((details) => {
+    if (!fs.existsSync('raw-data')) {
+      fs.mkdirSync('raw-data');
+    }
+
     return fs.promises.writeFile(
       'raw-data/movies.json',
       JSON.stringify(details),
