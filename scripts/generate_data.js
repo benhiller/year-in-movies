@@ -64,6 +64,9 @@ const fetchTMDBDetailsForMovie = async (record) => {
     case 'The Vampire of Düsseldorf':
       movieId = '65978';
       break;
+    case 'Cold War':
+      movieId = '440298';
+      break;
 
     default:
       movieId = await findMovieId(title, year);
