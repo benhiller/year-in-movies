@@ -31,7 +31,7 @@ const findMovieId = async (title, year) => {
   const searchResultsResp = await fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${
       process.env.TMDB_API_KEY
-    }&query=${encodeURIComponent(title)}`,
+    }&query=${encodeURIComponent(title)}&year=${year}`,
   );
   const searchResults = await searchResultsResp.json();
   const matchedSearchResult = searchResults.results.find((searchResult) =>
@@ -54,21 +54,6 @@ const fetchTMDBDetailsForMovie = async (record) => {
   switch (title) {
     case '$':
       movieId = '31644';
-      break;
-    case 'Twilight':
-      movieId = '298275';
-      break;
-    case 'High School':
-      movieId = '60315';
-      break;
-    case 'The Damned':
-      movieId = '41876';
-      break;
-    case 'Brick':
-      movieId = '9270';
-      break;
-    case 'F for Fake':
-      movieId = '43003';
       break;
 
     default:
