@@ -15,6 +15,7 @@ export const labelForLanguage = (language) => {
     case 'ja':
       return 'Japanese';
     case 'zh':
+    case 'cn':
       return 'Chinese';
     case 'ko':
       return 'Korean';
@@ -25,39 +26,42 @@ export const labelForLanguage = (language) => {
     case 'xx':
       return '-';
     case 'en':
-    default:
       return 'English';
+    default:
+      console.log('Unknown language code', language);
+      return 'Unknown';
   }
 };
 
 export const emojiForLanguage = (language) => {
   switch (language) {
-    case 'cs':
+    case 'Czech':
       return '\uD83C\uDDE8\uD83C\uDDFF';
-    case 'de':
+    case 'German':
       return '\uD83C\uDDE9\uD83C\uDDEA';
-    case 'es':
+    case 'Spanish':
       return '\uD83C\uDDEA\uD83C\uDDF8';
-    case 'fa':
+    case 'Farsi':
       return '\uD83C\uDDEE\uD83C\uDDF7';
-    case 'fr':
+    case 'French':
       return '\uD83C\uDDEB\uD83C\uDDF7';
-    case 'it':
+    case 'Italian':
       return '\uD83C\uDDEE\uD83C\uDDF9';
-    case 'ja':
+    case 'Japanese':
       return '\uD83C\uDDEF\uD83C\uDDF5';
-    case 'ko':
+    case 'Korean':
       return '\uD83C\uDDF0\uD83C\uDDF7';
-    case 'pl':
+    case 'Polish':
       return '\uD83C\uDDF5\uD83C\uDDF1';
-    case 'zh':
+    case 'Chinese':
       return '\uD83C\uDDE8\uD83C\uDDF3';
-    case 'ar':
+    case 'Arabic':
       return '';
-    case 'xx':
+    case '-':
       return '';
-    case 'en':
-    default:
+    case 'English':
       return '\uD83C\uDDFA\uD83C\uDDF8';
+    default:
+      return '';
   }
 };

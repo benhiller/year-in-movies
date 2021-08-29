@@ -1,3 +1,5 @@
+import { labelForLanguage } from 'language';
+
 export const computeTopDirectors = (movieData) =>
   Object.entries(
     movieData.reduce((acc, movie) => {
@@ -101,10 +103,12 @@ export const computeTopLanguages = (movieData) =>
         return acc;
       }
 
-      if (acc[language]) {
-        acc[language] = acc[language] + 1;
+      const group = labelForLanguage(language);
+
+      if (acc[group]) {
+        acc[group] = acc[group] + 1;
       } else {
-        acc[language] = 1;
+        acc[group] = 1;
       }
       return acc;
     }, {}),

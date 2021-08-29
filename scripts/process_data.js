@@ -55,6 +55,8 @@ const listGenres = (movie) => {
 const processData = (data) => {
   return data
     .filter((movie) => !movie.record.fields.Type)
+    .filter((movie) => !movie.record.fields.Unfinished)
+    .filter((movie) => movie.details.id)
     .map((movie) => {
       return {
         title: movie.details.title,

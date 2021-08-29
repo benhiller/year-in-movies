@@ -14,7 +14,7 @@ import SummaryStats from 'components/SummaryStats';
 import Footer from 'components/Footer';
 import { filterMovies, filterMoviesForYear } from 'filters';
 import { emojiForGenre } from 'genre';
-import { emojiForLanguage, labelForLanguage } from 'language';
+import { emojiForLanguage } from 'language';
 import {
   computeTopDirectors,
   computeTopCastMembers,
@@ -278,7 +278,7 @@ const Home = ({ movieData }) => {
           <RankedMetric
             items={topLanguages.map(([language, count]) => ({
               count,
-              name: labelForLanguage(language),
+              name: language,
               emoji: emojiForLanguage(language),
               selected: selectedFilter?.language === language,
             }))}
