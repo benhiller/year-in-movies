@@ -9,19 +9,29 @@ const PostersGridControls = ({
   selectedFilter,
   posterSort,
   posterSortAscending,
+  allowsExpansion,
+  expanded,
+  onExpandOrCollapse,
   onChangeFilter,
   onChangePosterSort,
   onChangePosterSortAscending,
 }) => (
   <div className={styles.controls}>
-    <div>
-      <span>
-        {selectedFilter ? `${filterType(selectedFilter)}: ` : 'All Movies'}
-        {selectedFilter && <b>{filterValue(selectedFilter)}</b>}
-      </span>{' '}
-      {selectedFilter && (
-        <button className={styles.clear} onClick={() => onChangeFilter(null)}>
-          <Clear />
+    <div className={styles.firstRow}>
+      <div>
+        <span>
+          {selectedFilter ? `${filterType(selectedFilter)}: ` : 'All Movies'}
+          {selectedFilter && <b>{filterValue(selectedFilter)}</b>}
+        </span>{' '}
+        {selectedFilter && (
+          <button className={styles.clear} onClick={() => onChangeFilter(null)}>
+            <Clear />
+          </button>
+        )}
+      </div>
+      {allowsExpansion && (
+        <button onClick={onExpandOrCollapse}>
+          {expanded ? 'Collapse' : 'Expand'}
         </button>
       )}
     </div>

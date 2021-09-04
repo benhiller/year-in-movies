@@ -2,6 +2,7 @@ import { useMemo, useState, useRef } from 'react';
 import useMeasure from 'react-use-measure';
 import mergeRefs from 'react-merge-refs';
 import classNames from 'classnames';
+import useMediaQuery from 'useMediaQuery';
 
 import styles from 'styles/App.module.css';
 import useWindowSize from 'useWindowSize';
@@ -74,14 +75,18 @@ const compareMovies = (m1, m2, posterSort) => {
 
 const Home = ({ movieData }) => {
   const { height } = useWindowSize();
+  const desktopMode = useMediaQuery('(min-width: 850px)');
   const [selectedYear, setSelectedYear] = useState(
     Math.max(2019, Math.min(2021, new Date().getFullYear())),
   );
   const [selectedFilter, setSelectedFilter] = useState(null);
+  const allowsExpandedPosters = !desktopMode;
+  const [expandedPosters, setExpandedPosters] = useState(false);
   const [posterSort, setPosterSort] = useState('watch-date');
   const [posterSortAscending, setPosterSortAscending] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
   const postersContainerRef = useRef(null);
+  const contentRef = useRef(null);
   const [measureRef, { height: postersContainerHeight }] = useMeasure({
     debounce: 64,
     polyfill: ResizeObserver,
@@ -148,7 +153,12 @@ const Home = ({ movieData }) => {
         height ? { height: `${height}px`, minHeight: `${height}px` } : null
       }
     >
-      <div className={styles.content}>
+      <div
+        className={classNames(styles.content, {
+          [styles.collapsedContent]: allowsExpandedPosters && expandedPosters,
+        })}
+        ref={contentRef}
+      >
         <h1 className={styles.title}>
           <button
             disabled={selectedYear === 2019}
@@ -385,6 +395,12 @@ const Home = ({ movieData }) => {
           selectedFilter={selectedFilter}
           posterSort={posterSort}
           posterSortAscending={posterSortAscending}
+          allowsExpansion={allowsExpandedPosters}
+          expanded={allowsExpandedPosters && expandedPosters}
+          onExpandOrCollapse={() => {
+            setExpandedPosters(!expandedPosters);
+            contentRef.current.scrollTop = 0;
+          }}
           onChangeFilter={setSelectedFilter}
           onChangePosterSort={setPosterSort}
           onChangePosterSortAscending={setPosterSortAscending}

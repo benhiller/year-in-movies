@@ -25,6 +25,11 @@
   overflow-x: hidden;
 }
 
+.collapsedContent {
+  flex: 0.095;
+  overflow: hidden;
+}
+
 .title {
   display: flex;
   flex-direction: row;
