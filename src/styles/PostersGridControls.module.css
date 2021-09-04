@@ -20,6 +20,10 @@
   padding-bottom: 0;
 }
 
+.firstRow {
+  justify-content: space-between !important;
+}
+
 .clear {
   display: inline-block;
   margin-left: 5px;
