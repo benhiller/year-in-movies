@@ -26,7 +26,10 @@ const listCastMembers = (movie) => {
 
   return movie.details.credits.cast
     .map((castMember) => {
-      if (castMember.character.includes('uncredited')) {
+      if (
+        !castMember.character ||
+        castMember.character.includes('uncredited')
+      ) {
         return null;
       }
       // This seems to match how TMDB determines which actors are 'top billed',
