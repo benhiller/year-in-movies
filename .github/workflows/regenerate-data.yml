@@ -21,3 +21,4 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: src/data/processed-movies.json
+          commit_author: Ben Bot <actions@github.com>
