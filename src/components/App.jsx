@@ -77,7 +77,7 @@ const Home = ({ movieData }) => {
   const { height } = useWindowSize();
   const desktopMode = useMediaQuery('(min-width: 850px)');
   const [selectedYear, setSelectedYear] = useState(
-    Math.max(2019, Math.min(2022, new Date().getFullYear())),
+    Math.max(2019, Math.min(2023, new Date().getFullYear())),
   );
   const [selectedFilter, setSelectedFilter] = useState(null);
   const allowsExpandedPosters = !desktopMode;
@@ -175,9 +175,9 @@ const Home = ({ movieData }) => {
             <span className={styles.year}>{selectedYear}</span>
           </div>
           <button
-            disabled={selectedYear === 2022}
+            disabled={selectedYear === 2023}
             className={classNames(styles.nextButton, {
-              [styles.hidden]: selectedYear === 2022,
+              [styles.hidden]: selectedYear === 2023,
             })}
             onClick={() => setSelectedYear(selectedYear + 1)}
           >
