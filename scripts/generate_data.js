@@ -76,6 +76,9 @@ const fetchTMDBDetailsForMovie = async (record) => {
     case 'Showing Up':
       movieId = '790416';
       break;
+    case 'The Undeclared War':
+      movieId = '17283';
+      break;
 
     default:
       movieId = await findMovieId(title, year);
