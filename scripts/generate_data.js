@@ -34,9 +34,15 @@ const findMovieId = async (title, year) => {
     }&query=${encodeURIComponent(title)}&year=${year}`,
   );
   const searchResults = await searchResultsResp.json();
-  const matchedSearchResult = searchResults.results.find((searchResult) =>
-    searchResult.release_date.startsWith(year),
-  );
+  if (!searchResults.results) {
+    console.log(`No search results for ${title} (${year})`);
+    return null;
+  }
+
+  const matchedSearchResult = searchResults.results.find((searchResult) => {
+    const releaseDate = new Date(searchResult.release_date);
+    return Math.abs(releaseDate.getFullYear() - year) < 2;
+  });
 
   if (!matchedSearchResult) {
     console.log(`Couldn't find details for ${title} (${year})`);
