@@ -36,6 +36,7 @@ const findMovieId = async (title, year) => {
   const searchResults = await searchResultsResp.json();
   if (!searchResults.results) {
     console.log(`No search results for ${title} (${year})`);
+    console.log(searchResults);
     return null;
   }
 
