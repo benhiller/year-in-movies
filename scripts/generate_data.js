@@ -34,11 +34,6 @@ const findMovieId = async (title, year) => {
     }&query=${encodeURIComponent(title)}&year=${year}`,
   );
   const searchResults = await searchResultsResp.json();
-  if (!searchResults.results) {
-    console.log(`No search results for ${title} (${year})`);
-    console.log(searchResults);
-    return null;
-  }
 
   const matchedSearchResult = searchResults.results.find((searchResult) => {
     const releaseDate = new Date(searchResult.release_date);
@@ -100,7 +95,13 @@ const fetchTMDBDetailsForMovie = async (record) => {
 
 fetchAllAirtableRecords()
   .then((records) => {
-    return Promise.all(records.map((movie) => fetchTMDBDetailsForMovie(movie)));
+    return Promise.all(
+      records.map(async (movie, idx) => {
+        // Add a delay between API calls
+        await new Promise((r) => setTimeout(r, idx * 100));
+        return fetchTMDBDetailsForMovie(movie);
+      }),
+    );
   })
   .then((details) => {
     if (!fs.existsSync('raw-data')) {
