@@ -73,11 +73,14 @@ const compareMovies = (m1, m2, posterSort) => {
   }
 };
 
+const FIRST_YEAR = 2019;
+const LAST_YEAR = 2023;
+
 const Home = ({ movieData }) => {
   const { height } = useWindowSize();
   const desktopMode = useMediaQuery('(min-width: 850px)');
   const [selectedYear, setSelectedYear] = useState(
-    Math.max(2019, Math.min(2023, new Date().getFullYear())),
+    Math.max(FIRST_YEAR, Math.min(LAST_YEAR, new Date().getFullYear())),
   );
   const [selectedFilter, setSelectedFilter] = useState(null);
   const allowsExpandedPosters = !desktopMode;
@@ -94,7 +97,8 @@ const Home = ({ movieData }) => {
   const mergedRef = mergeRefs([measureRef, postersContainerRef]);
 
   const movieDataForYear = useMemo(
-    () => filterMoviesForYear(movieData, selectedYear),
+    () =>
+      selectedYear ? filterMoviesForYear(movieData, selectedYear) : movieData,
     [movieData, selectedYear],
   );
 
@@ -161,25 +165,39 @@ const Home = ({ movieData }) => {
       >
         <h1 className={styles.title}>
           <button
-            disabled={selectedYear === 2019}
+            disabled={selectedYear === null}
             className={classNames(styles.previousButton, {
-              [styles.hidden]: selectedYear === 2019,
+              [styles.hidden]: selectedYear === null,
             })}
-            onClick={() => setSelectedYear(selectedYear - 1)}
+            onClick={() =>
+              setSelectedYear(
+                selectedYear === FIRST_YEAR ? null : selectedYear - 1,
+              )
+            }
           >
             <Arrow />
           </button>
 
           <div>
             Ben&apos;s Year in Movies -{' '}
-            <span className={styles.year}>{selectedYear}</span>
+            {selectedYear ? (
+              <>
+                <span className={styles.year}>{selectedYear}</span>
+              </>
+            ) : (
+              <span className={styles.year}>All Years</span>
+            )}
           </div>
           <button
-            disabled={selectedYear === 2023}
+            disabled={selectedYear === LAST_YEAR}
             className={classNames(styles.nextButton, {
-              [styles.hidden]: selectedYear === 2023,
+              [styles.hidden]: selectedYear === LAST_YEAR,
             })}
-            onClick={() => setSelectedYear(selectedYear + 1)}
+            onClick={() =>
+              setSelectedYear(
+                selectedYear === null ? FIRST_YEAR : selectedYear + 1,
+              )
+            }
           >
             <Arrow />
           </button>
@@ -201,11 +219,15 @@ const Home = ({ movieData }) => {
           <SummaryStats
             stats={[
               {
-                statName: `First Movie of ${selectedYear}`,
+                statName: selectedYear
+                  ? `First Movie of ${selectedYear}`
+                  : 'First Movie',
                 statValue: firstMovie.title,
               },
               {
-                statName: `Last Movie of ${selectedYear}`,
+                statName: selectedYear
+                  ? `Last Movie of ${selectedYear}`
+                  : 'Last Movie',
                 statValue: lastMovie.title,
               },
             ]}
