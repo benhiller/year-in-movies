@@ -3,8 +3,8 @@ require('dotenv').config();
 const fs = require('fs');
 const fetch = require('node-fetch');
 
-const fetchAirtablePage = async (offset) => {
-  let url = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Movies?sort[0][field]=Date&sort[0][direction]=asc`;
+const fetchAirtablePage = async (baseId, offset) => {
+  let url = `https://api.airtable.com/v0/${baseId}/Movies?sort[0][field]=Date&sort[0][direction]=asc`;
   if (offset) {
     url = url + `&offset=${offset}`;
   }
@@ -17,11 +17,25 @@ const fetchAirtablePage = async (offset) => {
 };
 
 const fetchAllAirtableRecords = async () => {
-  let json = await fetchAirtablePage(null);
+  const baseIds = [
+    process.env.AIRTABLE_BASE_ID,
+    process.env.AIRTABLE_BASE_ID_2,
+  ];
+  let records = [];
+  for (const idx in baseIds) {
+    const baseId = baseIds[idx];
+    const newRecords = await fetchAllAirtableRecordsForBase(baseId);
+    records = [...records, ...newRecords];
+  }
+  return records;
+};
+
+const fetchAllAirtableRecordsForBase = async (baseId) => {
+  let json = await fetchAirtablePage(baseId, null);
   let records = [...json.records];
 
   while (json.offset) {
-    json = await fetchAirtablePage(json.offset);
+    json = await fetchAirtablePage(baseId, json.offset);
     records = [...records, ...json.records];
   }
   return records;
