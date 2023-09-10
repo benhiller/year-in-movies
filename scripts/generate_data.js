@@ -21,9 +21,7 @@ const fetchAllAirtableRecords = async () => {
     process.env.AIRTABLE_BASE_ID,
     process.env.AIRTABLE_BASE_ID_2,
   ];
-  console.log(process.env.AIRTABLE_BASE_ID, process.env.AIRTABLE_BASE_ID_2);
   let records = [];
-  return records;
   for (const idx in baseIds) {
     const baseId = baseIds[idx];
     const newRecords = await fetchAllAirtableRecordsForBase(baseId);
