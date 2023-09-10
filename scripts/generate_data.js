@@ -19,7 +19,7 @@ const fetchAirtablePage = async (baseId, offset) => {
 const fetchAllAirtableRecords = async () => {
   const baseIds = [
     process.env.AIRTABLE_BASE_ID,
-    process.env.AIRTABLE_BASE_ID_2,
+    // process.env.AIRTABLE_BASE_ID_2,
   ];
   let records = [];
   for (const idx in baseIds) {
