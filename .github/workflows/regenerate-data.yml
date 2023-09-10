@@ -10,12 +10,13 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: '18.x'
       - run: yarn --frozen-lockfile
       - run: yarn generate-data
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          AIRTABLE_BASE_ID_2: ${{ secrets.AIRTABLE_BASE_ID_2 }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
       - run: yarn process-data
       - uses: stefanzweifel/git-auto-commit-action@v4
