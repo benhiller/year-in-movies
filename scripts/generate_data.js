@@ -41,7 +41,7 @@ const fetchAllAirtableRecordsForBase = async (baseId) => {
   return records;
 };
 
-const findMovieId = async (title, year) => {
+const findMovieId = async (title, year, exactYear = false) => {
   const searchResultsResp = await fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${
       process.env.TMDB_API_KEY
@@ -56,6 +56,17 @@ const findMovieId = async (title, year) => {
 
   if (!matchedSearchResult) {
     console.log(`Couldn't find details for ${title} (${year})`);
+    if (!exactYear) {
+      console.log('Checking prior/next year');
+      let id = await findMovieId(title, year - 1, true);
+      if (id) {
+        return id;
+      }
+      id = await findMovieId(title, year + 1, true);
+      if (id) {
+        return id;
+      }
+    }
     return null;
   }
 
