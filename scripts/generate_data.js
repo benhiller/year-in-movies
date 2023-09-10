@@ -56,7 +56,7 @@ const findMovieId = async (title, year, exactYear = false) => {
 
   if (!matchedSearchResult) {
     console.log(`Couldn't find details for ${title} (${year})`);
-    if (!exactYear) {
+    if (year && !exactYear) {
       console.log('Checking prior/next year');
       let id = await findMovieId(title, year - 1, true);
       if (id) {
