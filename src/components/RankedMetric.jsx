@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import styles from 'styles/RankedMetric.module.css';
+import styles from '~/styles/RankedMetric.module.css';
 
 const separateNameTokens = (name) => {
   const tokens = name.split(' ');

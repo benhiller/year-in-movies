@@ -1,4 +1,4 @@
-import styles from 'styles/MetricSection.module.css';
+import styles from '~/styles/MetricSection.module.css';
 
 const MetricSection = ({ emoji, metricName, children, ...props }) => {
   return (

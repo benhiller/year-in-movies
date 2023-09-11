@@ -2,20 +2,20 @@ import { useMemo, useState, useRef } from 'react';
 import useMeasure from 'react-use-measure';
 import mergeRefs from 'react-merge-refs';
 import classNames from 'classnames';
-import useMediaQuery from 'useMediaQuery';
 
-import styles from 'styles/App.module.css';
-import useWindowSize from 'useWindowSize';
-import MetricSection from 'components/MetricSection';
-import RankedMetric from 'components/RankedMetric';
-import PostersGridControls from 'components/PostersGridControls';
-import PostersGrid from 'components/PostersGrid';
-import Histogram from 'components/Histogram';
-import SummaryStats from 'components/SummaryStats';
-import Footer from 'components/Footer';
-import { filterMovies, filterMoviesForYear } from 'filters';
-import { emojiForGenre } from 'genre';
-import { emojiForLanguage } from 'language';
+import useMediaQuery from '~/useMediaQuery';
+import styles from '~/styles/App.module.css';
+import useWindowSize from '~/useWindowSize';
+import MetricSection from '~/components/MetricSection';
+import RankedMetric from '~/components/RankedMetric';
+import PostersGridControls from '~/components/PostersGridControls';
+import PostersGrid from '~/components/PostersGrid';
+import Histogram from '~/components/Histogram';
+import SummaryStats from '~/components/SummaryStats';
+import Footer from '~/components/Footer';
+import { filterMovies, filterMoviesForYear } from '~/filters';
+import { emojiForGenre } from '~/genre';
+import { emojiForLanguage } from '~/language';
 import {
   computeTopDirectors,
   computeTopCastMembers,
@@ -31,8 +31,8 @@ import {
   computeFirstMovie,
   computeLastMovie,
   labelForMonth,
-} from 'metrics';
-import { ReactComponent as Arrow } from 'img/arrow.svg';
+} from '~/metrics';
+import { ReactComponent as Arrow } from '~/img/arrow.svg';
 
 const generateMonths = () =>
   [...Array(12).keys()].map((i) => ({

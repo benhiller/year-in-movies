@@ -3,9 +3,9 @@ import useMeasure from 'react-use-measure';
 import { useTransition, a, interpolate } from 'react-spring';
 import { ResizeObserver } from '@juggle/resize-observer';
 
-import styles from 'styles/PostersGrid.module.css';
-import DetailsRow from 'components/DetailsRow';
-import useMediaQuery from 'useMediaQuery';
+import styles from '~/styles/PostersGrid.module.css';
+import DetailsRow from '~/components/DetailsRow';
+import useMediaQuery from '~/useMediaQuery';
 
 const POSTER_MIN_WIDTH = 120;
 const POSTER_MIN_WIDTH_MOBILE = 90;

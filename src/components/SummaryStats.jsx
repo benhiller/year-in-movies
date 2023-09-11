@@ -1,4 +1,4 @@
-import styles from 'styles/SummaryStats.module.css';
+import styles from '~/styles/SummaryStats.module.css';
 
 const SummaryStats = ({ stats, onClickStat }) => {
   return (

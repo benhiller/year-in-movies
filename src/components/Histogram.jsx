@@ -1,4 +1,4 @@
-import styles from 'styles/Histogram.module.css';
+import styles from '~/styles/Histogram.module.css';
 
 const Histogram = ({ items, orderedGroups, onClickItem }) => {
   const countByGroup = Object.fromEntries(items);

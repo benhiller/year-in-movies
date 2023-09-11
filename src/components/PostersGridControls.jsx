@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 
-import styles from 'styles/PostersGridControls.module.css';
-import { filterType, filterValue } from 'filters';
-import { ReactComponent as Arrow } from 'img/arrow.svg';
-import { ReactComponent as Clear } from 'img/clear.svg';
+import styles from '~/styles/PostersGridControls.module.css';
+import { filterType, filterValue } from '~/filters';
+import { ReactComponent as Arrow } from '~/img/arrow.svg';
+import { ReactComponent as Clear } from '~/img/clear.svg';
 
 const PostersGridControls = ({
   selectedFilter,

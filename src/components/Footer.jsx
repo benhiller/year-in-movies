@@ -1,7 +1,7 @@
-import styles from 'styles/Footer.module.css';
-import { ReactComponent as TMDbLogo } from 'img/tmdb-logo.svg';
-import { ReactComponent as GitHubLogo } from 'img/github-logo.svg';
-import me from 'img/me.jpg';
+import styles from '~/styles/Footer.module.css';
+import { ReactComponent as TMDbLogo } from '~/img/tmdb-logo.svg';
+import { ReactComponent as GitHubLogo } from '~/img/github-logo.svg';
+import me from '~/img/me.jpg';
 
 const Footer = () => {
   return (

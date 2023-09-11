@@ -1,4 +1,4 @@
-import { labelForLanguage } from 'language';
+import { labelForLanguage } from '~/language';
 
 export const computeTopDirectors = (movieData) =>
   Object.entries(

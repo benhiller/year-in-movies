@@ -1,8 +1,8 @@
 import { useSpring, a } from 'react-spring';
 
-import styles from 'styles/DetailsRow.module.css';
-import { ReactComponent as Chevron } from 'img/detail-row-chevron.svg';
-import { labelForLanguage } from 'language';
+import styles from '~/styles/DetailsRow.module.css';
+import { ReactComponent as Chevron } from '~/img/detail-row-chevron.svg';
+import { labelForLanguage } from '~/language';
 
 const DetailsRow = ({ movie, chevronPosition }) => {
   const props = useSpring({ left: chevronPosition });
