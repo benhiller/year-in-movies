@@ -2,9 +2,8 @@ module.exports = {
   extends: [
     'standard',
     'prettier',
-    'react-app',
-    'react-app/jest',
     'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
   rules: {
@@ -13,10 +12,15 @@ module.exports = {
     'react/prop-types': 'off',
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
   },
-  plugins: ['react'],
+  plugins: ['react-refresh'],
   globals: {
     fetch: false,
+    ResizeObserver: false,
   },
   settings: {
     react: {
