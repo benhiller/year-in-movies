@@ -24,8 +24,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.4",
-    "vite-plugin-svgr": "^3.2.0",
-    "vite-plugin-eslint": "^1.8.1",
     "eslint": "^7.11.0",
     "eslint-config-prettier": "^6.13.0",
     "eslint-config-standard": "^14.1.1",
@@ -40,7 +38,9 @@
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
     "source-map-explorer": "^2.5.1",
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-svgr": "^3.2.0"
   },
   "husky": {
     "hooks": {
