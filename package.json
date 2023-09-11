@@ -6,7 +6,6 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "generate-data": "node scripts/generate_data.js",
     "process-data": "node scripts/process_data.js"
   },
@@ -37,10 +36,13 @@
     "husky": "^4.3.5",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
-    "source-map-explorer": "^2.5.1",
     "vite": "^4.4.9",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-svgr": "^3.2.0"
+  },
+  "resolutions": {
+    "minimist": "^1.2.8",
+    "ejs": "^3.1.7"
   },
   "husky": {
     "hooks": {
