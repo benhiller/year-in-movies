@@ -77,45 +77,10 @@ const fetchTMDBDetailsForMovie = async (record) => {
   const title = record.fields.Name;
   const year = record.fields['Release Year'];
   let movieId;
-  // Special cases for some movies with difficult to query titles
-  switch (title) {
-    case '$':
-      movieId = '31644';
-      break;
-    case 'F for Fake':
-      movieId = '43003';
-      break;
-    case 'High':
-      movieId = '163526';
-      break;
-    case 'The Vampire of Düsseldorf':
-      movieId = '65978';
-      break;
-    case 'Cold War':
-      movieId = '440298';
-      break;
-    case 'Time and Tide':
-      movieId = '49291';
-      break;
-    case 'Apples':
-      movieId = '652156';
-      break;
-    case 'Showing Up':
-      movieId = '790416';
-      break;
-    case 'The Undeclared War':
-      movieId = '17283';
-      break;
-    case 'Charcoal':
-      movieId = '872989';
-      break;
-    case 'Él':
-    case 'El':
-      movieId = '43344';
-      break;
-      
-    default:
-      movieId = await findMovieId(title, year);
+  if (record.fields['TMDB ID']) {
+    movieId = record.fields['TMDB ID'];
+  } else {
+    movieId = await findMovieId(title, year);
   }
 
   const detailsResp = await fetch(
