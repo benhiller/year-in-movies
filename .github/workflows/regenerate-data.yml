@@ -18,6 +18,7 @@ jobs:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ vars.AIRTABLE_BASE_ID }}
           AIRTABLE_BASE_ID_2: ${{ vars.AIRTABLE_BASE_ID_2 }}
+          AIRTABLE_BASE_ID_3: ${{ vars.AIRTABLE_BASE_ID_3 }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
       - run: yarn process-data
       - uses: stefanzweifel/git-auto-commit-action@v4
