@@ -74,7 +74,7 @@ const compareMovies = (m1, m2, posterSort) => {
 };
 
 const FIRST_YEAR = 2019;
-const LAST_YEAR = 2025;
+const LAST_YEAR = 2026;
 
 const Home = ({ movieData }) => {
   const { height } = useWindowSize();
